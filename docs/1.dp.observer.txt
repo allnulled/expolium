@@ -1,0 +1,22 @@
+// 1. Observer/Listener/Publish-Subscribe
+
+class Subscriber
+ .subscriptions:Map<publisherId:String, publisher:Publisher>
+ .subscribeTo(publisher:Publisher):Void
+class Publisher
+ .subscribers:Map<subscriptorId:String, subscriber:Subscriber>
+ .subcribe(subscriber:Subscriber)
+ .publish(event:Function<Input<subscriber:Subscriber, publisher:Publisher>, Output<void:Void>>)
+
+Usage:
+
+let subscriber = new Subscriber()
+let publisher = new Publisher()
+
+subscriber.subscribeTo(publisher)
+// or:
+publisher.subscribe(subscriber)
+
+publisher.publish(function(subscriber, publisher) {
+	// do whatever...
+})

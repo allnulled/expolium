@@ -1,0 +1,15 @@
+{
+	"*.community.id": {
+		"EXAMPLE OF HIDDEN ATTRIBUTE FOR A COLUMN": true,
+		"__EXAMPLE OF TRASPASSED ATTRIBUTE FOR A COLUMN": "Some value"
+	},
+	"*.community.created_at": {
+		"EXAMPLE OF HIDDEN ATTRIBUTE FOR A COLUMN": 123
+	},
+	"*.*.created_at": {
+		"__hidden": true
+	},
+	"*.*.updated_at": {
+		"__hidden": true
+	}
+}

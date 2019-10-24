@@ -1,0 +1,218 @@
+Listado de rutas de carpetas
+El n£mero de serie del volumen es 8E70-A774
+C:\USERS\CARLOS\DESKTOP\2019-09-12\EXPOLIUM
+|   .env.development
+|   .env.production
+|   .env.testing
+|   expolium.config.js
+|   package-lock.json
+|   package.json
+|   TODO.md
+|   tree.txt
+|   
++---dev
+|   |   autorest-update.js
+|   |   clone.js
+|   |   
+|   \---autorest-update
+|           BaseController.js.ejs
+|           BaseModel.js.ejs
+|           cached.json
+|           Controller.js.ejs
+|           controllers.ejs
+|           export.json
+|           Model.js.ejs
+|           models.ejs
+|           
++---docs
+|       Expolium.Auth.postman_dump.json
+|       
++---log
+|       error.log
+|       info.log
+|       
++---src
+|   |   env.js
+|   |   load.js
+|   |   start.js
+|   |   
+|   +---core
+|   |   +---app
+|   |   |       App.js
+|   |   |       BasicRouter.js
+|   |   |       
+|   |   +---config
+|   |   +---controller
+|   |   |   |   BackOfficeController.js
+|   |   |   |   BasicController.js
+|   |   |   |   ControllerGroup.js
+|   |   |   |   EjsController.js
+|   |   |   |   Html404Controller.js
+|   |   |   |   JsFileController.js
+|   |   |   |   Json404Controller.js
+|   |   |   |   JsonFileController.js
+|   |   |   |   ModelController.js
+|   |   |   |   RestController.js
+|   |   |   |   StaticController.js
+|   |   |   |   StaticEjsController.js
+|   |   |   |   
+|   |   |   \---backoffice
+|   |   |           database.js
+|   |   |           login.js
+|   |   |           logout.js
+|   |   |           welcome.js
+|   |   |           
+|   |   +---database
+|   |   |       db.js
+|   |   |       db2.js
+|   |   |       db3.js
+|   |   |       
+|   |   +---error
+|   |   |       BasicError.js
+|   |   |       ErrorManager.js
+|   |   |       
+|   |   +---helper
+|   |   |       CheckManager.js
+|   |   |       CollectionManager.js
+|   |   |       DBManager.js
+|   |   |       ImportManager.js
+|   |   |       LoggerManager.js
+|   |   |       ModelManager.js
+|   |   |       ResponseManager.js
+|   |   |       StringUtils.js
+|   |   |       
+|   |   +---middleware
+|   |   |       BasicMiddleware.js
+|   |   |       
+|   |   +---model
+|   |   +---project
+|   |   |       Project.js
+|   |   |       
+|   |   +---public
+|   |   |   +---rendered
+|   |   |   |       home.ejs
+|   |   |   |       
+|   |   |   \---static
+|   |   |       \---assets
+|   |   |           +---img
+|   |   |           +---lib
+|   |   |           |       global.1.js
+|   |   |           |       
+|   |   |           \---res
+|   |   \---template
+|   |       |   404.ejs
+|   |       |   footer.ejs
+|   |       |   header.ejs
+|   |       |   ok.ejs
+|   |       |   
+|   |       \---menus
+|   |               nav.ejs
+|   |               
+|   +---core.admin
+|   +---core.auth
+|   |   +---controller
+|   |   |       LoginController.js
+|   |   |       LogoutController.js
+|   |   |       RecoverController.js
+|   |   |       
+|   |   \---middleware
+|   |           AuthorizedMiddleware.js
+|   |           LoggedMiddleware.js
+|   |           PermittedMiddleware.js
+|   |           
+|   +---core.rest
+|   |   \---db
+|   |       |   controllers.js
+|   |       |   models.js
+|   |       |   
+|   |       +---controller
+|   |       |   |   CommunityController.js
+|   |       |   |   EjemplosController.js
+|   |       |   |   MembershipController.js
+|   |       |   |   PermissionController.js
+|   |       |   |   PermissionPerRoleController.js
+|   |       |   |   RoleController.js
+|   |       |   |   SessionController.js
+|   |       |   |   UserController.js
+|   |       |   |   
+|   |       |   \---base
+|   |       |           BaseCommunityController.js
+|   |       |           BaseEjemplosController.js
+|   |       |           BaseMembershipController.js
+|   |       |           BasePermissionController.js
+|   |       |           BasePermissionPerRoleController.js
+|   |       |           BaseRoleController.js
+|   |       |           BaseSessionController.js
+|   |       |           BaseUserController.js
+|   |       |           
+|   |       \---model
+|   |           |   Community.js
+|   |           |   Ejemplos.js
+|   |           |   Membership.js
+|   |           |   Permission.js
+|   |           |   PermissionPerRole.js
+|   |           |   Role.js
+|   |           |   Session.js
+|   |           |   User.js
+|   |           |   
+|   |           \---base
+|   |                   BaseCommunity.js
+|   |                   BaseEjemplos.js
+|   |                   BaseMembership.js
+|   |                   BasePermission.js
+|   |                   BasePermissionPerRole.js
+|   |                   BaseRole.js
+|   |                   BaseSession.js
+|   |                   BaseUser.js
+|   |                   
+|   \---myproject
+|       +---app
+|       |       App.js
+|       |       Router.configure.js
+|       |       Router.js
+|       |       
+|       +---config
+|       |       db.extension.json
+|       |       db.json
+|       |       
+|       +---controller
+|       |       SqlQuery.js
+|       |       
+|       +---database
+|       |       db.js
+|       |       db2.js
+|       |       db3.js
+|       |       
+|       +---error
+|       |       BasicError.js
+|       |       ErrorManager.js
+|       |       
+|       +---helper
+|       +---middleware
+|       +---model
+|       +---project
+|       |       Project.js
+|       |       
+|       +---public
+|       |   +---rendered
+|       |   |       home.ejs
+|       |   |       
+|       |   \---static
+|       |       \---assets
+|       |           +---img
+|       |           +---lib
+|       |           |       global.1.js
+|       |           |       
+|       |           \---res
+|       \---template
+|           |   404.ejs
+|           |   footer.ejs
+|           |   header.ejs
+|           |   ok.ejs
+|           |   
+|           \---menus
+|                   nav.ejs
+|                   
+\---test
+    +---e2e
+    \---unit

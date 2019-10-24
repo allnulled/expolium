@@ -1,0 +1,1144 @@
+{
+  "bM90APIyMv": {
+    "community": {
+      "id": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "EXAMPLE OF HIDDEN ATTRIBUTE FOR A COLUMN": true,
+        "__EXAMPLE OF TRASPASSED ATTRIBUTE FOR A COLUMN": "Some value",
+        "boundConstraints": [
+          {
+            "columnKey": "PRI",
+            "boundConstraint": "PRIMARY"
+          }
+        ],
+        "isPrimaryKey": true,
+        "unsigned": 1,
+        "extra": "auto_increment",
+        "order": 1,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0
+      },
+      "name": {
+        "type": "varchar",
+        "fulltype": "varchar(50)",
+        "nullable": "NO",
+        "default": null,
+        "boundConstraints": [
+          {
+            "columnKey": "UNI",
+            "boundConstraint": "UNIQUE_name"
+          }
+        ],
+        "hasUniqueRule": true,
+        "unsigned": 0,
+        "extra": "",
+        "order": 2,
+        "charset": "utf8mb4",
+        "collation": "utf8mb4_unicode_ci",
+        "maxLength": 50,
+        "maxBytes": 200,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "created_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__hidden": true,
+        "EXAMPLE OF HIDDEN ATTRIBUTE FOR A COLUMN": 123,
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED",
+        "order": 3,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "updated_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__hidden": true,
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
+        "order": 4,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null
+      }
+    },
+    "ejemplos": {
+      "col1": {
+        "type": "tinyint",
+        "fulltype": "tinyint(4)",
+        "nullable": "YES",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 1,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 3,
+        "numericScale": 0
+      },
+      "col2": {
+        "type": "smallint",
+        "fulltype": "smallint(6)",
+        "nullable": "YES",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 2,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 5,
+        "numericScale": 0
+      },
+      "col3": {
+        "type": "mediumint",
+        "fulltype": "mediumint(9)",
+        "nullable": "YES",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 3,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 7,
+        "numericScale": 0
+      },
+      "col4": {
+        "type": "int",
+        "fulltype": "int(11)",
+        "nullable": "YES",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 4,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0
+      },
+      "col5": {
+        "type": "bigint",
+        "fulltype": "bigint(20)",
+        "nullable": "YES",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 5,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 19,
+        "numericScale": 0
+      },
+      "col6": {
+        "type": "bit",
+        "fulltype": "bit(1)",
+        "nullable": "YES",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 6,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 1,
+        "numericScale": null
+      },
+      "col7": {
+        "type": "float",
+        "fulltype": "float",
+        "nullable": "YES",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 7,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 12,
+        "numericScale": null
+      },
+      "col8": {
+        "type": "double",
+        "fulltype": "double",
+        "nullable": "YES",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 8,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 22,
+        "numericScale": null
+      },
+      "col9": {
+        "type": "decimal",
+        "fulltype": "decimal(10,0)",
+        "nullable": "YES",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 9,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0
+      },
+      "col10": {
+        "type": "char",
+        "fulltype": "char(1)",
+        "nullable": "YES",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 10,
+        "charset": "utf8",
+        "collation": "utf8_unicode_ci",
+        "maxLength": 1,
+        "maxBytes": 3,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "col11": {
+        "type": "varchar",
+        "fulltype": "varchar(255)",
+        "nullable": "YES",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 11,
+        "charset": "utf8",
+        "collation": "utf8_unicode_ci",
+        "maxLength": 255,
+        "maxBytes": 765,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "col12": {
+        "type": "tinytext",
+        "fulltype": "tinytext",
+        "nullable": "YES",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 12,
+        "charset": "utf8",
+        "collation": "utf8_unicode_ci",
+        "maxLength": 255,
+        "maxBytes": 255,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "col13": {
+        "type": "mediumtext",
+        "fulltype": "mediumtext",
+        "nullable": "YES",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 13,
+        "charset": "utf8",
+        "collation": "utf8_unicode_ci",
+        "maxLength": 16777215,
+        "maxBytes": 16777215,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "col14": {
+        "type": "longtext",
+        "fulltype": "longtext",
+        "nullable": "YES",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 14,
+        "charset": "utf8",
+        "collation": "utf8_unicode_ci",
+        "maxLength": 4294967295,
+        "maxBytes": 4294967295,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "col15": {
+        "type": "json",
+        "fulltype": "json",
+        "nullable": "YES",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 15,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "col18": {
+        "type": "tinyblob",
+        "fulltype": "tinyblob",
+        "nullable": "YES",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 16,
+        "charset": null,
+        "collation": null,
+        "maxLength": 255,
+        "maxBytes": 255,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "col19": {
+        "type": "blob",
+        "fulltype": "blob",
+        "nullable": "YES",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 17,
+        "charset": null,
+        "collation": null,
+        "maxLength": 65535,
+        "maxBytes": 65535,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "col20": {
+        "type": "mediumblob",
+        "fulltype": "mediumblob",
+        "nullable": "YES",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 18,
+        "charset": null,
+        "collation": null,
+        "maxLength": 16777215,
+        "maxBytes": 16777215,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "col21": {
+        "type": "longblob",
+        "fulltype": "longblob",
+        "nullable": "YES",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 19,
+        "charset": null,
+        "collation": null,
+        "maxLength": 4294967295,
+        "maxBytes": 4294967295,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "col22": {
+        "type": "date",
+        "fulltype": "date",
+        "nullable": "YES",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 20,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "col23": {
+        "type": "time",
+        "fulltype": "time",
+        "nullable": "YES",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 21,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "col24": {
+        "type": "year",
+        "fulltype": "year(4)",
+        "nullable": "YES",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 22,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "col25": {
+        "type": "datetime",
+        "fulltype": "datetime",
+        "nullable": "YES",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 23,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "col26": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "YES",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 24,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "col30": {
+        "type": "geometry",
+        "fulltype": "geometry",
+        "nullable": "YES",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 25,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "col36": {
+        "type": "enum",
+        "fulltype": "enum('a','b','c')",
+        "nullable": "YES",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 26,
+        "charset": "utf8",
+        "collation": "utf8_unicode_ci",
+        "maxLength": 1,
+        "maxBytes": 3,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "col38": {
+        "type": "set",
+        "fulltype": "set('a','b','c')",
+        "nullable": "YES",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 27,
+        "charset": "utf8",
+        "collation": "utf8_unicode_ci",
+        "maxLength": 5,
+        "maxBytes": 15,
+        "numericPrecision": null,
+        "numericScale": null
+      }
+    },
+    "membership": {
+      "id": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "boundConstraints": [
+          {
+            "columnKey": "PRI",
+            "boundConstraint": "PRIMARY"
+          }
+        ],
+        "isPrimaryKey": true,
+        "unsigned": 1,
+        "extra": "auto_increment",
+        "order": 1,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0
+      },
+      "id_user": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "boundConstraints": [
+          {
+            "columnKey": "UNI",
+            "boundConstraint": "UNIQUE_user_per_community"
+          },
+          {
+            "columnKey": "UNI",
+            "boundConstraint": "FK_membership_user",
+            "referencedTable": "user",
+            "referencedColumn": "id"
+          }
+        ],
+        "hasUniqueRule": true,
+        "unsigned": 1,
+        "extra": "",
+        "order": 2,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0,
+        "isForeignKey": true
+      },
+      "id_role": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "boundConstraints": [
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "FK_membership_role",
+            "referencedTable": "role",
+            "referencedColumn": "id"
+          }
+        ],
+        "isForeignKey": true,
+        "unsigned": 1,
+        "extra": "",
+        "order": 3,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0
+      },
+      "created_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__hidden": true,
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED",
+        "order": 4,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "updated_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__hidden": true,
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
+        "order": 5,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null
+      }
+    },
+    "permission": {
+      "id": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "boundConstraints": [
+          {
+            "columnKey": "PRI",
+            "boundConstraint": "PRIMARY"
+          }
+        ],
+        "isPrimaryKey": true,
+        "unsigned": 1,
+        "extra": "auto_increment",
+        "order": 1,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0
+      },
+      "id_community": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "boundConstraints": [
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "UNIQUE_permission_name_community"
+          },
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "FK_permission_community",
+            "referencedTable": "community",
+            "referencedColumn": "id"
+          }
+        ],
+        "hasUniqueRule": true,
+        "unsigned": 1,
+        "extra": "",
+        "order": 2,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0,
+        "isForeignKey": true
+      },
+      "name": {
+        "type": "varchar",
+        "fulltype": "varchar(50)",
+        "nullable": "NO",
+        "default": null,
+        "boundConstraints": [
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "UNIQUE_permission_name_community"
+          }
+        ],
+        "hasUniqueRule": true,
+        "unsigned": 0,
+        "extra": "",
+        "order": 3,
+        "charset": "utf8mb4",
+        "collation": "utf8mb4_unicode_ci",
+        "maxLength": 50,
+        "maxBytes": 200,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "created_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__hidden": true,
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED",
+        "order": 4,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "updated_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__hidden": true,
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
+        "order": 5,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null
+      }
+    },
+    "permission_per_role": {
+      "id": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "boundConstraints": [
+          {
+            "columnKey": "PRI",
+            "boundConstraint": "PRIMARY"
+          }
+        ],
+        "isPrimaryKey": true,
+        "unsigned": 1,
+        "extra": "auto_increment",
+        "order": 1,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0
+      },
+      "id_permission": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "boundConstraints": [
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "FK_permission_per_role_permission",
+            "referencedTable": "permission",
+            "referencedColumn": "id"
+          }
+        ],
+        "isForeignKey": true,
+        "unsigned": 1,
+        "extra": "",
+        "order": 2,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0
+      },
+      "id_role": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "boundConstraints": [
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "FK_permission_per_role_role",
+            "referencedTable": "role",
+            "referencedColumn": "id"
+          }
+        ],
+        "isForeignKey": true,
+        "unsigned": 1,
+        "extra": "",
+        "order": 3,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0
+      },
+      "created_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__hidden": true,
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED",
+        "order": 4,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "updated_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__hidden": true,
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
+        "order": 5,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null
+      }
+    },
+    "role": {
+      "id": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "boundConstraints": [
+          {
+            "columnKey": "PRI",
+            "boundConstraint": "PRIMARY"
+          }
+        ],
+        "isPrimaryKey": true,
+        "unsigned": 1,
+        "extra": "auto_increment",
+        "order": 1,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0
+      },
+      "id_community": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "boundConstraints": [
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "UNIQUE_role_name_community"
+          },
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "FK_role_community",
+            "referencedTable": "community",
+            "referencedColumn": "id"
+          }
+        ],
+        "hasUniqueRule": true,
+        "unsigned": 1,
+        "extra": "",
+        "order": 2,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0,
+        "isForeignKey": true
+      },
+      "name": {
+        "type": "varchar",
+        "fulltype": "varchar(50)",
+        "nullable": "NO",
+        "default": null,
+        "boundConstraints": [
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "UNIQUE_role_name_community"
+          }
+        ],
+        "hasUniqueRule": true,
+        "unsigned": 0,
+        "extra": "",
+        "order": 3,
+        "charset": "utf8mb4",
+        "collation": "utf8mb4_unicode_ci",
+        "maxLength": 50,
+        "maxBytes": 200,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "created_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__hidden": true,
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED",
+        "order": 4,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "updated_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__hidden": true,
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
+        "order": 5,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null
+      }
+    },
+    "session": {
+      "id": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "boundConstraints": [
+          {
+            "columnKey": "PRI",
+            "boundConstraint": "PRIMARY"
+          }
+        ],
+        "isPrimaryKey": true,
+        "unsigned": 1,
+        "extra": "auto_increment",
+        "order": 1,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0
+      },
+      "id_user": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "boundConstraints": [
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "FK__user",
+            "referencedTable": "user",
+            "referencedColumn": "id"
+          }
+        ],
+        "isForeignKey": true,
+        "unsigned": 1,
+        "extra": "",
+        "order": 2,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0
+      },
+      "secret_token": {
+        "type": "varchar",
+        "fulltype": "varchar(255)",
+        "nullable": "NO",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 3,
+        "charset": "utf8",
+        "collation": "utf8_unicode_ci",
+        "maxLength": 255,
+        "maxBytes": 765,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "recovery_token": {
+        "type": "varchar",
+        "fulltype": "varchar(255)",
+        "nullable": "NO",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 4,
+        "charset": "utf8",
+        "collation": "utf8_unicode_ci",
+        "maxLength": 255,
+        "maxBytes": 765,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "created_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__hidden": true,
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED",
+        "order": 5,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "updated_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__hidden": true,
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
+        "order": 6,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null
+      }
+    },
+    "user": {
+      "id": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "boundConstraints": [
+          {
+            "columnKey": "PRI",
+            "boundConstraint": "PRIMARY"
+          }
+        ],
+        "isPrimaryKey": true,
+        "unsigned": 1,
+        "extra": "auto_increment",
+        "order": 1,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0
+      },
+      "name": {
+        "type": "varchar",
+        "fulltype": "varchar(50)",
+        "nullable": "NO",
+        "default": null,
+        "boundConstraints": [
+          {
+            "columnKey": "UNI",
+            "boundConstraint": "UNIQUE_user_name"
+          }
+        ],
+        "hasUniqueRule": true,
+        "unsigned": 0,
+        "extra": "",
+        "order": 2,
+        "charset": "utf8mb4",
+        "collation": "utf8mb4_unicode_ci",
+        "maxLength": 50,
+        "maxBytes": 200,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "password": {
+        "type": "varchar",
+        "fulltype": "varchar(255)",
+        "nullable": "NO",
+        "default": null,
+        "unsigned": 0,
+        "extra": "",
+        "order": 3,
+        "charset": "utf8mb4",
+        "collation": "utf8mb4_unicode_ci",
+        "maxLength": 255,
+        "maxBytes": 1020,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "email": {
+        "type": "varchar",
+        "fulltype": "varchar(100)",
+        "nullable": "NO",
+        "default": null,
+        "boundConstraints": [
+          {
+            "columnKey": "UNI",
+            "boundConstraint": "UNIQUE_user_mail"
+          }
+        ],
+        "hasUniqueRule": true,
+        "unsigned": 0,
+        "extra": "",
+        "order": 4,
+        "charset": "utf8mb4",
+        "collation": "utf8mb4_unicode_ci",
+        "maxLength": 100,
+        "maxBytes": 400,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "created_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__hidden": true,
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED",
+        "order": 5,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null
+      },
+      "updated_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__hidden": true,
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
+        "order": 6,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null
+      }
+    }
+  }
+}
