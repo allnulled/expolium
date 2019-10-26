@@ -7,8 +7,22 @@ class ParametersManager {
 		return new this(...args);
 	}
 
-	static adaptRequestParameters(source, request, response, next, ...others) {
-		source.input = Object.assign({}, request.query, request.body, request.params);
+	static get DEFAULT_SOURCE() {
+		return {
+			input: {},
+			output: {},
+			storage: {}
+		}
+	}
+
+	static adaptRequestParameters(sourceParameter = null, request, response, next, otherInputs = {}, ...others) {
+		let source = sourceParameter;
+		if(sourceParameter === null) {
+			source = Object.assign({}, this.DEFAULT_SOURCE);
+		}
+		source.input = Object.assign({}, request.query, request.body, request.params, otherInputs, {
+			httpHeaders: request.headers
+		});
 		if(!("data" in source.output)) {
 			source.output.data = null;
 		}
@@ -28,6 +42,8 @@ class ParametersManager {
 		source.request = request;
 		source.response = response;
 		source.next = next;
+		source.others = others;
+		return source;
 	}
 
 	constructor(options = {}, ...args) {

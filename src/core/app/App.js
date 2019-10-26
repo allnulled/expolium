@@ -164,6 +164,11 @@ class App {
 		this.$app.use(bodyParser.urlencoded({ extended: true }));
 		this.$app.use(bodyParser.json());
 		this.$app.use(upload.array());
+		this.$app.use((request, response, next) => {
+			request.expolium = {};
+			response.expolium = {};
+			return next();
+		});
 		// static:
 		const jsonMethods = {
 			jsonSuccess: function(data, metadata = {}, code = 200) {

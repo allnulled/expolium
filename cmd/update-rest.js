@@ -1,3 +1,7 @@
+/**************************************************************
+Name: db:update
+Description: updates /src/core.rest/db models and controllers.
+**************************************************************/
 const fs = require("fs-extra");
 const ejs = require("ejs");
 const path = require("path");
@@ -19,7 +23,7 @@ class SqlInspector {
 	}
 
 	static getExportJson() {
-		return JSON.parse(fs.readFileSync(__dirname + "/autorest-update/export.json").toString());
+		return JSON.parse(fs.readFileSync(__dirname + "/rest-update/export.json").toString());
 	}
 
 	static _flatten(arr) {
@@ -70,7 +74,7 @@ class SqlInspector {
 		// @UNCOMMENT to update from database:
 		return this._query(sequelize, databaseName);
 		return new Promise((resolve, reject) => {
-			resolve(JSON.parse(fs.readFileSync(__dirname + "/autorest-update/cached.json").toString()));
+			resolve(JSON.parse(fs.readFileSync(__dirname + "/rest-update/cached.json").toString()));
 		});
 	}
 
@@ -78,7 +82,7 @@ class SqlInspector {
 		return new Promise((resolve, reject) => {
 			this.__query(sequelize, databaseName ? databaseName : sequelize.getDatabaseName()).then(results => {
 				// @UNCOMMENT to cache the results from database:
-				fs.writeFileSync(__dirname + "/autorest-update/cached.json", JSON.stringify(results), "utf8");
+				fs.writeFileSync(__dirname + "/rest-update/cached.json", JSON.stringify(results), "utf8");
 				const shaped = this._flatten(results).reduce((o, item) => {
 					const database = item["DATABASE"];
 					const table = item["TABLE"];
@@ -255,11 +259,11 @@ class SqlInspector {
 	}
 
 	static generateModels(results, exportJson, projectRoot) {
-		return this.generateFilesPerTable("model", __dirname + "/autorest-update/BaseModel.js.ejs", __dirname + "/autorest-update/Model.js.ejs", results, exportJson, projectRoot);
+		return this.generateFilesPerTable("model", __dirname + "/rest-update/BaseModel.js.ejs", __dirname + "/rest-update/Model.js.ejs", results, exportJson, projectRoot);
 	}
 
 	static generateControllers(results, exportJson, projectRoot) {
-		return this.generateFilesPerTable("controller", __dirname + "/autorest-update/BaseController.js.ejs", __dirname + "/autorest-update/Controller.js.ejs", results, exportJson, projectRoot);
+		return this.generateFilesPerTable("controller", __dirname + "/rest-update/BaseController.js.ejs", __dirname + "/rest-update/Controller.js.ejs", results, exportJson, projectRoot);
 	}
 
 	static renderGeneralFile(fileSrc, fileDst, results, exportJson, projectRoot) {
@@ -282,11 +286,11 @@ class SqlInspector {
 	}
 
 	static generateModelsImporter(results, exportJson, projectRoot) {
-		return this.renderGeneralFile(__dirname + "/autorest-update/models.ejs", exportJson.models, results, exportJson, projectRoot);
+		return this.renderGeneralFile(__dirname + "/rest-update/models.ejs", exportJson.models, results, exportJson, projectRoot);
 	}
 
 	static generateControllersImporter(results, exportJson, projectRoot) {
-		return this.renderGeneralFile(__dirname + "/autorest-update/controllers.ejs", exportJson.controllers, results, exportJson, projectRoot);
+		return this.renderGeneralFile(__dirname + "/rest-update/controllers.ejs", exportJson.controllers, results, exportJson, projectRoot);
 	}
 
 }

@@ -18,20 +18,39 @@ class BasicController {
 
 	mountOnRouter(router) {
 		if(router instanceof require(process.env.PROJECT_ROOT + "/core/app/BasicRouter.js")) {
-			router.$router[this.method.toLowerCase()](this.path, this.middleware, this.controller, this.handle, this.fail);
+			router.$router[this.method.toLowerCase()](this.path, this.getMiddleware(), this.getController(), this.handle, this.fail);
 			return this;
 		} else {
 			throw new ErrorManager.classes.RequiredTypeError("BasicRouter");
 		}
 	}
 
-	addMiddleware(middleware) {
-		if(middleware instanceof BasicMiddleware) {
-			this.middleware = this.middleware.concat(middleware);
-			return this;
-		} else {
-			throw new ErrorManager.classes.RequiredTypeError("BasicMiddleware");
-		}
+	getMiddleware() {
+		return [].concat(this.middleware).map(middleware => {
+			if(middleware instanceof require(process.env.PROJECT_ROOT + "/core/middleware/BasicMiddleware.js")) {
+				return middleware.middleware;
+			} else if(typeof middleware === "function") {
+				return middleware;
+			} else if(Array.isArray(middleware)) {
+				return middleware;
+			} else {
+				throw new ErrorManager.classes.RequiredTypeError("BasicMiddleware");
+			}
+		});
+	}
+
+	getController() {
+		return [].concat(this.controller).map(controller => {
+			if(controller instanceof BasicController) {
+				return [].concat(controller.middleware).concat(controller.controller);
+			} else if(typeof controller === "function") {
+				return controller;
+			} else if(Array.isArray(controller)) {
+				return controller;
+			} else {
+				throw new ErrorManager.classes.RequiredTypeError("BasicController");
+			}
+		});
 	}
 
 	setMethod(method) {

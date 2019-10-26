@@ -39,6 +39,7 @@ module.exports = function() {
 
 		this.addController(new LogoutController({
 			router: this,
+			middleware: new LoggedMiddleware({ router: this }),
 			path: ["/auth/v1/logout"],
 		}));
 

@@ -1,4 +1,5 @@
 const fs = require("fs");
+const groupArray = require("group-array");
 
 class CollectionManager {
 
@@ -153,6 +154,10 @@ class CollectionManager {
 			result = this[op[0]](result, ...op.slice(1));
 		});
 		return result;
+	}
+
+	static groupRawBy(original, ...fields) {
+		return groupArray(original, ...fields);
 	}
 
 }

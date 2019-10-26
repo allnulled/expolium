@@ -2,14 +2,15 @@
   "name": "expolium",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "src/start.js",
   "scripts": {
-    "dev": "nodemon src/start.js --watch ./src",
-    "up": "node src/start.js",
-    "clone": "node dev/clone.js",
-    "autorest:update": "node dev/autorest-update.js",
-    "db:update": "node dev/autorest-update.js",
-    "db:drop": "rimraf src/core.rest/db/model/* && rimraf src/core.rest/db/controller/*",
+    "do": "node cmd/do.js",
+    "dev": "nodemon src/start.js",
+    "project:do": "node cmd/do.js",
+    "project:up": "node src/start.js",
+    "project:clone": "node cmd/project-clone.js",
+    "rest:update": "node cmd/rest-update",
+    "rest:drop": "node cmd/rest-clean",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -26,6 +27,7 @@
     "ejs": "^2.7.1",
     "express": "^4.17.1",
     "express-list-endpoints": "^4.0.1",
+    "group-array": "^1.0.0",
     "import-fresh": "^3.1.0",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.19.5",
@@ -41,6 +43,7 @@
   },
   "devDependencies": {
     "fs-extra": "^8.1.0",
+    "inquirer": "^7.0.0",
     "just-a-timer": "^1.0.1",
     "prettier": "^1.18.2",
     "yargs": "^14.2.0"

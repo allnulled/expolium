@@ -3,5 +3,9 @@ const StringUtils = require(process.env.PROJECT_ROOT + "/core/helper/StringUtils
 module.exports = (parameters, data) => {
 	const text = StringUtils.stringify(data);
 	parameters.exit = true;
-	parameters.response.json(JSON.parse(text)).send();
+	try {
+		parameters.response.json(JSON.parse(text)).send();
+	} catch(error) {
+		parameters.response.json(text).send();
+	}
 };

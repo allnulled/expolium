@@ -13,6 +13,7 @@ class BasicMiddleware {
 		if(typeof options !== "object")
 			throw new ErrorManager.classes.RequiredTypeError("object");
 		Object.keys(options).forEach(prop => this[prop] = options[prop]);
+		this.callback = [].concat(this.callback);
 	}
 
 	mountOnRouter(router) {

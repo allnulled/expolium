@@ -1,3 +1,8 @@
+/**************************************************************
+Name: clone project
+Description: clones current project to specified folder. 
+Usage: node cmd/project-clone my-new-folder
+**************************************************************/
 const fs = require("fs-extra");
 const path = require("path");
 const args = require("yargs").argv;
