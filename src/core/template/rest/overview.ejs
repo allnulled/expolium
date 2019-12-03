@@ -1,0 +1,58 @@
+<%
+	
+	const StringUtils = require(process.env.PROJECT_ROOT + "/core/helper/StringUtils.js");
+	const Models = require(process.env.PROJECT_ROOT + "/core.rest/" + Object.keys(router.app.constructor.databaseConnections)[0] + "/models.js");
+	_.output.metadata.tags = Object.assign(_.output.metadata.tags, {
+		bootstrap: true,
+		popper: true,
+		jquery: true,
+		"custom.rest": true,
+	});
+	let allModels = controllers.reduce((o, controller) => {
+		console.log();
+		o[controller.constructor.model.definition] = controller.constructor.model;
+		return o;
+	}, {});
+%>
+
+<div class="container xpl-view">
+
+	<h3 class="x-form-title">Overview of database:</h3>
+	<table class="table table-sm x-table x-table-overview" style="width:100%;">
+		<thead class="thead-dark">
+			<tr>
+				<th style="width:100%;">Model</th>
+			</tr>
+		</thead>
+		<tbody>
+		<%
+		Object.keys(allModels).forEach(key => {
+			const {table, name, path} = allModels[key].definition;
+		%>
+			<tr data-x-link=<%-JSON.stringify(_.request.url.replace(/\/\@\/view\/?$/g, "") + "/" + StringUtils.hyphenize(table) + "/@/view")%> onclick="window.location = this.getAttribute('data-x-link')" style="cursor:pointer;">
+				<td>
+					<%-StringUtils.humanize(table)%>
+				</td>
+			</tr>
+		<%
+		});
+		%>
+		</tbody>
+	</table>
+	<script type="text/javascript">
+		const me = jQuery(document.currentScript);
+		const form = me.parent();
+		const formDataReceived = <%-JSON.stringify({
+			controllerUrl: _.request.url.replace(/\/\@\/view\/?$/g, "")
+		}, null, 4);%>;
+		const events = {
+			
+		};
+		Object.keys(events).forEach(eventSelector => {
+			const separatorPosition = eventSelector.indexOf(":");
+			const event = eventSelector.substr(0, separatorPosition);
+			const selector = eventSelector.substr(separatorPosition+1);
+			form.on(event, selector, events[eventSelector]);
+		});
+	</script>
+</form>

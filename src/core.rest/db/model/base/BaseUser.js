@@ -30,9 +30,11 @@ class UserDefinition {
                 unsigned: true,
                 timestamps: false,
                 underscored: true,
-                __typeCode: "Sequelize.INTEGER(10)",
-                __fulltype: "int(10) unsigned",
-                __typeLabel: "integer"
+                __type_code: "Sequelize.INTEGER(10)",
+                __full_type: "int(10) unsigned",
+                __type_label: "integer",
+                __main_table: true,
+                __allowed_joins: {}
             },
             name: {
                 type: Sequelize.STRING(50),
@@ -41,9 +43,9 @@ class UserDefinition {
                 defaultValue: null,
                 timestamps: false,
                 underscored: true,
-                __typeCode: "Sequelize.STRING(50)",
-                __fulltype: "varchar(50)",
-                __typeLabel: "string"
+                __type_code: "Sequelize.STRING(50)",
+                __full_type: "varchar(50)",
+                __type_label: "string"
             },
             password: {
                 type: Sequelize.STRING(255),
@@ -52,9 +54,9 @@ class UserDefinition {
                 defaultValue: null,
                 timestamps: false,
                 underscored: true,
-                __typeCode: "Sequelize.STRING(255)",
-                __fulltype: "varchar(255)",
-                __typeLabel: "string"
+                __type_code: "Sequelize.STRING(255)",
+                __full_type: "varchar(255)",
+                __type_label: "string"
             },
             email: {
                 type: Sequelize.STRING(100),
@@ -63,9 +65,9 @@ class UserDefinition {
                 defaultValue: null,
                 timestamps: false,
                 underscored: true,
-                __typeCode: "Sequelize.STRING(100)",
-                __fulltype: "varchar(100)",
-                __typeLabel: "string"
+                __type_code: "Sequelize.STRING(100)",
+                __full_type: "varchar(100)",
+                __type_label: "string"
             },
             created_at: {
                 type: Sequelize.DATE,
@@ -74,9 +76,9 @@ class UserDefinition {
                 defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
                 timestamps: false,
                 underscored: true,
-                __typeCode: "Sequelize.DATE",
-                __fulltype: "timestamp",
-                __typeLabel: "date",
+                __type_code: "Sequelize.DATE",
+                __full_type: "timestamp",
+                __type_label: "date",
                 __hidden: true
             },
             updated_at: {
@@ -86,9 +88,9 @@ class UserDefinition {
                 defaultValue: Sequelize.literal("CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP"),
                 timestamps: false,
                 underscored: true,
-                __typeCode: "Sequelize.DATE",
-                __fulltype: "timestamp",
-                __typeLabel: "date",
+                __type_code: "Sequelize.DATE",
+                __full_type: "timestamp",
+                __type_label: "date",
                 __hidden: true
             }
         };
@@ -139,7 +141,7 @@ class UserDefinition {
 
     static getPublicColumns() {
         return Object.keys(this.columns).reduce((result, column) => {
-            if (this.columns[column]._hidden === true) {
+            if (this.columns[column].__hidden === true || this.columns[column].__shown === false) {
                 //
             } else {
                 result[column] = this.columns[column];
@@ -150,6 +152,18 @@ class UserDefinition {
 
     static getPublicColumnNames() {
         return Object.keys(this.getPublicColumns());
+    }
+
+    static isMainTable() {
+        return true;
+    }
+
+    static getAttachedModelBoundaries() {
+        return {};
+    }
+
+    static get primaryKeyColumn() {
+        return "id";
     }
 }
 

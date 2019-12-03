@@ -27,7 +27,7 @@ class BasicMiddleware {
 
 	mountOnController(controller) {
 		if(controller instanceof BasicController) {
-			controller.middleware = controller.middleware.concat(this.callback);
+			controller.middleware = [].concat(controller.middleware).concat(this.callback);
 			return this;
 		} else {
 			throw new ErrorManager.classes.RequiredTypeError("BasicController");
@@ -36,7 +36,7 @@ class BasicMiddleware {
 
 	mountOnMiddleware(middleware) {
 		if(middleware instanceof BasicMiddleware) {
-			middleware.callback = middleware.callback.concat(this.callback);
+			middleware.callback = [].concat(middleware.callback).concat(this.callback);
 			return this;
 		} else {
 			throw new ErrorManager.classes.RequiredTypeError("BasicMiddleware");

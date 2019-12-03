@@ -1,8 +1,0 @@
-{
-	"BaseController": "core.rest/<%=databaseConnection%>/controller/base/Base<%=Model%>Controller.js",
-	"Controller": "core.rest/<%=databaseConnection%>/controller/<%=Model%>Controller.js",
-	"BaseModel": "core.rest/<%=databaseConnection%>/model/base/Base<%=Model%>.js",
-	"Model": "core.rest/<%=databaseConnection%>/model/<%=Model%>.js",
-	"controllers": "core.rest/<%=databaseConnection%>/controllers.js",
-	"models": "core.rest/<%=databaseConnection%>/models.js"
-}

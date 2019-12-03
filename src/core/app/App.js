@@ -1,14 +1,19 @@
 const fs = require("fs");
 const http = require("http");
 const express = require("express");
+const ejs = require("ejs");
 const path = require("path");
 const moment = require("moment");
 const chokidar = require("chokidar");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const expressSession = require("express-session");
 const importFresh = require("import-fresh");
+const ReflectionManager = require(process.env.PROJECT_ROOT + "/core/helper/ReflectionManager.js");
 const DBManager = require(process.env.PROJECT_ROOT + "/core/helper/DBManager.js");
 const ErrorManager = require(process.env.PROJECT_ROOT + "/core/error/ErrorManager.js");
 const LoggerManager = require(process.env.PROJECT_ROOT + "/core/helper/LoggerManager.js");
+const Logger = LoggerManager.create({source:__filename});
 const BasicRouter = require(__dirname + "/BasicRouter.js");
 const Sequelize = require("sequelize");
 const multer = require("multer");
@@ -16,6 +21,10 @@ const upload = multer();
 
 
 class App {
+
+	static get htmlDependencies() {
+		return JSON.parse(fs.readFileSync(process.env.PROJECT_ROOT + "/core/config/dependencies.json").toString());
+	}
 
 	static get name() {
 		throw new Error("Must override App.name");
@@ -146,6 +155,60 @@ class App {
 		};
 	}
 
+	formatHtmlResponse(data, metadata, code) {
+		return `
+<!DOCTYPE html>
+<html>
+<head>${this.formatMetadataTags(metadata.tags || {})}</head>
+<body>${data}</body>
+</html>
+		`;
+	}
+
+	formatTextResponse(data, metadata, code) {
+		return data;
+	}
+
+	formatMetadataTags(metadataTags) {
+		// 1. filter only valid dependencies and add dependencies first.
+		const metadata = this.constructor.getMetadataDefinition(metadataTags);
+		// 2. transform dependency keys into html script
+		return this.constructor.getMetadataScript(metadata);
+	}
+
+	static getMetadataDefinition(metadataTags) {
+		const dependenciesNames = [];
+		const dependencies = this.htmlDependencies;
+		const checkDependency = (tagId, dependencies, metadataTags, output = []) => {
+			if(!(tagId in dependencies.definitions)) {
+				throw new ErrorManager.classes.DependencyNotFoundError(tagId);
+			}
+			if(!(tagId in metadataTags)) {
+				throw new ErrorManager.classes.DependencyNotImportedError(innerDependency);
+			}
+			const dependency = dependencies.definitions[tagId];
+			if(dependency.dependsOn) {
+				dependency.dependsOn.forEach(innerDependency => {
+					checkDependency(innerDependency, dependencies, metadataTags, output);
+				});
+			}
+			if(output.indexOf(tagId) === -1) {
+				output.push(tagId);
+			}
+			return true;
+		};
+		Object.keys(metadataTags).filter(tagId => {
+			checkDependency(tagId, dependencies, metadataTags, dependenciesNames);
+		});
+		return dependenciesNames.map(k => {
+			return dependencies.definitions[k];
+		});
+	}
+
+	static getMetadataScript(metadata) {
+		return metadata.map(i => [].concat(i.contents).join("\n  ")).join("\n  ");
+	}
+
 	async init() {
 		try {
 			await this.initLogger();
@@ -163,6 +226,16 @@ class App {
 		// dynamic:
 		this.$app.use(bodyParser.urlencoded({ extended: true }));
 		this.$app.use(bodyParser.json());
+		this.$app.use(cookieParser());
+		this.$app.use(expressSession({
+		    key: "user_sid",
+		    secret: "somerandonstuffs",
+		    resave: false,
+		    saveUninitialized: true,
+		    cookie: {
+		        expires: 600000
+		    }
+		}));
 		this.$app.use(upload.array());
 		this.$app.use((request, response, next) => {
 			request.expolium = {};
@@ -178,6 +251,10 @@ class App {
 				return this.jsonDispatch(error, metadata, code);
 			},
 			jsonDispatch: function(data, metadata = {}, code = 200) {
+				if(this.headersSent) {
+					return;
+				}
+				this.set({"Content-Type": "application/json"});
 				return this.status(code).json(this.formatJsonResponse(data, metadata, code));
 			},
 			sendJsonSuccess: function(data, metadata = {}, code = 200) {
@@ -186,12 +263,104 @@ class App {
 			sendJsonError: function(error, metadata = {}, code = 500) {
 				return this.sendJson(error, metadata, code);
 			},
-			sendJson: function(data, metadata = {}, code = 500) {
-				return this.jsonDispatch(data, metadata, code).send();
+			sendJson: function(data, metadata = {}, code = 200) {
+				return this.jsonDispatch(data, metadata, code);
+			}
+		};
+
+		const htmlMethods = {
+			htmlSuccess: function(data, metadata = {}, code = 200) {
+				return this.htmlDispatch(data, metadata, code);
+			},
+			htmlError: function(error, metadata = {}, code = 500) {
+				return this.htmlDispatch(error, metadata, code);
+			},
+			htmlDispatch: function(data, metadata = {}, code = 200) {
+				if(this.headersSent) {
+					return;
+				}
+				this.set({"Content-Type": "text/html; charset=utf-8"});
+				return this.status(code).send(this.formatHtmlResponse(data, metadata, code));
+			},
+			sendHtmlSuccess: function(data, metadata = {}, code = 200) {
+				return this.sendHtml(data, metadata, code);
+			},
+			sendHtmlError: function(error, metadata = {}, code = 500) {
+				return this.sendHtml(error, metadata, code);
+			},
+			sendHtml: function(data, metadata = {}, code = 200) {
+				return this.htmlDispatch(data, metadata, code);
 			},
 		};
-		Object.assign(this.$app.response, jsonMethods);
+
+		const ejsMethods = {
+			htmlEjsFileSuccess: function(file, data, metadata = {}, code = 200) {
+				return this.htmlEjsFileDispatch(file, data, metadata, code);
+			},
+			htmlEjsFileError: function(file, error, metadata = {}, code = 500) {
+				return this.htmlEjsFileDispatch(file, error, metadata, code);
+			},
+			htmlEjsFileDispatch: function(file, data, metadata = {}, code = 200) {
+				if(this.headersSent) {
+					return;
+				}
+				return new Promise((resolve, reject) => {
+					ejs.renderFile(path.resolve(file), {...data, metadata, require: require}, {}, (error, output) => {
+						if(error) {
+							console.log("Error", error);
+								this.set({"Content-Type": "text/html; charset=utf-8"});
+							if(!this.headersSent) {
+								this.status(500).json(ReflectionManager.breakCircularity(error)).send();
+							}
+							return reject(error);
+						}
+						if(!this.headersSent) {
+							this.set({"Content-Type": "text/html; charset=utf-8"});
+							this.status(code).send(this.formatHtmlResponse(output, metadata, code));
+						}
+						return resolve(output);
+					});
+				});
+			},
+			sendHtmlEjsFileSuccess: function(file, data, metadata = {}, code = 200) {
+				return this.sendHtmlEjsFile(file, data, metadata, code);
+			},
+			sendHtmlEjsFileError: function(file, error, metadata = {}, code = 500) {
+				return this.sendHtmlEjsFile(file, error, metadata, code);
+			},
+			sendHtmlEjsFile: function(file, data, metadata = {}, code = 200) {
+				return this.htmlEjsFileDispatch(file, data, metadata, code);
+			},
+		};
+
+		const textMethods = {
+			textSuccess: function(data, metadata = {}, code = 200) {
+				return this.textDispatch(data, metadata, code);
+			},
+			textError: function(error, metadata = {}, code = 500) {
+				return this.textDispatch(error, metadata, code);
+			},
+			textDispatch: function(data, metadata = {}, code = 200) {
+				if(this.headersSent) {
+					return;
+				}
+				this.set({"Content-Type": "text/plain; charset=utf-8"});
+				return this.status(code).send(this.formatTextResponse(data, metadata, code));
+			},
+			sendTextSuccess: function(data, metadata = {}, code = 200) {
+				return this.sendText(data, metadata, code);
+			},
+			sendTextError: function(error, metadata = {}, code = 500) {
+				return this.sendText(error, metadata, code);
+			},
+			sendText: function(data, metadata = {}, code = 200) {
+				return this.textDispatch(data, metadata, code);
+			},
+		};
 		this.$app.response.formatJsonResponse = this.formatJsonResponse.bind(this);
+		this.$app.response.formatHtmlResponse = this.formatHtmlResponse.bind(this);
+		this.$app.response.formatTextResponse = this.formatTextResponse.bind(this);
+		Object.assign(this.$app.response, jsonMethods, htmlMethods, textMethods, ejsMethods);
 	}
 
 	async initDB() {
@@ -278,7 +447,7 @@ class App {
 
 	async initLogger() {
 		try {
-			this.loggerManager = LoggerManager.create(__filename);
+			this.loggerManager = LoggerManager.create({source:__filename + ":App"});
 			this.logger = this.loggerManager.get();
 			this.logger.info("app.logger was successfully initialized!");
 			this.$app.use(this.loggerManager.getMiddleware());

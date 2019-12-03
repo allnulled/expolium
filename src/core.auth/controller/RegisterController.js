@@ -3,68 +3,46 @@ const BasicController = require(process.env.PROJECT_ROOT + "/core/controller/Bas
 const ErrorManager = require(process.env.PROJECT_ROOT + "/core/error/ErrorManager.js");
 const ParametersManager = require(process.env.PROJECT_ROOT + "/core/helper/ParametersManager.js");
 const CollectionManager = require(process.env.PROJECT_ROOT + "/core/helper/CollectionManager.js");
+const ReflectionManager = require(process.env.PROJECT_ROOT + "/core/helper/ReflectionManager.js");
 const User = require(process.env.PROJECT_ROOT + "/core.rest/db/model/User.js");
 const squel = require("squel");
 const Sequelize = require("sequelize");
 
 class RegisterController extends BasicController {
 
-	onResponse(_) {
-		_.output.metadata.finished = moment().format("YYYY/MM/DD HH:mm:ss.SSS");
-		return _.response.sendJsonSuccess(_.output.data, _.output.metadata, _.output.code);
+	constructor(options = {}) {
+		super(options);
+		this.method = "post";
+		this.controller = this.registerCallback.bind(this);
 	}
 
-	onPrepareSelectUserQuery(_) {
-		// Stating point only
+	static getRegisterSteps() {
+		return [
+			"onPrepareSanitizeInput",
+			"onPrepareInsertUserQuery",
+			"onPrepareInsert",
+			"onPrepareInto",
+			"onPrepareValues",
+			"~onInsertForUser",
+			"onResponse",
+		];
 	}
 
-	onPrepareSelect(_) {
-		_.storage.query1 = squel.select({ separator: " " });
+	registerCallback(request, response, next) {
+		return this.constructor.register(new ParametersManager({
+			controller: this,
+			controllerClass: this.constructor,
+			request: request,
+			response: response,
+			next: next,
+		}));
 	}
 
-	onPrepareFrom(_) {
-		_.storage.query1.from("user", "u");
+	static register(_) {
+		return ReflectionManager.gateway(this, this.getRegisterSteps(), _);
 	}
 
-	onPrepareFields(_) {
-		// nothing will mean everything for squel
-	}
-
-	onPrepareJoinMembership(_) {
-		_.storage.query1.left_join("membership", "m", "m.id_user = u.id");
-	}
-
-	onPrepareJoinRole(_) {
-		_.storage.query1.left_join("role", "r", "r.id = m.id_role");
-	}
-	
-	onPrepareJoinCommunity(_) {
-		_.storage.query1.left_join("community", "c", "c.id = r.id_community");
-	}
-
-	onPrepareJoinPermission(_) {
-		_.storage.query1.left_join("permission_per_role", "pr", "pr.id_role = r.id");
-		_.storage.query1.left_join("permission", "p", "p.id = pr.id_permission");
-	}
-
-	onPrepareWhereCredentials(_) {
-		_.storage.query1.where(
-			squel.expr().and("u.name = ?", _.input.name).or("u.email = ?", _.input.name)
-		);
-	}
-
-	async onSelectForUser(_) {
-		_.storage.query1sql = _.storage.query1.toString();
-		_.storage.query1result = await this.router.app.db.getConnection().query(_.storage.query1sql, { type: Sequelize.QueryTypes.SELECT });
-	}
-
-	onCheckForUser(_) {
-		if(_.storage.query1result.length) {
-			throw new ErrorManager.classes.AuthenticationError("User or email <" + _.input.name + "> already exists.");
-		}
-	}
-
-	onPrepareSanitizeInput(_) {
+	static onPrepareSanitizeInput(_) {
 		if(_.input.name) {
 			if(_.input.name.indexOf("@") !== -1) {
 				throw new ErrorManager.classes.ValidationError("Parameter 'name' can only contain letters and numbers");
@@ -77,83 +55,42 @@ class RegisterController extends BasicController {
 		}
 	}
 
-	onPrepareInsertUserQuery(_) {
+	static onPrepareInsertUserQuery(_) {
 		// Stating point only
 	}
 
-	onPrepareInsert(_) {
-		_.storage.query2 = squel.insert({ separator: " " });
+	static onPrepareInsert(_) {
+		_.storage.insertUser = squel.insert({ separator: " " });
 	}
 
-	onPrepareInto(_) {
-		_.storage.query2.into("user");
+	static onPrepareInto(_) {
+		_.storage.insertUser.into("user");
 	}
 
-	onPrepareValues(_) {
+	static onPrepareValues(_) {
 		const validColumns = User.definition.getPublicColumnNames();
 		const columns = CollectionManager.getOnlyKeys(_.input, validColumns);
 		Object.keys(columns).forEach(name => {
 			const column = columns[name];
-			_.storage.query2.set(name, column);
+			_.storage.insertUser.set(name, column);
 		});
 	}
 
-	async onInsertForUser(_) {
-		_.storage.query2sql = _.storage.query2.toString();
-		_.storage.query2result = await this.router.app.db.getConnection().query(_.storage.query2sql);
-	}
-
-	async registerCallback(request, response, next) {
-		const _ = new ParametersManager({}, request, response, next);
+	static async onInsertForUser(_) {
+		const sql = _.storage.insertUser.toString();
 		try {
-			// @PartOne: Retrieve user by name/email. If it exists, return error.
-			this.onPrepareSelectUserQuery(_);
-			if(_.exit) {return _.exit;}
-			this.onPrepareSelect(_);
-			if(_.exit) {return _.exit;}
-			this.onPrepareFrom(_);
-			if(_.exit) {return _.exit;}
-			this.onPrepareFields(_);
-			if(_.exit) {return _.exit;}
-			this.onPrepareJoinMembership(_);
-			if(_.exit) {return _.exit;}
-			this.onPrepareJoinRole(_);
-			if(_.exit) {return _.exit;}
-			this.onPrepareJoinCommunity(_);
-			if(_.exit) {return _.exit;}
-			this.onPrepareJoinPermission(_);
-			if(_.exit) {return _.exit;}
-			this.onPrepareWhereCredentials(_);
-			if(_.exit) {return _.exit;}
-			await this.onSelectForUser(_);
-			if(_.exit) {return _.exit;}
-			this.onCheckForUser(_);
-			if(_.exit) {return _.exit;}
-			// @PartTwo: Insert new session with generated token.
-			this.onPrepareSanitizeInput(_);
-			if(_.exit) {return _.exit;}
-			this.onPrepareInsertUserQuery(_);
-			if(_.exit) {return _.exit;}
-			this.onPrepareInsert(_);
-			if(_.exit) {return _.exit;}
-			this.onPrepareInto(_);
-			if(_.exit) {return _.exit;}
-			this.onPrepareValues(_);
-			if(_.exit) {return _.exit;}
-			await this.onInsertForUser(_);
-			if(_.exit) {return _.exit;}
-			// @PartThree: Respond to the user.
-			this.onResponse(_);
+			_.storage.insertUserResult = await _.controller.router.app.db.getConnection().query(sql);
 		} catch(error) {
-			console.log(error);
-			return _.response.sendJsonError(error);
+			_.exit = true;
+			_.response.sendJsonError(error);
+			return console.log(error);
 		}
+		_.output.data = _.storage.insertUserResult;
 	}
 
-	constructor(options = {}) {
-		super(options);
-		this.method = "post";
-		this.controller = this.registerCallback.bind(this);
+	static onResponse(_) {
+		_.output.metadata.finished = moment().format("YYYY/MM/DD HH:mm:ss.SSS");
+		return _.response.sendJsonSuccess(_.output.data, _.output.metadata, _.output.code);
 	}
 
 }

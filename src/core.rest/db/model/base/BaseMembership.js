@@ -30,9 +30,12 @@ class MembershipDefinition {
                 unsigned: true,
                 timestamps: false,
                 underscored: true,
-                __typeCode: "Sequelize.INTEGER(10)",
-                __fulltype: "int(10) unsigned",
-                __typeLabel: "integer"
+                __type_code: "Sequelize.INTEGER(10)",
+                __full_type: "int(10) unsigned",
+                __type_label: "integer",
+                __bound_to_community_by: [["#", "id_role", "role", "id"], ["role", "id_community", "@", "@"]],
+                __main_table: true,
+                __allowed_joins: {}
             },
             id_user: {
                 type: Sequelize.INTEGER(10),
@@ -42,9 +45,21 @@ class MembershipDefinition {
                 unsigned: true,
                 timestamps: false,
                 underscored: true,
-                __typeCode: "Sequelize.INTEGER(10)",
-                __fulltype: "int(10) unsigned",
-                __typeLabel: "integer"
+                __type_code: "Sequelize.INTEGER(10)",
+                __full_type: "int(10) unsigned",
+                __type_label: "integer"
+            },
+            id_community: {
+                type: Sequelize.INTEGER(10),
+                field: "id_community",
+                allowNull: false,
+                defaultValue: null,
+                unsigned: true,
+                timestamps: false,
+                underscored: true,
+                __type_code: "Sequelize.INTEGER(10)",
+                __full_type: "int(10) unsigned",
+                __type_label: "integer"
             },
             id_role: {
                 type: Sequelize.INTEGER(10),
@@ -54,9 +69,9 @@ class MembershipDefinition {
                 unsigned: true,
                 timestamps: false,
                 underscored: true,
-                __typeCode: "Sequelize.INTEGER(10)",
-                __fulltype: "int(10) unsigned",
-                __typeLabel: "integer"
+                __type_code: "Sequelize.INTEGER(10)",
+                __full_type: "int(10) unsigned",
+                __type_label: "integer"
             },
             created_at: {
                 type: Sequelize.DATE,
@@ -65,9 +80,9 @@ class MembershipDefinition {
                 defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
                 timestamps: false,
                 underscored: true,
-                __typeCode: "Sequelize.DATE",
-                __fulltype: "timestamp",
-                __typeLabel: "date",
+                __type_code: "Sequelize.DATE",
+                __full_type: "timestamp",
+                __type_label: "date",
                 __hidden: true
             },
             updated_at: {
@@ -77,9 +92,9 @@ class MembershipDefinition {
                 defaultValue: Sequelize.literal("CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP"),
                 timestamps: false,
                 underscored: true,
-                __typeCode: "Sequelize.DATE",
-                __fulltype: "timestamp",
-                __typeLabel: "date",
+                __type_code: "Sequelize.DATE",
+                __full_type: "timestamp",
+                __type_label: "date",
                 __hidden: true
             }
         };
@@ -106,6 +121,18 @@ class MembershipDefinition {
             },
             {
                 table: "membership",
+                column: "id_community",
+                constraint: "UNIQUE_user_per_community"
+            },
+            {
+                table: "membership",
+                column: "id_community",
+                constraint: "FK_membership_community",
+                referencedTable: "community",
+                referencedColumn: "id"
+            },
+            {
+                table: "membership",
                 column: "id_role",
                 constraint: "FK_membership_role",
                 referencedTable: "role",
@@ -124,7 +151,7 @@ class MembershipDefinition {
 
     static getPublicColumns() {
         return Object.keys(this.columns).reduce((result, column) => {
-            if (this.columns[column]._hidden === true) {
+            if (this.columns[column].__hidden === true || this.columns[column].__shown === false) {
                 //
             } else {
                 result[column] = this.columns[column];
@@ -135,6 +162,22 @@ class MembershipDefinition {
 
     static getPublicColumnNames() {
         return Object.keys(this.getPublicColumns());
+    }
+
+    static getCommunityBoundaries() {
+        return [["#", "id_role", "role", "id"], ["role", "id_community", "@", "@"]];
+    }
+
+    static isMainTable() {
+        return true;
+    }
+
+    static getAttachedModelBoundaries() {
+        return {};
+    }
+
+    static get primaryKeyColumn() {
+        return "id";
     }
 }
 

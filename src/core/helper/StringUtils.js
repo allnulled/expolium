@@ -6,6 +6,14 @@ class StringUtils {
 		return "qwertyuiopasdfghjklmnbvcxz0123456789".split("");
 	}
 
+	static snakize(str) {
+		return str.replace(/(?:^|\.?)([A-Z])/g, function (x,y){return "_" + y.toLowerCase()}).replace(/^_/, "");
+	}
+
+	static hyphenize(str) {
+		return this.snakize(str).replace(/_/g, "-");
+	}
+
 	static capitalize(str, startCapital = true) {
 		let o = "";
 		let capitalizeNext = startCapital;
@@ -24,6 +32,29 @@ class StringUtils {
 
 	static camelize(str) {
 		return this.capitalize(str, false);
+	}
+
+	static humanize(strParam, startCapital = true, allCapitals = false) {
+		let o = "";
+		let str = this.snakize(strParam);
+		let spaceNext = false;
+		str = startCapital ? (str.substr(0,1).toUpperCase() + str.substr(1)) : str;
+		console.log(str);
+		str.split("").forEach(c => {
+			if(c === "_") {
+				spaceNext = true;
+			} else if(spaceNext) {
+				o += " " + (allCapitals ? c.toUpperCase() : c.toLowerCase());
+				spaceNext = false;
+			} else {
+				o += c;
+			}
+		});
+		return o;
+	}
+
+	static sanitizeFilename(str) {
+		return str.replace(/[\\\/]/g, ".");
 	}
 
 	static joinUrl(...str) {
@@ -52,6 +83,10 @@ class StringUtils {
 			};
 		};
 		return JSON.stringify(data, getCircularReplacer());
+	}
+
+	static parseJson(text) {
+		return JSON.parse(text);
 	}
 
 }

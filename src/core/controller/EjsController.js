@@ -4,7 +4,7 @@ const BasicController = require(__dirname + "/BasicController.js");
 class EjsController extends BasicController {
 
 	getParameters(req, res, next) {
-		return req.params;
+		return Object.assign({}, req.query, req.body, req.params);
 	}
 
 	mountOnRouter(router) {

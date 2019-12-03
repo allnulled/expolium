@@ -1,0 +1,68 @@
+<%
+	
+	_.output.metadata.tags = Object.assign(_.output.metadata.tags, {
+		bootstrap: true,
+		popper: true,
+		jquery: true,
+		"custom.rest": true,
+	});
+	const definition = controller.constructor.model.definition;
+	const fill = _.storage.queries.viewOneQuery;
+%>
+
+<form class="container xpl-form">
+
+	<h3 class="x-form-title"><%-StringUtils.humanize(definition.name)%></h3>
+	<div class="x-form-header">
+		<div class="x-row">
+			<a href="<%-_.request.url.replace("/" + StringUtils.hyphenize(definition.table) + "/@/view/" + _.request.params.id, "") + "/@/view"%>" class="x-link">All tables</a>
+			<span> | </span>
+			<a href="<%-_.request.url.replace("/" + StringUtils.hyphenize(definition.table) + "/@/view/" + _.request.params.id, "") + `/${StringUtils.hyphenize(definition.table)}/@/view`%>" class="x-link">All <%-StringUtils.humanize(definition.table, false, false)%> items</a>
+		</div>
+	</div>
+	<div class="x-form-body">
+		<ul>
+			<% Object.keys(definition.columns).forEach(key => { 
+				const column = definition.columns[key];
+				%>
+
+			<li>
+				<div class="form-group x-form-group">
+					<div class="card x-card x-form-card">
+						<label class="form-label x-form-label"><%-StringUtils.humanize(key)%>:</label>
+						<input class="form-control form-control-sm x-form-control" type="text" name=<%-JSON.stringify(key)%> />
+					</div>
+				</div>
+			</li>
+			<% }); %>
+		</ul>
+	</div>
+	<script type="text/javascript">
+		const me = jQuery(document.currentScript);
+		const form = me.parent();
+		const formDataReceived = <%-JSON.stringify({
+			controllerUrl: _.request.url.replace(/\/\@\/view\/?$/g, ""),
+			definition: definition,
+			results: fill,
+		}, null, 4);%>;
+		const events = {
+			"click:>h3": (e) => {
+				alert(e.target.textContent);
+			},
+			"input:[data-xpl-search]": (e) => {
+				alert(e.target.value);
+			}
+		};
+		Object.keys(events).forEach(eventSelector => {
+			const separatorPosition = eventSelector.indexOf(":");
+			const event = eventSelector.substr(0, separatorPosition);
+			const selector = eventSelector.substr(separatorPosition+1);
+			form.on(event, selector, events[eventSelector]);
+		});
+		if(formDataReceived.results) {
+			Object.keys(formDataReceived.results).forEach(key => {
+				form.find(`input[name=${JSON.stringify(key)}`).val(formDataReceived.results[key]);
+			});
+		}
+	</script>
+</form>

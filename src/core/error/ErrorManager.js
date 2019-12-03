@@ -3,6 +3,14 @@ const BasicError = require(__dirname + "/BasicError.js");
 class ErrorManager {
 
 	static get classes() {
+		class UniversalError extends BasicError {
+			constructor(message, info) {
+				super();
+				this.name = "UniversalError";
+				this.message = message;
+				this.info = info;
+			}
+		}
 		class RequiredTypeError extends BasicError {
 			constructor(message, info) {
 				super();
@@ -59,7 +67,24 @@ class ErrorManager {
 				this.info = info;
 			}
 		}
+		class DependencyNotFoundError extends BasicError {
+			constructor(message, info) {
+				super();
+				this.name = "DependencyNotFoundError";
+				this.message = message;
+				this.info = info;
+			}
+		}
+		class DependencyNotImportedError extends BasicError {
+			constructor(message, info) {
+				super();
+				this.name = "DependencyNotImportedError";
+				this.message = message;
+				this.info = info;
+			}
+		}
 		return {
+			BasicError,
 			RequiredTypeError,
 			MustOverrideError,
 			MustHaveProperty,
@@ -67,6 +92,9 @@ class ErrorManager {
 			FileNotFound,
 			AuthenticationError,
 			ValidationError,
+			UniversalError,
+			DependencyNotFoundError,
+			DependencyNotImportedError,
 		};
 	}
 

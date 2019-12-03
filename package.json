@@ -17,16 +17,23 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@vue/cli": "^4.0.5",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "chokidar": "^3.2.1",
     "colorized-logger": "^1.0.3",
     "console.table": "^0.10.0",
+    "cookie-parser": "^1.4.4",
+    "deep-extend": "^0.6.0",
+    "dot-prop": "^5.1.1",
     "dotenv": "^8.1.0",
     "ejs": "^2.7.1",
+    "es6-template-strings": "^2.0.1",
+    "execute-command-sync": "^1.0.2",
     "express": "^4.17.1",
     "express-list-endpoints": "^4.0.1",
+    "express-session": "^1.17.0",
     "group-array": "^1.0.0",
     "import-fresh": "^3.1.0",
     "jsonwebtoken": "^8.5.1",
@@ -42,10 +49,12 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
+    "download": "^7.1.0",
     "fs-extra": "^8.1.0",
     "inquirer": "^7.0.0",
     "just-a-timer": "^1.0.1",
     "prettier": "^1.18.2",
+    "tree-node-cli": "^1.2.5",
     "yargs": "^14.2.0"
   }
 }

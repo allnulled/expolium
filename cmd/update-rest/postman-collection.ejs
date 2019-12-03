@@ -1,0 +1,418 @@
+<%
+
+const getDefaultValueFrom = column => {
+	switch(column.type) {
+		case "int":
+			return 1;
+		case "varchar":
+			return "Text sample";
+		case "timestamp":
+			return "2019/06/30 15:59";
+	}
+	return JSON.stringify(column);
+};
+
+const _ = {};
+_.info = {};
+_.info._postman_id = "";
+_.info.name = exportJson.PostmanCollectionName;
+_.info.schema = "https://schema.getpostman.com/json/collection/v2.1.0/collection.json";
+_.item = [];
+
+/////////// AUTH API ///////////////
+
+_.item[0] = {};
+_.item[0].name = "AUTH API";
+_.item[0]._postman_isSubFolder = true;
+_.item[0].item = [];
+
+_.item[0].item[0] = {};
+_.item[0].item[0].name = "POST /register";
+_.item[0].item[0].response = {};
+_.item[0].item[0].request = {};
+_.item[0].item[0].request.url = {};
+_.item[0].item[0].request.url.raw = "{{auth_url}}/register";
+_.item[0].item[0].request.url.host = ["{{auth_url}}"];
+_.item[0].item[0].request.url.path = ["register"];
+_.item[0].item[0].request.url.query = [];
+_.item[0].item[0].request.method = "POST";
+_.item[0].item[0].request.header = [];
+_.item[0].item[0].request.header[0] = {};
+_.item[0].item[0].request.header[0].key = "Content-Type";
+_.item[0].item[0].request.header[0].value = "application/json";
+_.item[0].item[0].request.body = {};
+_.item[0].item[0].request.body.mode = "formdata";
+_.item[0].item[0].request.body.formdata = [];
+_.item[0].item[0].request.body.formdata[0] = {};
+_.item[0].item[0].request.body.formdata[0].key = "name";
+_.item[0].item[0].request.body.formdata[0].value = "defaultuser";
+_.item[0].item[0].request.body.formdata[0].type = "text";
+_.item[0].item[0].request.body.formdata[1] = {};
+_.item[0].item[0].request.body.formdata[1].key = "password";
+_.item[0].item[0].request.body.formdata[1].value = "defaultpassword";
+_.item[0].item[0].request.body.formdata[1].type = "text";
+_.item[0].item[0].request.body.formdata[2] = {};
+_.item[0].item[0].request.body.formdata[2].key = "email";
+_.item[0].item[0].request.body.formdata[2].value = "defaultemail@domain.com";
+_.item[0].item[0].request.body.formdata[2].type = "text";
+
+_.item[0].item[1] = {};
+_.item[0].item[1].name = "POST /login";
+_.item[0].item[1].response = {};
+_.item[0].item[1].request = {};
+_.item[0].item[1].request.url = {};
+_.item[0].item[1].request.url.raw = "{{auth_url}}/login";
+_.item[0].item[1].request.url.host = ["{{auth_url}}"];
+_.item[0].item[1].request.url.path = ["login"];
+_.item[0].item[1].request.url.query = [];
+_.item[0].item[1].request.method = "POST";
+_.item[0].item[1].request.header = [];
+_.item[0].item[1].request.header[0] = {};
+_.item[0].item[1].request.header[0].key = "Content-Type";
+_.item[0].item[1].request.header[0].value = "application/json";
+_.item[0].item[1].request.body = {};
+_.item[0].item[1].request.body.mode = "formdata";
+_.item[0].item[1].request.body.formdata = [];
+_.item[0].item[1].request.body.formdata[0] = {};
+_.item[0].item[1].request.body.formdata[0].key = "name";
+_.item[0].item[1].request.body.formdata[0].value = "defaultuser";
+_.item[0].item[1].request.body.formdata[0].type = "text";
+_.item[0].item[1].request.body.formdata[1] = {};
+_.item[0].item[1].request.body.formdata[1].key = "password";
+_.item[0].item[1].request.body.formdata[1].value = "defaultpassword";
+_.item[0].item[1].request.body.formdata[1].type = "text";
+
+_.item[0].item[2] = {};
+_.item[0].item[2].name = "POST /logout";
+_.item[0].item[2].response = {};
+_.item[0].item[2].request = {};
+_.item[0].item[2].request.url = {};
+_.item[0].item[2].request.url.raw = "{{auth_url}}/logout";
+_.item[0].item[2].request.url.host = ["{{auth_url}}"];
+_.item[0].item[2].request.url.path = ["logout"];
+_.item[0].item[2].request.url.query = [];
+_.item[0].item[2].request.method = "POST";
+_.item[0].item[2].request.header = [];
+_.item[0].item[2].request.header[0] = {};
+_.item[0].item[2].request.header[0].key = "Content-Type";
+_.item[0].item[2].request.header[0].value = "application/json";
+_.item[0].item[2].request.header[1] = {};
+_.item[0].item[2].request.header[1].key = "Authorization";
+_.item[0].item[2].request.header[1].value = "{{secret_token}}";
+_.item[0].item[2].request.body = {};
+
+_.item[0].item[3] = {};
+_.item[0].item[3].name = "POST /unregister";
+_.item[0].item[3].response = {};
+_.item[0].item[3].request = {};
+_.item[0].item[3].request.url = {};
+_.item[0].item[3].request.url.raw = "{{auth_url}}/unregister";
+_.item[0].item[3].request.url.host = ["{{auth_url}}"];
+_.item[0].item[3].request.url.path = ["unregister"];
+_.item[0].item[3].request.url.query = [];
+_.item[0].item[3].request.method = "POST";
+_.item[0].item[3].request.header = [];
+_.item[0].item[3].request.header[0] = {};
+_.item[0].item[3].request.header[0].key = "Content-Type";
+_.item[0].item[3].request.header[0].value = "application/json";
+_.item[0].item[2].request.header[1] = {};
+_.item[0].item[2].request.header[1].key = "Authorization";
+_.item[0].item[2].request.header[1].value = "{{secret_token}}";
+_.item[0].item[3].request.body = {};
+
+_.item[0].item[4] = {};
+_.item[0].item[4].name = "POST /recover";
+_.item[0].item[4].response = {};
+_.item[0].item[4].request = {};
+_.item[0].item[4].request.url = {};
+_.item[0].item[4].request.url.raw = "{{auth_url}}/recover";
+_.item[0].item[4].request.url.host = ["{{auth_url}}"];
+_.item[0].item[4].request.url.path = ["recover"];
+_.item[0].item[4].request.url.query = [];
+_.item[0].item[4].request.method = "POST";
+_.item[0].item[4].request.header = [];
+_.item[0].item[4].request.header[0] = {};
+_.item[0].item[4].request.header[0].key = "Content-Type";
+_.item[0].item[4].request.header[0].value = "application/json";
+_.item[0].item[2].request.header[1] = {};
+_.item[0].item[2].request.header[1].key = "Authorization";
+_.item[0].item[2].request.header[1].value = "{{secret_token}}";
+_.item[0].item[4].request.body = {};
+
+/////////// REST API ///////////////
+
+_.item[1] = {};
+_.item[1].name = "REST API";
+_.item[1]._postman_isSubFolder = true;
+_.item[1].item = [];
+
+Object.keys(results).forEach((table, iTable) => {
+	_.item[1].item[iTable] = {};
+	_.item[1].item[iTable].name = "/" + StringUtils.hyphenize(table);
+	_.item[1].item[iTable].item = [];
+
+	let itm = {};
+
+	itm = {};
+	itm.name = "GET /" + StringUtils.hyphenize(table) + "/@";
+	itm.response = {};
+	itm.request = {};
+	itm.request.url = {};
+	itm.request.url.raw = "{{rest_url}}/" + StringUtils.hyphenize(table) + "/@";
+	itm.request.url.host = ["{{rest_url}}"];
+	itm.request.url.path = [StringUtils.hyphenize(table), "@"];
+	itm.request.url.query = [];
+	itm.request.method = "GET";
+	itm.request.header = [];
+	itm.request.header[0] = {};
+	itm.request.header[0].key = "Content-Type";
+	itm.request.header[0].value = "application/json";
+	itm.request.header[1] = {};
+	itm.request.header[1].key = "Authorization";
+	itm.request.header[1].value = "{{secret_token}}";
+	itm.request.body = {};
+	_.item[1].item[iTable].item.push(itm);
+	
+	itm = {};
+	itm.name = "GET /" + StringUtils.hyphenize(table);
+	itm.response = {};
+	itm.request = {};
+	itm.request.url = {};
+	itm.request.url.raw = "{{rest_url}}/" + StringUtils.hyphenize(table) ;
+	itm.request.url.host = ["{{rest_url}}"];
+	itm.request.url.path = [StringUtils.hyphenize(table)];
+	itm.request.url.query = [];
+	itm.request.method = "GET";
+	itm.request.header = [];
+	itm.request.header[0] = {};
+	itm.request.header[0].key = "Content-Type";
+	itm.request.header[0].value = "application/json";
+	itm.request.header[1] = {};
+	itm.request.header[1].key = "Authorization";
+	itm.request.header[1].value = "{{secret_token}}";
+	itm.request.body = {};
+	_.item[1].item[iTable].item.push(itm);
+
+
+	itm = {};
+	itm.name = "GET /" + StringUtils.hyphenize(table) + "/:id";
+	itm.response = {};
+	itm.request = {};
+	itm.request.url = {};
+	itm.request.url.raw = "{{rest_url}}/" + StringUtils.hyphenize(table) + "/:id";
+	itm.request.url.host = ["{{rest_url}}"];
+	itm.request.url.path = [StringUtils.hyphenize(table), ":id"];
+	itm.request.url.query = [];
+	itm.request.method = "GET";
+	itm.request.header = [];
+	itm.request.header[0] = {};
+	itm.request.header[0].key = "Content-Type";
+	itm.request.header[0].value = "application/json";
+	itm.request.header[1] = {};
+	itm.request.header[1].key = "Authorization";
+	itm.request.header[1].value = "{{secret_token}}";
+	itm.request.body = {};
+	_.item[1].item[iTable].item.push(itm);
+
+
+	itm = {};
+	itm.name = "POST /" + StringUtils.hyphenize(table);
+	itm.response = {};
+	itm.request = {};
+	itm.request.url = {};
+	itm.request.url.raw = "{{rest_url}}/" + StringUtils.hyphenize(table);
+	itm.request.url.host = ["{{rest_url}}"];
+	itm.request.url.path = [StringUtils.hyphenize(table)];
+	itm.request.url.query = [];
+	itm.request.method = "POST";
+	itm.request.header = [];
+	itm.request.header[0] = {};
+	itm.request.header[0].key = "Content-Type";
+	itm.request.header[0].value = "application/json";
+	itm.request.header[1] = {};
+	itm.request.header[1].key = "Authorization";
+	itm.request.header[1].value = "{{secret_token}}";
+	itm.request.body = {};
+	itm.request.body.mode = "formdata";
+	itm.request.body.formdata = [];
+	Object.keys(results[table]).forEach((column, iColumn) => {
+		itm.request.body.formdata[iColumn] = {};
+		itm.request.body.formdata[iColumn].key = column;
+		itm.request.body.formdata[iColumn].value = getDefaultValueFrom(results[table][column]);
+	});
+	_.item[1].item[iTable].item.push(itm);
+	
+	itm = {};
+	itm.name = "PUT /" + StringUtils.hyphenize(table) + "/:id";
+	itm.response = {};
+	itm.request = {};
+	itm.request.url = {};
+	itm.request.url.raw = "{{rest_url}}/" + StringUtils.hyphenize(table) + "/:id";
+	itm.request.url.host = ["{{rest_url}}"];
+	itm.request.url.path = [StringUtils.hyphenize(table), ":id"];
+	itm.request.url.query = [];
+	itm.request.method = "PUT";
+	itm.request.header = [];
+	itm.request.header[0] = {};
+	itm.request.header[0].key = "Content-Type";
+	itm.request.header[0].value = "application/json";
+	itm.request.header[1] = {};
+	itm.request.header[1].key = "Authorization";
+	itm.request.header[1].value = "{{secret_token}}";
+	itm.request.body = {};
+	itm.request.body.mode = "formdata";
+	itm.request.body.formdata = [];
+	Object.keys(results[table]).forEach((column, iColumn) => {
+		itm.request.body.formdata[iColumn] = {};
+		itm.request.body.formdata[iColumn].key = column;
+		itm.request.body.formdata[iColumn].value = getDefaultValueFrom(results[table][column]);
+	});
+
+	_.item[1].item[iTable].item.push(itm);
+
+	itm = {};
+	itm.name = "DELETE /" + StringUtils.hyphenize(table) + "/:id";
+	itm.response = {};
+	itm.request = {};
+	itm.request.url = {};
+	itm.request.url.raw = "{{rest_url}}/" + StringUtils.hyphenize(table) + "/:id";
+	itm.request.url.host = ["{{rest_url}}"];
+	itm.request.url.path = [StringUtils.hyphenize(table), ":id"];
+	itm.request.url.query = [];
+	itm.request.method = "DELETE";
+	itm.request.header = [];
+	itm.request.header[0] = {};
+	itm.request.header[0].key = "Content-Type";
+	itm.request.header[0].value = "application/json";
+	itm.request.header[1] = {};
+	itm.request.header[1].key = "Authorization";
+	itm.request.header[1].value = "{{secret_token}}";
+	itm.request.body = {};
+	_.item[1].item[iTable].item.push(itm);
+
+	itm = {};
+	itm.name = "GET /" + StringUtils.hyphenize(table) + "/@/view";
+	itm.response = {};
+	itm.request = {};
+	itm.request.url = {};
+	itm.request.url.raw = "{{rest_url}}/" + StringUtils.hyphenize(table) + "/@/view";
+	itm.request.url.host = ["{{rest_url}}"];
+	itm.request.url.path = [StringUtils.hyphenize(table), "@", "view"];
+	itm.request.url.query = [];
+	itm.request.method = "GET";
+	itm.request.header = [];
+	itm.request.header[0] = {};
+	itm.request.header[0].key = "Content-Type";
+	itm.request.header[0].value = "text/html; charset=utf-8";
+	itm.request.header[1] = {};
+	itm.request.header[1].key = "Authorization";
+	itm.request.header[1].value = "{{secret_token}}";
+	itm.request.body = {};
+	_.item[1].item[iTable].item.push(itm);
+	
+	itm = {};
+	itm.name = "GET /" + StringUtils.hyphenize(table) + "/@/view/:id";
+	itm.response = {};
+	itm.request = {};
+	itm.request.url = {};
+	itm.request.url.raw = "{{rest_url}}/" + StringUtils.hyphenize(table) + "/@/view/:id";
+	itm.request.url.host = ["{{rest_url}}"];
+	itm.request.url.path = [StringUtils.hyphenize(table), "@", "view", ":id"];
+	itm.request.url.query = [];
+	itm.request.method = "GET";
+	itm.request.header = [];
+	itm.request.header[0] = {};
+	itm.request.header[0].key = "Content-Type";
+	itm.request.header[0].value = "text/html; charset=utf-8";
+	itm.request.header[1] = {};
+	itm.request.header[1].key = "Authorization";
+	itm.request.header[1].value = "{{secret_token}}";
+	itm.request.body = {};
+	_.item[1].item[iTable].item.push(itm);
+
+	itm = {};
+	itm.name = "GET /" + StringUtils.hyphenize(table) + "/@/add";
+	itm.response = {};
+	itm.request = {};
+	itm.request.url = {};
+	itm.request.url.raw = "{{rest_url}}/" + StringUtils.hyphenize(table) + "/@/add";
+	itm.request.url.host = ["{{rest_url}}"];
+	itm.request.url.path = [StringUtils.hyphenize(table), "@", "add"];
+	itm.request.url.query = [];
+	itm.request.method = "GET";
+	itm.request.header = [];
+	itm.request.header[0] = {};
+	itm.request.header[0].key = "Content-Type";
+	itm.request.header[0].value = "text/html; charset=utf-8";
+	itm.request.header[1] = {};
+	itm.request.header[1].key = "Authorization";
+	itm.request.header[1].value = "{{secret_token}}";
+	itm.request.body = {};
+	_.item[1].item[iTable].item.push(itm);
+
+	itm = {};
+	itm.name = "GET /" + StringUtils.hyphenize(table) + "/@/add/:id";
+	itm.response = {};
+	itm.request = {};
+	itm.request.url = {};
+	itm.request.url.raw = "{{rest_url}}/" + StringUtils.hyphenize(table) + "/@/add/:id";
+	itm.request.url.host = ["{{rest_url}}"];
+	itm.request.url.path = [StringUtils.hyphenize(table), "@", "add", ":id"];
+	itm.request.url.query = [];
+	itm.request.method = "GET";
+	itm.request.header = [];
+	itm.request.header[0] = {};
+	itm.request.header[0].key = "Content-Type";
+	itm.request.header[0].value = "text/html; charset=utf-8";
+	itm.request.header[1] = {};
+	itm.request.header[1].key = "Authorization";
+	itm.request.header[1].value = "{{secret_token}}";
+	itm.request.body = {};
+	_.item[1].item[iTable].item.push(itm);
+
+	itm = {};
+	itm.name = "GET /" + StringUtils.hyphenize(table) + "/@/edit/:id";
+	itm.response = {};
+	itm.request = {};
+	itm.request.url = {};
+	itm.request.url.raw = "{{rest_url}}/" + StringUtils.hyphenize(table) + "/@/edit/:id";
+	itm.request.url.host = ["{{rest_url}}"];
+	itm.request.url.path = [StringUtils.hyphenize(table), "@", "edit", ":id"];
+	itm.request.url.query = [];
+	itm.request.method = "GET";
+	itm.request.header = [];
+	itm.request.header[0] = {};
+	itm.request.header[0].key = "Content-Type";
+	itm.request.header[0].value = "text/html; charset=utf-8";
+	itm.request.header[1] = {};
+	itm.request.header[1].key = "Authorization";
+	itm.request.header[1].value = "{{secret_token}}";
+	itm.request.body = {};
+	_.item[1].item[iTable].item.push(itm);
+
+	_.variable = [
+		{
+			"key": "server_url",
+			"value": "127.0.0.1:8089",
+			"type": "string"
+		},
+		{
+			"key": "auth_url",
+			"value": "{{server_url}}/auth/v1",
+			"type": "string"
+		},
+		{
+			"key": "rest_url",
+			"value": "{{server_url}}/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "secret_token",
+			"value": "x",
+			"type": "string"
+		}
+	];
+});
+
+%><%-JSON.stringify(_, null, 4)%>
+

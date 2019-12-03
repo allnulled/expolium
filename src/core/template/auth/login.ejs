@@ -1,0 +1,71 @@
+<%
+
+_.output.metadata.tags = Object.assign({}, _.output.metadata.tags, {
+	bootstrap: true,
+	popper: true,
+	jquery: true,
+	"custom.rest": true,
+	"login.title": true,
+});
+
+const AuthenticationManager = require(process.env.PROJECT_ROOT + "/core.auth/helper/AuthenticationManager.js");
+const bearerToken = AuthenticationManager.getBearerToken(_);
+
+%>
+<div class="container x-login-form">
+	<div class="card x-card x-login-card">
+		<% if(!bearerToken) { %>
+			<div class="card-header">
+				<h3 style="text-align:center; text-transform: uppercase; margin: 4px;">Login</h3>
+			</div>
+			<div class="card-body">
+				<form method="<%-_.controller.settings && _.controller.settings.formMethod ? _.controller.settings.formMethod : "POST"%>"
+					action=<%-JSON.stringify(_.controller.settings && _.controller.settings.formAction ? _.controller.settings.formAction : "#")%>>
+					<input type="hidden" name="__redirect_success" value="/home" />
+					<input type="hidden" name="__redirect_error" value="/login" />
+					<div class="form-group x-form-group">
+						<label class="x-form-label">User or email:</label>
+						<input class="form-control form-control-sm x-form-control" type="text" name="name" value="defaultuser" />
+					</div>
+					<div class="form-group x-form-group">
+						<label class="x-form-label">Password:</label>
+						<input class="form-control form-control-sm x-form-control" type="password" name="password" value="defaultpassword" />
+					</div>
+					<div class="form-group" style="text-align: center;">
+						<button class="btn btn-sm btn-info">Log in</button>
+						<span style="min-width:20px;"></span>
+						<button class="btn btn-sm btn-success">Register</button>
+					</div>
+					<div class="form-group x-form-group" style="text-align:center; margin-bottom: 0;">
+						<a class="x-form-label" href="#">Remind me, please</a>
+					</div>
+				</form>
+			</div>
+		<% } else { %>
+			<div class="card-header">
+				<h3 style="text-align:center; text-transform: uppercase; margin: 4px;">You are already logged in!</h3>
+			</div>
+			<div class="card-body">
+				<div class="x-form-label">This is your token in case you missed it:</div>
+				<pre><%=bearerToken%></pre>
+				<a href="/">Return to home.</a>
+			</div>
+		<% } %>
+	</div>
+	<script type="text/javascript">
+		const me = jQuery(document.currentScript);
+		const form = me.parent();
+		const formDataReceived = <%-JSON.stringify({
+			controllerUrl: _.request.url,
+		}, null, 4);%>;
+		const events = {
+			// 
+		};
+		Object.keys(events).forEach(eventSelector => {
+			const separatorPosition = eventSelector.indexOf(":");
+			const event = eventSelector.substr(0, separatorPosition);
+			const selector = eventSelector.substr(separatorPosition+1);
+			form.on(event, selector, events[eventSelector]);
+		});
+	</script>
+</div>

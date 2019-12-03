@@ -1,1 +1,1 @@
-npm run do
+node cmd/do.js $@

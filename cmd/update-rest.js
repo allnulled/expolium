@@ -1,6 +1,7 @@
 /**************************************************************
-Name: db:update
-Description: updates /src/core.rest/db models and controllers.
+Name: update:rest
+Description: updates /src/core.rest/db models and controllers,
+among others.
 **************************************************************/
 const fs = require("fs-extra");
 const ejs = require("ejs");
@@ -23,7 +24,7 @@ class SqlInspector {
 	}
 
 	static getExportJson() {
-		return JSON.parse(fs.readFileSync(__dirname + "/rest-update/export.json").toString());
+		return JSON.parse(fs.readFileSync(__dirname + "/update-rest/export.json").toString());
 	}
 
 	static _flatten(arr) {
@@ -72,9 +73,9 @@ class SqlInspector {
 
 	static __query(sequelize, databaseName) {
 		// @UNCOMMENT to update from database:
-		return this._query(sequelize, databaseName);
+		//return this._query(sequelize, databaseName);
 		return new Promise((resolve, reject) => {
-			resolve(JSON.parse(fs.readFileSync(__dirname + "/rest-update/cached.json").toString()));
+			resolve(JSON.parse(fs.readFileSync(__dirname + "/update-rest/cached.json").toString()));
 		});
 	}
 
@@ -82,7 +83,7 @@ class SqlInspector {
 		return new Promise((resolve, reject) => {
 			this.__query(sequelize, databaseName ? databaseName : sequelize.getDatabaseName()).then(results => {
 				// @UNCOMMENT to cache the results from database:
-				fs.writeFileSync(__dirname + "/rest-update/cached.json", JSON.stringify(results), "utf8");
+				fs.writeFileSync(__dirname + "/update-rest/cached.json", JSON.stringify(results), "utf8");
 				const shaped = this._flatten(results).reduce((o, item) => {
 					const database = item["DATABASE"];
 					const table = item["TABLE"];
@@ -220,7 +221,7 @@ class SqlInspector {
 		}
 	}
 
-	static generateFilesPerTable(label, overridenFile, sotfOverridenFile, results, exportJson, projectRoot) {
+	static generateFilesPerTable(label, overridenFile, sotfOverridenFile, results, exportJson, project, extra) {
 		const baseModelTemplate = fs.readFileSync(overridenFile).toString();
 		const labelCapitalized = this.capitalize(label);
 		const baseModelPathTemplate = exportJson["Base" + labelCapitalized];
@@ -238,19 +239,20 @@ class SqlInspector {
 					database: database, 
 					databaseConnection: DATABASE_CONNECTION_TO_REGENERATE,
 					databaseContent: databaseContent,
+					...extra
 				};
 				const baseModelFilepathPart = ejs.render(baseModelPathTemplate, tableVariables);
-				const baseModelFilepath = path.resolve(projectRoot, baseModelFilepathPart);
+				const baseModelFilepath = path.resolve(project, baseModelFilepathPart);
 				const modelFilepathPart = ejs.render(modelPathTemplate, tableVariables);
-				const modelFilepath = path.resolve(projectRoot, modelFilepathPart);
+				const modelFilepath = path.resolve(project, modelFilepathPart);
 				tableVariables.baseModelFilepath = baseModelFilepath;
 				tableVariables.modelFilepath = modelFilepath;
 				const baseModelContents = ejs.render(baseModelTemplate, tableVariables);
-				console.log("Regenerating " + label + " at:\n  - " + baseModelFilepath);
+				//console.log("Regenerating " + label + " at:\n  - " + baseModelFilepath);
 				fs.outputFileSync(baseModelFilepath, this.beautifyJavascript(baseModelContents), "utf8");
 				if((!fs.existsSync(modelFilepath)) || OVERRIDE_ALL) {
 					const modelContents = ejs.render(modelTemplate, tableVariables);
-					console.log("Generating " + label + " at:\n  - " + modelFilepath);
+					//console.log("Generating " + label + " at:\n  - " + modelFilepath);
 					fs.outputFileSync(modelFilepath, this.beautifyJavascript(modelContents), "utf8");
 				}
 			});
@@ -258,15 +260,15 @@ class SqlInspector {
 
 	}
 
-	static generateModels(results, exportJson, projectRoot) {
-		return this.generateFilesPerTable("model", __dirname + "/rest-update/BaseModel.js.ejs", __dirname + "/rest-update/Model.js.ejs", results, exportJson, projectRoot);
+	static generateModels(results, exportJson, project, extra) {
+		return this.generateFilesPerTable("model", __dirname + "/update-rest/BaseModel.js.ejs", __dirname + "/update-rest/Model.js.ejs", results, exportJson, project, extra);
 	}
 
-	static generateControllers(results, exportJson, projectRoot) {
-		return this.generateFilesPerTable("controller", __dirname + "/rest-update/BaseController.js.ejs", __dirname + "/rest-update/Controller.js.ejs", results, exportJson, projectRoot);
+	static generateControllers(results, exportJson, project, extra) {
+		return this.generateFilesPerTable("controller", __dirname + "/update-rest/BaseController.js.ejs", __dirname + "/update-rest/Controller.js.ejs", results, exportJson, project, extra);
 	}
 
-	static renderGeneralFile(fileSrc, fileDst, results, exportJson, projectRoot) {
+	static renderGeneralFile(fileSrc, fileDst, results, exportJson, project, extra = {}) {
 		const template = fs.readFileSync(fileSrc).toString();
 		Object.keys(results).forEach(database => {
 			const databaseContent = results[database];
@@ -276,21 +278,35 @@ class SqlInspector {
 				databaseContent: databaseContent,
 				results: databaseContent,
 				exportJson: exportJson,
-				projectRoot: projectRoot
+				project: project,
+				...extra
 			};
-			const outputPath = path.resolve(projectRoot, ejs.render(fileDst, templateParameters));
+			const outputPath = path.resolve(project, ejs.render(fileDst, templateParameters));
 			const contents = ejs.render(template, templateParameters);
-			console.log("Generating:\n  - " + outputPath);
+			//console.log("Generating:\n  - " + outputPath);
 			fs.outputFileSync(outputPath, contents, "utf8");
 		});
 	}
 
-	static generateModelsImporter(results, exportJson, projectRoot) {
-		return this.renderGeneralFile(__dirname + "/rest-update/models.ejs", exportJson.models, results, exportJson, projectRoot);
+	static generateModelsImporter(results, exportJson, project, extra) {
+		return this.renderGeneralFile(__dirname + "/update-rest/models.ejs", exportJson.models, results, exportJson, project, extra);
 	}
 
-	static generateControllersImporter(results, exportJson, projectRoot) {
-		return this.renderGeneralFile(__dirname + "/rest-update/controllers.ejs", exportJson.controllers, results, exportJson, projectRoot);
+	static generateControllersImporter(results, exportJson, project, extra) {
+		return this.renderGeneralFile(__dirname + "/update-rest/controllers.ejs", exportJson.controllers, results, exportJson, project, extra);
+	}
+
+	static generatePostmanCollection(results, exportJson, project, extra) {
+		this.renderGeneralFile(__dirname + "/update-rest/postman-collection.ejs", exportJson.PostmanCollection, results, exportJson, project, extra);
+		JSON.parse(fs.readFileSync(__dirname + "/../doc/project.postman_collection.json").toString());
+	}
+
+	static generateTemplateController(results, exportJson, project, extra) {
+		// const outputPath = path.resolve(project, ejs.render(exportJson.template, {
+		// 	databaseConnection: DATABASE_CONNECTION_TO_REGENERATE,
+		// }));
+		//fs.copyFileSync(__dirname + "/update-rest/template.ejs", outputPath);
+		//fs.copySync(__dirname + "/update-rest/template", outputPath.replace(/\.[^\.]+$/g, ""));
 	}
 
 }
@@ -302,14 +318,17 @@ require(__dirname + "/../src/load.js").then(project => {
 	const extension = JSON.parse(fs.readFileSync(process.env.PROJECT_ROOT + "/" + config.project + "/config/db.extension.json").toString());
 
 	SqlInspector.inspect(project.app.db.$sequelize, extension).then(results => {
+		const StringUtils = require(process.env.PROJECT_ROOT + "/core/helper/StringUtils.js");
 		fs.writeFileSync(process.env.PROJECT_ROOT + "/" + config.project + "/config/db.json", JSON.stringify(results, null, 2), "utf8");
 		project.app.db.$sequelize.close();
 		console.log("The successfull operation took: " + (timer.time()/1000) + " milliseconds.");
 		const exportJson = SqlInspector.getExportJson();
-		SqlInspector.generateModels(results, exportJson, process.env.PROJECT_ROOT, project);
-		SqlInspector.generateModelsImporter(results, exportJson, process.env.PROJECT_ROOT, project);
-		SqlInspector.generateControllers(results, exportJson, process.env.PROJECT_ROOT, project);
-		SqlInspector.generateControllersImporter(results, exportJson, process.env.PROJECT_ROOT, project);
+		SqlInspector.generateModels(results, exportJson, process.env.PROJECT_ROOT, project, {StringUtils});
+		SqlInspector.generateModelsImporter(results, exportJson, process.env.PROJECT_ROOT, {StringUtils});
+		SqlInspector.generatePostmanCollection(results, exportJson, process.env.PROJECT_ROOT, {StringUtils});
+		SqlInspector.generateTemplateController(results, exportJson, process.env.PROJECT_ROOT, {StringUtils});
+		SqlInspector.generateControllers(results, exportJson, process.env.PROJECT_ROOT, {StringUtils});
+		SqlInspector.generateControllersImporter(results, exportJson, process.env.PROJECT_ROOT, {StringUtils});
 	}).catch(error => {
 		console.log("ERROR", error);
 		project.app[DATABASE_CONNECTION_TO_REGENERATE].$sequelize.close();

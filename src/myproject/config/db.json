@@ -6,8 +6,16 @@
         "fulltype": "int(10) unsigned",
         "nullable": "NO",
         "default": null,
-        "EXAMPLE OF HIDDEN ATTRIBUTE FOR A COLUMN": true,
-        "__EXAMPLE OF TRASPASSED ATTRIBUTE FOR A COLUMN": "Some value",
+        "__bound_to_community_by": [
+          [
+            "#",
+            "id",
+            "@",
+            "@"
+          ]
+        ],
+        "__main_table": true,
+        "__allowed_joins": {},
         "boundConstraints": [
           {
             "columnKey": "PRI",
@@ -53,7 +61,6 @@
         "nullable": "NO",
         "default": "CURRENT_TIMESTAMP",
         "__hidden": true,
-        "EXAMPLE OF HIDDEN ATTRIBUTE FOR A COLUMN": 123,
         "unsigned": 0,
         "extra": "DEFAULT_GENERATED",
         "order": 3,
@@ -494,6 +501,22 @@
         "fulltype": "int(10) unsigned",
         "nullable": "NO",
         "default": null,
+        "__bound_to_community_by": [
+          [
+            "#",
+            "id_role",
+            "role",
+            "id"
+          ],
+          [
+            "role",
+            "id_community",
+            "@",
+            "@"
+          ]
+        ],
+        "__main_table": true,
+        "__allowed_joins": {},
         "boundConstraints": [
           {
             "columnKey": "PRI",
@@ -518,11 +541,11 @@
         "default": null,
         "boundConstraints": [
           {
-            "columnKey": "UNI",
+            "columnKey": "MUL",
             "boundConstraint": "UNIQUE_user_per_community"
           },
           {
-            "columnKey": "UNI",
+            "columnKey": "MUL",
             "boundConstraint": "FK_membership_user",
             "referencedTable": "user",
             "referencedColumn": "id"
@@ -532,6 +555,35 @@
         "unsigned": 1,
         "extra": "",
         "order": 2,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0,
+        "isForeignKey": true
+      },
+      "id_community": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "boundConstraints": [
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "UNIQUE_user_per_community"
+          },
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "FK_membership_community",
+            "referencedTable": "community",
+            "referencedColumn": "id"
+          }
+        ],
+        "hasUniqueRule": true,
+        "unsigned": 1,
+        "extra": "",
+        "order": 3,
         "charset": null,
         "collation": null,
         "maxLength": null,
@@ -556,7 +608,7 @@
         "isForeignKey": true,
         "unsigned": 1,
         "extra": "",
-        "order": 3,
+        "order": 4,
         "charset": null,
         "collation": null,
         "maxLength": null,
@@ -572,7 +624,7 @@
         "__hidden": true,
         "unsigned": 0,
         "extra": "DEFAULT_GENERATED",
-        "order": 4,
+        "order": 5,
         "charset": null,
         "collation": null,
         "maxLength": null,
@@ -588,7 +640,7 @@
         "__hidden": true,
         "unsigned": 0,
         "extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
-        "order": 5,
+        "order": 6,
         "charset": null,
         "collation": null,
         "maxLength": null,
@@ -603,6 +655,16 @@
         "fulltype": "int(10) unsigned",
         "nullable": "NO",
         "default": null,
+        "__bound_to_community_by": [
+          [
+            "#",
+            "id_community",
+            "@",
+            "@"
+          ]
+        ],
+        "__main_table": true,
+        "__allowed_joins": {},
         "boundConstraints": [
           {
             "columnKey": "PRI",
@@ -735,12 +797,16 @@
         "boundConstraints": [
           {
             "columnKey": "MUL",
+            "boundConstraint": "UNIQUE_permission_per_role"
+          },
+          {
+            "columnKey": "MUL",
             "boundConstraint": "FK_permission_per_role_permission",
             "referencedTable": "permission",
             "referencedColumn": "id"
           }
         ],
-        "isForeignKey": true,
+        "hasUniqueRule": true,
         "unsigned": 1,
         "extra": "",
         "order": 2,
@@ -749,7 +815,8 @@
         "maxLength": null,
         "maxBytes": null,
         "numericPrecision": 10,
-        "numericScale": 0
+        "numericScale": 0,
+        "isForeignKey": true
       },
       "id_role": {
         "type": "int",
@@ -759,12 +826,16 @@
         "boundConstraints": [
           {
             "columnKey": "MUL",
+            "boundConstraint": "UNIQUE_permission_per_role"
+          },
+          {
+            "columnKey": "MUL",
             "boundConstraint": "FK_permission_per_role_role",
             "referencedTable": "role",
             "referencedColumn": "id"
           }
         ],
-        "isForeignKey": true,
+        "hasUniqueRule": true,
         "unsigned": 1,
         "extra": "",
         "order": 3,
@@ -773,7 +844,8 @@
         "maxLength": null,
         "maxBytes": null,
         "numericPrecision": 10,
-        "numericScale": 0
+        "numericScale": 0,
+        "isForeignKey": true
       },
       "created_at": {
         "type": "timestamp",
@@ -814,6 +886,16 @@
         "fulltype": "int(10) unsigned",
         "nullable": "NO",
         "default": null,
+        "__bound_to_community_by": [
+          [
+            "#",
+            "id_community",
+            "@",
+            "@"
+          ]
+        ],
+        "__main_table": true,
+        "__allowed_joins": {},
         "boundConstraints": [
           {
             "columnKey": "PRI",
@@ -945,13 +1027,17 @@
         "default": null,
         "boundConstraints": [
           {
-            "columnKey": "MUL",
+            "columnKey": "UNI",
+            "boundConstraint": "UNIQUE_user_per_session"
+          },
+          {
+            "columnKey": "UNI",
             "boundConstraint": "FK__user",
             "referencedTable": "user",
             "referencedColumn": "id"
           }
         ],
-        "isForeignKey": true,
+        "hasUniqueRule": true,
         "unsigned": 1,
         "extra": "",
         "order": 2,
@@ -960,7 +1046,8 @@
         "maxLength": null,
         "maxBytes": null,
         "numericPrecision": 10,
-        "numericScale": 0
+        "numericScale": 0,
+        "isForeignKey": true
       },
       "secret_token": {
         "type": "varchar",
@@ -1031,6 +1118,8 @@
         "fulltype": "int(10) unsigned",
         "nullable": "NO",
         "default": null,
+        "__main_table": true,
+        "__allowed_joins": {},
         "boundConstraints": [
           {
             "columnKey": "PRI",

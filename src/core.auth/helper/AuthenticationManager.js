@@ -19,6 +19,22 @@ class AuthenticationManager {
 		}
 	}
 
+	static getBearerToken(_) {
+		let bearerToken = undefined;
+		if (_.request.headers.authorization) {
+			bearerToken = _.request.headers.authorization;
+		} else if (_.request.session && _.request.session.bearerToken) {
+			bearerToken = _.request.session.bearerToken;
+		}
+		if (!bearerToken) {
+			//
+		} else {
+			bearerToken = bearerToken.replace(/Bearer /g, "");
+			_.request.session.bearerToken = bearerToken;
+		}
+		return bearerToken;
+	}
+
 }
 
 module.exports = AuthenticationManager;

@@ -1,3 +1,6 @@
+const ErrorManager = require(process.env.PROJECT_ROOT + "/core/error/ErrorManager.js");
+const StringUtils = require(process.env.PROJECT_ROOT + "/core/helper/StringUtils.js");
+
 class ReflectionManager {
 
 	static get DEFAULT_INTERCALATION() {
@@ -6,8 +9,10 @@ class ReflectionManager {
 
 	static get DEFAULT_ERROR_HANDLER() {
 		return (error, parameters) => {
-			console.log(error);
-			return parameters.response ? parameters.response.sendJsonError(error, {}, error.code || 500) : null;
+			if(typeof parameters.response === "object" && parameters.response.sendJsonError) {
+				return parameters.response.sendJsonError(error);
+			}
+			throw error;
 		}
 	}
 
@@ -18,10 +23,12 @@ class ReflectionManager {
 				const isAsync = methodNameCrude.startsWith("~");
 				const methodName = isAsync ? methodNameCrude.substr(1) : methodNameCrude;
 				if(!(methodName in source)) {
-					throw new Error("MethodNameNotFound", `Method ${methodName} was not found in source.`);
+					console.log(`Method ${methodName} was not found in source.`);
+					throw new ErrorManager.classes.UniversalError("MethodNameNotFound");
 				}
 				if(typeof source[methodName] !== "function") {
-					throw new Error("InvalidMethodType", `Property ${methodName} is not a function.`);
+					console.log(`Property ${methodName} is not a function.`);
+					throw new ErrorManager.classes.UniversalError("InvalidMethodType");
 				}
 				if(isAsync) {
 					await source[methodName](parameters);
@@ -37,6 +44,9 @@ class ReflectionManager {
 		}
 	}
 
+	static breakCircularity(data) {
+		return StringUtils.parseJson(StringUtils.stringify(data));
+	}
 }
 
 module.exports = ReflectionManager;

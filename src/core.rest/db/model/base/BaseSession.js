@@ -30,9 +30,9 @@ class SessionDefinition {
                 unsigned: true,
                 timestamps: false,
                 underscored: true,
-                __typeCode: "Sequelize.INTEGER(10)",
-                __fulltype: "int(10) unsigned",
-                __typeLabel: "integer"
+                __type_code: "Sequelize.INTEGER(10)",
+                __full_type: "int(10) unsigned",
+                __type_label: "integer"
             },
             id_user: {
                 type: Sequelize.INTEGER(10),
@@ -42,9 +42,9 @@ class SessionDefinition {
                 unsigned: true,
                 timestamps: false,
                 underscored: true,
-                __typeCode: "Sequelize.INTEGER(10)",
-                __fulltype: "int(10) unsigned",
-                __typeLabel: "integer"
+                __type_code: "Sequelize.INTEGER(10)",
+                __full_type: "int(10) unsigned",
+                __type_label: "integer"
             },
             secret_token: {
                 type: Sequelize.STRING(255),
@@ -53,9 +53,9 @@ class SessionDefinition {
                 defaultValue: null,
                 timestamps: false,
                 underscored: true,
-                __typeCode: "Sequelize.STRING(255)",
-                __fulltype: "varchar(255)",
-                __typeLabel: "string"
+                __type_code: "Sequelize.STRING(255)",
+                __full_type: "varchar(255)",
+                __type_label: "string"
             },
             recovery_token: {
                 type: Sequelize.STRING(255),
@@ -64,9 +64,9 @@ class SessionDefinition {
                 defaultValue: null,
                 timestamps: false,
                 underscored: true,
-                __typeCode: "Sequelize.STRING(255)",
-                __fulltype: "varchar(255)",
-                __typeLabel: "string"
+                __type_code: "Sequelize.STRING(255)",
+                __full_type: "varchar(255)",
+                __type_label: "string"
             },
             created_at: {
                 type: Sequelize.DATE,
@@ -75,9 +75,9 @@ class SessionDefinition {
                 defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
                 timestamps: false,
                 underscored: true,
-                __typeCode: "Sequelize.DATE",
-                __fulltype: "timestamp",
-                __typeLabel: "date",
+                __type_code: "Sequelize.DATE",
+                __full_type: "timestamp",
+                __type_label: "date",
                 __hidden: true
             },
             updated_at: {
@@ -87,9 +87,9 @@ class SessionDefinition {
                 defaultValue: Sequelize.literal("CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP"),
                 timestamps: false,
                 underscored: true,
-                __typeCode: "Sequelize.DATE",
-                __fulltype: "timestamp",
-                __typeLabel: "date",
+                __type_code: "Sequelize.DATE",
+                __full_type: "timestamp",
+                __type_label: "date",
                 __hidden: true
             }
         };
@@ -101,6 +101,11 @@ class SessionDefinition {
                 table: "session",
                 column: "id",
                 constraint: "PRIMARY"
+            },
+            {
+                table: "session",
+                column: "id_user",
+                constraint: "UNIQUE_user_per_session"
             },
             {
                 table: "session",
@@ -122,7 +127,7 @@ class SessionDefinition {
 
     static getPublicColumns() {
         return Object.keys(this.columns).reduce((result, column) => {
-            if (this.columns[column]._hidden === true) {
+            if (this.columns[column].__hidden === true || this.columns[column].__shown === false) {
                 //
             } else {
                 result[column] = this.columns[column];
@@ -133,6 +138,18 @@ class SessionDefinition {
 
     static getPublicColumnNames() {
         return Object.keys(this.getPublicColumns());
+    }
+
+    static isMainTable() {
+        return false;
+    }
+
+    static getAttachedModelBoundaries() {
+        return {};
+    }
+
+    static get primaryKeyColumn() {
+        return "id";
     }
 }
 

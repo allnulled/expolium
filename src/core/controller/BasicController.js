@@ -18,7 +18,7 @@ class BasicController {
 
 	mountOnRouter(router) {
 		if(router instanceof require(process.env.PROJECT_ROOT + "/core/app/BasicRouter.js")) {
-			router.$router[this.method.toLowerCase()](this.path, this.getMiddleware(), this.getController(), this.handle, this.fail);
+			router.$router[this.method.toLowerCase()](this.path, ...this.getMiddleware(), ...this.getController());
 			return this;
 		} else {
 			throw new ErrorManager.classes.RequiredTypeError("BasicRouter");
@@ -71,15 +71,6 @@ class BasicController {
 	setController(controller) {
 		this.controller = controller;
 		return this;
-	}
-
-	handle(request, response, next) {
-		// @TODO: handle the request.
-		response.code(200).json({status: "ok", message: "hoooray!"});
-	}
-
-	fail(request, response, next) {
-		response.code(500).json({status: "failed"});
 	}
 
 }

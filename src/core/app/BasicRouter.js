@@ -7,6 +7,7 @@ class BasicRouter {
 
 	constructor(options = {}) {
 		this.path = "";
+		// this.middleware = [];
 		this.$router = new express.Router();
 		if(typeof options !== "object")
 			throw new ErrorManager.classes.RequiredTypeError("object");
@@ -39,7 +40,7 @@ class BasicRouter {
 
 	addRouter(router) {
 		if(router instanceof BasicRouter) {
-			this.$router.use(router.path, (...args) => {
+			this.$router.use(router.path, router.getMiddleware(), (...args) => {
 				return router.$router(...args);
 			});
 			return this;

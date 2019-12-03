@@ -23,11 +23,6 @@ class LogoutController extends BasicController {
 			"onPrepareSelect",
 			"onPrepareFrom",
 			"onPrepareFields",
-			"onPrepareJoinMembership",
-			"onPrepareJoinRole",
-			"onPrepareJoinCommunity",
-			"onPrepareJoinPermission",
-			"onPrepareJoinSession",
 			"onPrepareWhereCredentials",
 			"~onQueryForSession",
 			"onCheckForUser",
@@ -38,12 +33,20 @@ class LogoutController extends BasicController {
 			"onPrepareDeleteFrom",
 			"onPrepareDeleteWhereCredentials",
 			"~onQueryForSessionDeletion",
+			"onRemoveSessionToken",
 			"onResponse",
 		];
 	}
 
 	logoutCallback(request, response, next) {
-		return this.constructor.logout(new ParametersManager({}, request, response, next));
+		return this.constructor.logout(new ParametersManager({ 
+			headers: request.headers, 
+			controller: this, 
+			controllerClass: this.constructor,
+			request: request,
+			response: response,
+			next: next,
+		}));
 	}
 
 	static logout(_) {
@@ -51,84 +54,75 @@ class LogoutController extends BasicController {
 	}
 
 	static onPrepareSelectSessionQuery(_) {
-		// 
+		// Empty is ok.
 	}
 
 	static onPrepareSelect(_) {
-		// 
+		_.storage.selectSessionQuery = squel.select({ separator: " " });
 	}
 
 	static onPrepareFrom(_) {
-		// 
+		_.storage.selectSessionQuery = squel.select({ separator: " " });
 	}
 
 	static onPrepareFields(_) {
-		// 
-	}
-
-	static onPrepareJoinMembership(_) {
-		// 
-	}
-
-	static onPrepareJoinRole(_) {
-		// 
-	}
-
-	static onPrepareJoinCommunity(_) {
-		// 
-	}
-
-	static onPrepareJoinPermission(_) {
-		// 
-	}
-
-	static onPrepareJoinSession(_) {
-		// 
+		_.storage.selectSessionQuery.from("session", "s");
 	}
 
 	static onPrepareWhereCredentials(_) {
-		// 
+		_.storage.selectSessionQuery.where("s.secret_token = ?", _.headers.authorization);
 	}
 
-	static onQueryForSession(_) {
-		// 
+	static async onQueryForSession(_) {
+		const sql = _.storage.selectSessionQuery.toString();
+		_.storage.selectSessionResult = await _.controller.router.app.db.getConnection().query(sql);
 	}
 
 	static onCheckForUser(_) {
-		// 
+		// Redundant check.
 	}
 
 	static onCheckForPassword(_) {
-		// 
+		// Redundant check.
 	}
 
 	static onCheckForSession(_) {
-		// 
+		if(!_.storage.selectSessionResult.length) {
+			throw new ErrorManager.classes.AuthenticationError("SecretTokenNotFound");
+		}
 	}
 
 	static onPrepareDeleteSessionQuery(_) {
-		// 
+		// Empty is ok.
 	}
 
 	static onPrepareDelete(_) {
-		// 
+		_.storage.deleteSessionQuery = squel.delete({ separator: " " });
 	}
 
 	static onPrepareDeleteFrom(_) {
-		// 
+		_.storage.deleteSessionQuery.from("session");
 	}
 
 	static onPrepareDeleteWhereCredentials(_) {
-		// 
+		_.storage.deleteSessionQuery.where("session.secret_token = ?", _.headers.authorization);
 	}
 
-	static onQueryForSessionDeletion(_) {
-		// 
+	static async onQueryForSessionDeletion(_) {
+		const sql = _.storage.deleteSessionQuery.toString();
+		_.storage.deleteSessionResult = await _.controller.router.app.db.getConnection().query(sql);
+		_.output.data = _.storage.deleteSessionResult;
+	}
+
+	static onRemoveSessionToken(_) {
+		if(_.request && _.request.session) {
+			delete _.request.session.bearerToken;
+		}
 	}
 
 	static onResponse(_) {
 		_.output.metadata.finished = moment().format("YYYY/MM/DD HH:mm:ss.SSS");
-		return _.response.sendJsonSuccess(_.request.expolium.auth, _.output.metadata, _.output.code);
+		return _.response.sendJsonSuccess(_.output.data, _.output.metadata, _.output.code);
 	}
 
 

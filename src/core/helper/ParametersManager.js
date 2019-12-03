@@ -1,4 +1,6 @@
 const ErrorManager = require(process.env.PROJECT_ROOT + "/core/error/ErrorManager.js");
+const ReflectionManager = require(process.env.PROJECT_ROOT + "/core/helper/ReflectionManager.js");
+const deepExtend = require("deep-extend");
 const moment = require("moment");
 
 class ParametersManager {
@@ -7,64 +9,51 @@ class ParametersManager {
 		return new this(...args);
 	}
 
-	static get DEFAULT_SOURCE() {
+	static getDefaultSource(source = {}) {
+		let extension = {
+			headers: false,
+			request: false,
+			response: false,
+			next: function() {},
+		};
 		return {
 			input: {},
-			output: {},
-			storage: {}
+			storage: {},
+			output: {
+				data: {},
+				metadata: {},
+				code: 200
+			},
+			...extension
 		}
 	}
 
-	static adaptRequestParameters(sourceParameter = null, request, response, next, otherInputs = {}, ...others) {
-		let source = sourceParameter;
-		if(sourceParameter === null) {
-			source = Object.assign({}, this.DEFAULT_SOURCE);
+	static adaptRequestParameters(sourceParameters = {}) {
+		const original = Object.assign({}, sourceParameters);
+		const source = Object.assign(sourceParameters, this.getDefaultSource(), original);
+		const others = [];
+		if(original.request) {
+			if(original.request.query) {
+				others.push(original.request.query);
+			}
+			if(original.request.body) {
+				others.push(original.request.body);
+			}
+			if(original.request.params) {
+				others.push(original.request.params);
+			}
 		}
-		source.input = Object.assign({}, request.query, request.body, request.params, otherInputs, {
-			httpHeaders: request.headers
-		});
-		if(!("data" in source.output)) {
-			source.output.data = null;
-		}
-		if(!("metadata" in source.output)) {
-			source.output.metadata = {
-				model: "Session",
-				method: "POST",
-				operation: "post one",
-				action: "login attempt",
-				started: moment().format("YYYY/MM/DD HH:mm:ss.SSS"),
-				finished: undefined,
-			};
-		}
-		if(!("code" in source.output)) {
-			source.output.code = 200;
-		}
-		source.request = request;
-		source.response = response;
-		source.next = next;
-		source.others = others;
+		source.input = Object.assign(source.input || {}, ...others, original.input || {});
+		source.output = Object.assign(source.output || {}, original.output || {});
+		source.metadata = Object.assign(source.metadata || {}, original.metadata || {});
 		return source;
 	}
 
-	constructor(options = {}, ...args) {
+	constructor(options = {}) {
 		if(typeof options !== "object")
 			throw new ErrorManager.classes.RequiredTypeError("object");
 		Object.keys(options).forEach(prop => this[prop] = options[prop]);
-		if(!("input" in this)) {
-			this.input = {};
-		}
-		if(!("storage" in this)) {
-			this.storage = {};
-		}
-		if(!("output" in this)) {
-			this.output = {};
-		}
-		if(args.length >= 3) {
-			this.isResponse = true;
-			this.constructor.adaptRequestParameters(this, ...args);
-		} else {
-			this.isResponse = false;
-		}
+		this.constructor.adaptRequestParameters(this);
 	}
 
 }

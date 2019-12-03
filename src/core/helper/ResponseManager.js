@@ -108,7 +108,7 @@ class ResponseManager {
 		return this.dispatchHtml(text, code);
 	}
 
-	dispatchHtml(text, code = 500) {
+	dispatchHtml(text, code = 200) {
 		return this.response.status(code).send(text);
 	}
 
@@ -121,18 +121,31 @@ class ResponseManager {
 	}
 
 	dispatchEjsFile(file, parameters = {}, options = {}, code = 200) {
-		return fs.exists(file, exists => {
-			if(!exists) {
-				return this.next();
+		return this.constructor.renderEjsFile(file, parameters, options, code).then(result => {
+			return this.response.status(200).send(result);
+		}).catch(error => {
+			if(process.env.NODE_ENV === "development") {
+				return this.response.status(500).send(error);
 			}
-			return fs.readFile(file, "utf8", (error, data) => {
-				if(error) {
-					return this.response.status(500).send("Error reading file");
+		});
+	}
+
+	static renderEjsFile(file, parameters = {}, options = {}, code = 200) {
+		return new Promise((resolve, reject) => {
+			fs.exists(file, exists => {
+				if(!exists) {
+					return reject(new Error("File <" + file + "> does not exist"));
 				}
-				const result = ejs.render(data, parameters, options);
-				return this.response.status(code).send(result);
+				return fs.readFile(file, "utf8", (error, data) => {
+					if(error) {
+						return reject(error);
+					}
+					const result = ejs.render(data, parameters, options);
+					return resolve(result);
+				});
 			});
 		});
+
 	}
 
 	successFile(file, code = 200) {

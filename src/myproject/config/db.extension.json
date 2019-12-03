@@ -1,15 +1,41 @@
 {
-	"*.community.id": {
-		"EXAMPLE OF HIDDEN ATTRIBUTE FOR A COLUMN": true,
-		"__EXAMPLE OF TRASPASSED ATTRIBUTE FOR A COLUMN": "Some value"
-	},
-	"*.community.created_at": {
-		"EXAMPLE OF HIDDEN ATTRIBUTE FOR A COLUMN": 123
-	},
 	"*.*.created_at": {
 		"__hidden": true
 	},
 	"*.*.updated_at": {
 		"__hidden": true
+	},
+	"*.community.id": {
+		"__bound_to_community_by": [
+			["#", "id", "@", "@"]
+		],
+		"__main_table": true,
+		"__allowed_joins": {}
+	},
+	"*.permission.id": {
+		"__bound_to_community_by": [
+			["#", "id_community", "@", "@"]
+		],
+		"__main_table": true,
+		"__allowed_joins": {}
+	},
+	"*.role.id": {
+		"__bound_to_community_by": [
+			["#", "id_community", "@", "@"]
+		],
+		"__main_table": true,
+		"__allowed_joins": {}
+	},
+	"*.membership.id": {
+		"__bound_to_community_by": [
+			["#", "id_role", "role", "id"],
+			["role", "id_community", "@", "@"]
+		],
+		"__main_table": true,
+		"__allowed_joins": {}
+	},
+	"*.user.id": {
+		"__main_table": true,
+		"__allowed_joins": {}
 	}
 }

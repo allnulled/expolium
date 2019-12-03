@@ -1,0 +1,61 @@
+<%
+	
+_.output.metadata.tags = Object.assign({}, _.output.metadata.tags, {
+	bootstrap: true,
+	popper: true,
+	jquery: true,
+	"custom.rest": true,
+	"logout.title": true,
+});
+
+const AuthenticationManager = require(process.env.PROJECT_ROOT + "/core.auth/helper/AuthenticationManager.js");
+const bearerToken = AuthenticationManager.getBearerToken(_);
+
+%>
+
+<div class="container x-login-form">
+	<div class="card x-card x-login-card">
+		<div class="card-header">
+			<h3 style="text-align:center; text-transform: uppercase; margin: 4px;">Logout</h3>
+		</div>
+		<div class="card-body">
+		<% if(bearerToken) { %>
+			<form method="<%-_.controller.settings && _.controller.settings.formMethod ? _.controller.settings.formMethod : "POST"%>"
+				action=<%-JSON.stringify(_.controller.settings && _.controller.settings.formAction ? _.controller.settings.formAction : "#")%>>
+				<div class="form-group x-form-group" style="text-align: center;">
+					<label class="x-form-label">Secret token:</label>
+					<div><%=bearerToken%></div>
+				</div>
+				<div class="form-group x-form-group" style="text-align: center;">
+					<label class="x-form-label">Are you sure you want to leave us?</label>
+				</div>
+				<div class="form-group" style="text-align: center; margin-bottom: 0;">
+					<button class="btn btn-sm btn-danger" data-logout-btn>Yes, I want to leave</button>
+					<span style="min-width:20px;"></span>
+					<button class="btn btn-sm btn-default" onclick="window.history.back()">Cancel</button>
+				</div>
+			</form>
+		<% } else { %>
+			<span style="text-align: center;">You need to be <a href="/login">logged in</a> to logout.</span>
+		<% } %>
+		</div>
+	</div>
+	<script type="text/javascript">
+		const me = jQuery(document.currentScript);
+		const form = me.parent();
+		const formDataReceived = <%-JSON.stringify({
+			controllerUrl: _.request.url,
+		}, null, 4);%>;
+		const events = {
+			["click:[data-cancel-btn]"]: (e) => {
+
+			}
+		};
+		Object.keys(events).forEach(eventSelector => {
+			const separatorPosition = eventSelector.indexOf(":");
+			const event = eventSelector.substr(0, separatorPosition);
+			const selector = eventSelector.substr(separatorPosition+1);
+			form.on(event, selector, events[eventSelector]);
+		});
+	</script>
+</div>

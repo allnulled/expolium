@@ -1,4 +1,38 @@
-<header>
-	<h1>Home</h1>
-	<h4>Sweet home</h4>
-</header>
+<%
+
+_.output.metadata.tags = Object.assign({}, _.output.metadata.tags, {
+	bootstrap: true,
+	popper: true,
+	jquery: true,
+	"custom.rest": true
+});
+
+const AuthenticationManager = require(process.env.PROJECT_ROOT + "/core.auth/helper/AuthenticationManager.js");
+const bearerToken = AuthenticationManager.getBearerToken(_);
+
+%>
+
+<div class="header x-header">
+    <nav class="navbar navbar-expand-md navbar-light bg-light x-navbar">
+        <a href="#" class="navbar-brand x-link x-brand-link">Brand</a>
+        <button type="button" class="navbar-toggler x-button" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon x-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav">
+                <a href="#" class="nav-item nav-link active">Home</a>
+                <a href="#" class="nav-item nav-link">Profile</a>
+                <a href="#" class="nav-item nav-link">Messages</a>
+                <a href="#" class="nav-item nav-link disabled" tabindex="-1">Reports</a>
+            </div>
+            <div class="navbar-nav ml-auto">
+            	<% if(!bearerToken) { %>
+                <a href="/login" class="nav-item nav-link">Login</a>
+                <% } else { %>
+                Welcome, <span><%=JSON.stringify(bearerToken)%></span>
+                <% } %>
+            </div>
+        </div>
+    </nav>
+</div>

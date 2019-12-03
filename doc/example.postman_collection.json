@@ -1,0 +1,398 @@
+{
+	"info": {
+		"_postman_id": "f633cc10-f805-4c61-8a27-2d45d1b5f82e",
+		"name": "auth api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"item": [
+				{
+					"name": "POST /register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url_server}}/auth/v1/register",
+							"host": [
+								"{{url_server}}"
+							],
+							"path": [
+								"auth",
+								"v1",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user",
+									"value": "Usuario",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Contraseña",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url_server}}/auth/v1/login",
+							"host": [
+								"{{url_server}}"
+							],
+							"path": [
+								"auth",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "9d5zdj9uff6p8y7d3kqc374hsl1kww37c9zky2cb3mb0drrdvxpr2wfhrvpvbsv7q3q46pz5lcfg0emmqgskk9mm89cj2hiknu91jy52ceaja2oeugzolf4rjm4zm8dpx8tm4wr82t9trjgd5f01xs2aoylh9ytbole37d186toc8q0xxrvsueexiln7wuyzklayk574su78z4eyr7nu8yzm8qi7jvn1tlskdrj2ezj45qdxurqfsgf49gqubmu",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url_server}}/auth/v1/logout",
+							"host": [
+								"{{url_server}}"
+							],
+							"path": [
+								"auth",
+								"v1",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /unregister",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url_server}}/auth/v1/unregister",
+							"host": [
+								"{{url_server}}"
+							],
+							"path": [
+								"auth",
+								"v1",
+								"unregister"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /recover",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url_server}}/auth/v1/recover",
+							"host": [
+								"{{url_server}}"
+							],
+							"path": [
+								"auth",
+								"v1",
+								"recover"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "permissionPerRole",
+					"item": [
+						{
+							"name": "SCHEMA /permissionPerRole",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8089/api/v1/permissionPerRole/@",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8089",
+									"path": [
+										"api",
+										"v1",
+										"permissionPerRole",
+										"@"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET MANY /permissionPerRole",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8089/api/v1/permissionPerRole",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8089",
+									"path": [
+										"api",
+										"v1",
+										"permissionPerRole"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "community",
+					"item": [
+						{
+							"name": "SCHEMA /community",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/community/@",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"community",
+										"@"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET MANY /community",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/community",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"community"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET ONE /community/:id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/community/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"community",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST ONE /community",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "My Community XX",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/community?aa=aa",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"community"
+									],
+									"query": [
+										{
+											"key": "aa",
+											"value": "aa"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PUT ONE /community/:id",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "My Community 200",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/community/3",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"community",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE ONE /community/:id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/community/4",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"community",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "d6e92668-3207-4626-a5c4-766e5a88fbcd",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "036bd0f5-856f-474f-9ecc-ee9a2ac0467b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "d41c214a-6cae-40ef-88f4-165cd9d1076c",
+			"key": "url_server",
+			"value": "127.0.0.1:8089",
+			"type": "string"
+		},
+		{
+			"id": "d4ce9e96-6f12-422a-8cd9-d584a2906ad6",
+			"key": "url",
+			"value": "/api/v1",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

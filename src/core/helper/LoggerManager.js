@@ -8,6 +8,7 @@ class LoggerManager {
 	}
 
 	constructor(options = {}) {
+		this.source = undefined;
 		this.setOptions(options);
 		this.initLogger();
 	}
@@ -19,7 +20,7 @@ class LoggerManager {
 	}
 
 	initLogger() {
-		
+
 		this.$logger = winston.createLogger({
 			transports: [
 				new winston.transports.File({
@@ -52,11 +53,14 @@ class LoggerManager {
 
 		this.$logger.stream = {
 			write: (message, encoding) => {
-				this.$logger.info(message);
+				const prefix = this.source ? "[" + this.source + "]> " : "";
+				this.$logger.info(prefix + message);
 			}
 		};
 
-		this.$middleware = morgan("combined", { stream: this.$logger.stream });
+		this.$middleware = morgan("combined", {
+			stream: this.$logger.stream
+		});
 
 	}
 
@@ -66,6 +70,48 @@ class LoggerManager {
 
 	getMiddleware() {
 		return this.$middleware;
+	}
+
+	error(...args) {
+		if(this.source) {
+			this.$logger.error(this.source + " says:");
+		}
+		return this.$logger.error(...args);
+	}
+
+	warn(...args) {
+		if(this.source) {
+			this.$logger.warn(this.source + " says:");
+		}
+		return this.$logger.warn(...args);
+	}
+
+	info(...args) {
+		if(this.source) {
+			this.$logger.info(this.source + " says:");
+		}
+		return this.$logger.info(...args);
+	}
+
+	verbose(...args) {
+		if(this.source) {
+			this.$logger.verbose(this.source + " says:");
+		}
+		return this.$logger.verbose(...args);
+	}
+
+	debug(...args) {
+		if(this.source) {
+			this.$logger.debug(this.source + " says:");
+		}
+		return this.$logger.debug(...args);
+	}
+
+	silly(...args) {
+		if(this.source) {
+			this.$logger.silly(this.source + " says:");
+		}
+		return this.$logger.silly(...args);
 	}
 
 }

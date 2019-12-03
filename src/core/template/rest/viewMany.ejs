@@ -1,0 +1,94 @@
+<%
+	
+	_.output.metadata.tags = Object.assign(_.output.metadata.tags, {
+		bootstrap: true,
+		popper: true,
+		jquery: true,
+		"custom.rest": true,
+	});
+	const definition = controller.constructor.model.definition;
+	const results = _.storage.queries.viewManyQuery;
+%>
+
+<form class="container xpl-form">
+
+	<%-JSON.stringify(_.request.expolium.auth)%>
+
+	<h3 class="x-form-title"><%-StringUtils.humanize(definition.name)%></h3>
+	<div class="x-form-header">
+		<div class="x-row">
+			<a href="<%-_.request.url.replace("/" + StringUtils.hyphenize(definition.table) + "/@/view", "") + "/@/view"%>" class="x-link">All tables</a>
+		</div>
+		<div class="form-group x-form-group">
+			<input class="form-control form-control-sm x-form-group" type="text" name="search" data-xpl-search/>
+		</div>
+		<div class="form-group x-form-group">
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+	</div>
+	<div class="x-form-body">
+		<table class="table table-responsive table-sm x-table x-results-table">
+			<thead class="thead-dark">
+				<tr><%
+				Object.keys(definition.columns).forEach((column, index) => {
+						%>
+					<th><%-StringUtils.humanize(column, true, false);%></th><%
+				});
+					%>
+					<th style="width:100%"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<%
+				if(typeof results !== "undefined") {
+					[].concat(results).forEach(row => {
+						%>
+						<tr data-x-link=<%-JSON.stringify(_.request.url.replace(/\/\@\/view\/?$/g, `/@/view/${row[definition.primaryKeyColumn]}`))%> onclick="window.location = this.getAttribute('data-x-link')" style="cursor:pointer;"><%
+						Object.keys(definition.columns).forEach(column => {
+							//const key = definition.table + "." + column;
+							const key = column;
+							let data = "-";
+							if(key in row) {
+								data = row[key];
+							}
+							%>
+							<td><%=data;%></td>
+						<%
+						});
+						%>
+							<td></td>
+					</tr>
+						<%
+					});
+				}
+				%>
+			</tbody>
+		</table>
+	</div>
+	<script type="text/javascript">
+		const me = jQuery(document.currentScript);
+		const form = me.parent();
+		const formDataReceived = <%-JSON.stringify({
+			controllerUrl: _.request.url.replace(/\/\@\/view\/?$/g, ""),
+			definition: definition,
+			results: results
+		}, null, 4);%>;
+		const events = {
+			"click:>h3": (e) => {
+				alert(e.target.textContent);
+			},
+			"input:[data-xpl-search]": (e) => {
+				alert(e.target.value);
+			}
+		};
+		Object.keys(events).forEach(eventSelector => {
+			const separatorPosition = eventSelector.indexOf(":");
+			const event = eventSelector.substr(0, separatorPosition);
+			const selector = eventSelector.substr(separatorPosition+1);
+			form.on(event, selector, events[eventSelector]);
+		});
+	</script>
+</form>
