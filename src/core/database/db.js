@@ -1,1 +1,5 @@
-module.exports = DatabaseManager.createFromEnvPrefix("DB_");
+const SequelizeDatabaseConnector = require(__dirname + "/connector/SequelizeDatabaseConnector.js");
+
+const connector = new SequelizeDatabaseConnector({ prefix: "DB_" });
+
+module.exports = connector.getDatabaseConnection();

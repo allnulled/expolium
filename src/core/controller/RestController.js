@@ -1,106 +1,79 @@
-const path = require("path");
+const fs = require("fs");
+const express = require("express");
 const ejs = require("ejs");
-const moment = require("moment");
-const ErrorManager = require(process.env.PROJECT_ROOT + "/core/error/ErrorManager.js");
-const ResponseManager = require(process.env.PROJECT_ROOT + "/core/helper/ResponseManager.js");
-const ParametersManager = require(process.env.PROJECT_ROOT + "/core/helper/ParametersManager.js");
+const BaseController = require(__dirname + "/BaseController.js");
+const JsonRestApiResponse = require(process.env.PROJECT_ROOT + "/core/app/response/JsonRestApiResponse.js");
+const RestControllerLogger = require(process.env.PROJECT_ROOT + "/core/helper/LoggerUtils.js").create("RestController");
 const StringUtils = require(process.env.PROJECT_ROOT + "/core/helper/StringUtils.js");
-const ModelController = require(__dirname + "/ModelController.js");
-const BasicController = require(__dirname + "/BasicController.js");
+const ErrorManager = require(process.env.PROJECT_ROOT + "/core/helper/ErrorManager.js");
+const RequestParameters = require(process.env.PROJECT_ROOT + "/core/type/RequestParameters.js");
+const RestModelController = require(__dirname + "/RestModelController.js");
 
-class RestController extends BasicController {
+class RestController extends BaseController {
 
-	mountOnRouter(router) {
-		if(!Array.isArray(this.controllers)) {
-			throw new Error("RestController#controllers must be an array");
-		}
-		// import all model-controllers:
-		this.registeredControllers = [];
-		this.controllers.forEach(controller => {
-			let modelController;
-			if(typeof(controller) === "string") {
-				try {
-					const ModelControllerChild = require(path.resolve(controller));
-					const modelControllerChild = new ModelControllerChild({ router: router });
-					if(!(modelControllerChild instanceof ModelController)) {
-						throw new ErrorManager.classes.MustBeInstanceOf(__dirname + "/ModelController.js");
-					}
-					this.registeredControllers.push(modelControllerChild);
-					modelController = modelControllerChild;
-				} catch(error) {
-					this.router.app.logger.error("Error importing RestController: " + model);
-					throw error;
-				}
-			} else if(controller instanceof ModelController) {
-				this.registeredControllers.push(controller);
-				modelController = controller;
-			} else {
-				modelController = new controller({ router: router });
-				if(!(modelController instanceof ModelController)) {
-					throw new ErrorManager.classes.MustBeInstanceOf(__dirname + "/ModelController.js");
-				}
-				this.registeredControllers.push(modelController);
-			}
-			// modelController.middleware = [].concat(this.middleware).concat(modelController.middleware);
-		});
-		// mount all model-controllers:
-		this.router.app.logger.info("[*] Controllers found:", this.controllers.length);
-		const controllers = [];
-		this.registeredControllers.forEach((controller, index) => {
-			// all modification from parent to children, here:
-			controller.path = StringUtils.joinUrl(this.path || "/", controller.path || "/");
-			this.router.app.logger.info("[*] Controller " + index + ": " + controller.path);
-			controller.mountOnRouter.bind(controller)(router);
-			controllers.push(controller);
-		});
-		const overviewPath = StringUtils.joinUrl(this.path || "/", "@/view");
-		router.$router.get(overviewPath, this.getMiddleware(), (request, response, next) => {
-			const _ = new ParametersManager({
-				controller: this,
-				controllerClass: this.constructor,
-				request: request,
-				response: response,
-				next: next,
-				input: {
-					__method: "GET",
-					__operation: "get overview",
-				},
-				storage: {},
-				output: {
-					data: undefined, //the model overview
-					metadata: {
-						model: "(overview)",
-						method: "GET",
-						operation: "get overview",
-						started: moment().format("YYYY/MM/DD HH:mm:ss.SSS"),
-						finished: undefined,
-						tags: {},
-					},
-					code: 200
-				}
-			});
-			ejs.renderFile(path.resolve(process.env.PROJECT_ROOT + "/core/template/rest/overview.ejs"), {
-				controller: this,
-				controllers: controllers,
-				router: router,
-				_: _,
-				require: require,
-			}).then(result => {
-				_.output.data = result;
-				return response.sendHtmlSuccess(_.output.data, _.output.metadata, _.output.code);
-			}).catch(error => {
-				_.output.data = error;
-				console.log(error);
-				return response.sendHtmlError(_.output.data, _.output.metadata, _.output.code);
-			});
-		});
+	static get RestModelController() {
+		return RestModelController;
 	}
 
 	constructor(options = {}) {
 		super(options);
-		if(typeof options !== "object")
-			throw new ErrorManager.classes.RequiredTypeError("object");
-		Object.keys(options).forEach(prop => this[prop] = options[prop]);
+		if(typeof this.route === "undefined") {
+			this.route = "/";
+		}
+		if(typeof this.middleware === "undefined") {
+			this.middleware = [];
+		}
+		if(typeof this.controllers !== "object" || !Array.isArray(this.controllers)) {
+			throw new ErrorManager.classes.RequiredTypeError("RestController.controllers must be an array");
+		}
+	}
+
+	onFallbackRequest(request, response, next) {
+		return new JsonRestApiResponse().respond({ data: {error: "This URL does not correspond to a valid endpoint of this REST API."}, code: 404, metadata: {}}, response);
+	}
+	
+	beMountedOnRouter(router) {
+		RestControllerLogger.log("beMountedOnRouter");
+		const restRouter = express.Router();
+		this.controllers.forEach((controller, controllerIndex) => {
+			let controllerInstance = typeof controller === "object" ? controller : undefined;
+			if(typeof controllerInstance === "undefined") {
+				controllerInstance = new controller({ router, restController: this });
+			}
+			if(controllerInstance instanceof this.constructor.RestModelController) {
+				controllerInstance.beMountedOnRouter(router, restRouter);
+			} else {
+				RestControllerLogger.log("error with:", controllerInstance);
+				throw new ErrorManager.classes.RequiredTypeError("RestController.controllers must be an array of RestModelController instances (" + controllerIndex + ")");
+			}
+			this.controllers[controllerIndex] = controllerInstance;
+		});
+		// 1. JSON OVERVIEW:
+		restRouter.get("/", (request, response, next) => {
+			const routes = {};
+			this.controllers.forEach(controller => {
+				const route = StringUtils.joinUrl("/" + controller.constructor.path);
+				const publicDefinition = {route, ...controller.constructor.model.definition.getPublicDefinition()};
+				routes[publicDefinition.table] = publicDefinition;
+			});
+			return new JsonRestApiResponse().respond({ data: routes, code: 200, metadata: {baseUrl: this.route}}, response);
+		});
+		// 2. ROUTER:
+		router.$router.use(this.route, restRouter);
+		// 3. UI OVERVIEW:
+		restRouter.get(["/@/overview", "/@/view"], (request, response, next) => {
+			const _ = new RequestParameters({ request, response, next });
+			ejs.renderFile(process.env.PROJECT_ROOT + "/core/template/rest/overview.ejs", {_,require}, (error, text) => {
+				if(error) {
+					RestControllerLogger.log(error);
+					return response.send(error);
+				}
+				return response.send(text);
+			});
+		});
+		// 4. FALLBACK:
+		restRouter.all("*", this.onFallbackRequest);
+		RestControllerLogger.log("mounted with " + Object.keys(this.controllers).length + " models on " + this.route);
 	}
 
 }

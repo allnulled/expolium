@@ -1,12 +1,11 @@
-const BasicError = require(__dirname + "/BasicError.js");
+const BaseError = require(__dirname + "/BaseError.js");
 
-class RequiredTypeError extends BasicError {
-	constructor(message, info) {
-		super();
-		this.name = "RequiredTypeError";
-		this.message = message;
-		this.info = info;
+class RequiredTypeError extends BaseError {
+
+	static get name() {
+		return "RequiredTypeError";
 	}
+
 }
 
 module.exports = RequiredTypeError;

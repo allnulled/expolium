@@ -1,9 +1,0 @@
-// 4.dp.factory.txt
-
-class Command
- .name:String
- .details:Any
- .constructor(name:String, details:Any):Command
-class Factory
- .types:Object<Class>
- .run(command:Command):Any

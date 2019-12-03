@@ -1,0 +1,52 @@
+<%
+
+const out = {};
+
+out.forms = {};
+
+Object.keys(results).forEach(table => {
+	if(!(table in out.forms)) {
+		out.forms[table] = {};
+		out.forms[table].table = table;
+		out.forms[table].model = StringUtils.capitalize(table);
+		out.forms[table].endpoint = "/" + StringUtils.hyphenize(table);
+		out.forms[table].columns = {};
+	}
+	Object.keys(results[table]).forEach(column => {
+		if(!(column in out.forms[table].columns)) {
+			out.forms[table].columns[column] = {};
+		}
+		Object.keys(results[table][column]).forEach(attribute => {
+			if(attribute.startsWith("$form")) {
+				let attr = attribute.replace("$form", "");
+				let attr2 = attr.substr(0,1).toLowerCase() + attr.substr(1);
+				out.forms[table].columns[column][attr2] = results[table][column][attribute];
+			}
+		});
+	});
+});
+
+/*
+
+{
+	...metadata,
+	forms: {
+		<table>: {
+			columns: {
+				<column>: {
+					attributes: {
+						...columnAttributes
+					},
+					references: {
+						...columnReferences
+					}
+				}
+			}
+		}
+	}
+}
+
+//*/
+
+%>
+<%-JSON.stringify(out, null, 4)%>

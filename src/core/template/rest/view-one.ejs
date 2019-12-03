@@ -1,0 +1,124 @@
+<%
+
+const formBuilder = new FormBuilder();
+const columns = controller.constructor.model.definition.getPublicColumns();
+const queryStatus = _.storage.queries.viewOneQueryStatus;
+const item = _.storage.queries.viewOneQuery;
+const humanModel = StringUtils.humanize(controller.constructor.model.definition.table);
+const humanModelLower = humanModel.toLowerCase();
+const hasItem = !!_.storage.queries.viewOneQuery.id;
+const id = _.input.__id;
+const action = StringUtils.humanize(_.input.__operation).split(" ");
+const autoId = StringUtils.generateId(50);
+
+_.output.metadata.tags = Object.assign(_.output.metadata.tags, {
+	jquerySerializeObject: true,
+	restClient: true,
+	axios: true,
+	rainbowBackground: true
+});
+
+%>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+		<meta charset="utf-8">
+		<title><%-StringUtils.humanize(action[0])%> <%-humanModelLower%> <%=id%></title>
+		<%-PageDependencyUtils.getSortedMetadataTags(_.output.metadata.tags)%>
+		
+	</head>
+	<body>
+		<canvas id="canvas" style="position:fixed;top:0;bottom:0;left:0;right:0;"></canvas>
+		<div data-rest-component data-rest-view-one-component>
+			<div class="container">
+				<div class="row">
+					<h4 class="col-12">View <%-humanModelLower%> <%=id%></h4>
+				</div>
+				<div class="row">
+					<nav class="col-12" aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item btn-sm"><a data-rest-btn-overview href="#">Overview</a></li>
+							<li class="breadcrumb-item btn-sm"><a data-rest-btn-all href="#">All <%-humanModelLower%></a></li>
+							<li class="breadcrumb-item btn-sm active" aria-current="page"><%-StringUtils.humanize(action[0])%> <%=humanModelLower%> <%=id%></li>
+						</ol>
+					</nav>
+				</div>
+				<div class="row">
+					<div class="col-12" class="buttons-group">
+						<span class="float-left">
+							<button class="btn btn-sm btn-default" data-rest-btn-all>
+								<i class="fas fa-ellipsis-h"></i>
+							</button>
+						</span>
+						<span class="float-right">
+							<button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteItemModal<%-autoId%>">
+								<i class="fas fa-trash-alt"></i>
+							</button>
+							<button class="btn btn-sm btn-outline-secondary" data-rest-btn-new>
+								<i class="far fa-file"></i>
+							</button>
+							<button class="btn btn-sm btn-info" data-rest-btn-copy>
+								<i class="fas fa-file-alt"></i>
+							</button>
+							<button class="btn btn-sm btn-success" data-rest-btn-edit>
+								<i class="fas fa-pen"></i>
+							</button>
+						</span>
+					</div>
+				</div>
+		
+		<%
+			if(!hasItem) {
+				%>
+				<div class="row">
+					<div class="col-12">
+						<div class="alert breadcrumb alert-danger" role="alert">
+							<div class="breadcrumb-item btn-sm alert-danger" style="width:100%">
+								<div><%-humanModel%> with id <b><%=id%></b> was not found</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<%
+			} else {
+		%>
+				<div class="row">
+					<div class="col-12">
+						<div class="table-responsive">
+							<table class="table table-striped table-sm"
+								data-rest-model=<%-JSON.stringify(controller.constructor.model.definition.name)%>
+								data-rest-model-url=<%-JSON.stringify(controller.constructor.path)%>
+								data-rest-base-url=<%-JSON.stringify(controller.restController ? (controller.restController.route.replace(/\/$/g,"") + "/") : "/")%>>
+								<thead style="width: 100%">
+									<tr>
+										<th>Field</th>
+										<th>Value</th>
+									</tr>
+								</thead>
+								<tbody>
+					<% Object.keys(item).forEach(column => { %>
+									<tr>
+										<td>
+											<b><%=StringUtils.humanize(column)%></b>
+										</td>
+										<td>
+											<span><%=item[column]%></span>
+										</td>
+									</tr>
+					<% }); %>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+		<% } %>
+
+				
+			</div>
+			<% include ./parts/rest-events.ejs %>
+			<% include ./parts/delete-item-modal.ejs %>
+		</div>
+
+	</body>
+</html>

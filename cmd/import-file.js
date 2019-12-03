@@ -11,3 +11,7 @@ const src = argv.from;
 const dst = path.resolve(argv.to);
 
 fs.copySync(src, dst);
+
+
+if(global.PROJECT) 
+	global.PROJECT.app.closeAll();

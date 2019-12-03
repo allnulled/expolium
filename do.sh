@@ -1,1 +1,0 @@
-node cmd/do.js $@

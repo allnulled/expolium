@@ -1,0 +1,17 @@
+<div class="form-group">
+	<label class="form-label">
+		<i class="fas fa-list"></i>
+		<span><%- dataType.label || "Some option:" %></span>
+		<div class="description"><%- dataType.description %></div>
+	</label>
+	<select class="form-control form-control-sm">
+		<%
+			dataType.enum_list.forEach(item => {
+		%>
+		<option value="<%-item%>"><%-StringUtils.humanize(item).toLowerCase()%></option>
+		<%
+			});
+		%>
+	</select>
+
+</div>

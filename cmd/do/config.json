@@ -1,0 +1,3 @@
+{
+	"directCommands": ["import:file", "import:url"]
+}

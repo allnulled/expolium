@@ -1,4 +1,6 @@
 <%
+	const es6Template = require("es6-template-strings");
+	const StringUtils = require(process.env.PROJECT_ROOT + "/core/helper/StringUtils.js");
 	const parseTypeParameters = (column) => {
 		if(column.fulltype.indexOf("(") !== -1) {
 			return column.fulltype.substr(column.fulltype.indexOf("(")).replace(/\) *(unsigned)$/g, ")");
@@ -37,22 +39,26 @@
 
 	const getSequelizeTypeLabelFrom = (column) => {
 		const columnType = column.type;
+		const isForeignKey = column.boundConstraints && column.boundConstraints.reduce((o,item) => "referencedTable" in item || o, false);
+		if(isForeignKey) {
+			return "referenced-table";
+		}
 		if(columnType.indexOf("decimal") === 0) {
-			return JSON.stringify("decimal");
+			return "decimal";
 		} else if (columnType.indexOf("double") === 0) {
-			return JSON.stringify("double");
+			return "double";
 		} else if (columnType.indexOf("float") === 0) {
-			return JSON.stringify("float");
+			return "float";
 		} else if (columnType.indexOf("bit") === 0) {
-			return JSON.stringify("boolean");
+			return "boolean";
 		} else if (columnType.indexOf("bigint") === 0) {
-			return JSON.stringify("bigint");
+			return "bigint";
 		} else if (columnType.indexOf("int") === 0) {
-			return JSON.stringify("integer");
+			return "integer";
 		} else if (columnType.indexOf("set") === 0) {
-			return JSON.stringify("enum");
+			return "enum";
 		} else if (columnType.indexOf("enum") === 0) {
-			return JSON.stringify("enum");
+			return "enum";
 		} else if (columnType.indexOf("geomcollection") === 0) {
 			throw new Error("MySQL native type <geomcollection> is not supported.");
 		} else if (columnType.indexOf("multipolygon") === 0) {
@@ -62,9 +68,10 @@
 		} else if (columnType.indexOf("multipoint") === 0) {
 			throw new Error("MySQL native type <multipoint> is not supported.");
 		} else if (columnType.indexOf("geometry") === 0) {
-			return JSON.stringify("geometry");
+			return "geometry";
+			// throw new Error("MySQL native type <geometry> is not supported.");
 		} else if (columnType.indexOf("mediumint") === 0) {
-			return JSON.stringify("bigint");
+			return "bigint";
 		} else if (columnType.indexOf("polygon") === 0) {
 			throw new Error("MySQL native type <polygon> is not supported.");
 		} else if (columnType.indexOf("linestring") === 0) {
@@ -72,39 +79,39 @@
 		} else if (columnType.indexOf("point") === 0) {
 			throw new Error("MySQL native type <point> is not supported.");
 		} else if (columnType.indexOf("timestamp") === 0) {
-			return JSON.stringify("date");
+			return "datetime";
 		} else if (columnType.indexOf("datetime") === 0) {
-			return JSON.stringify("date");
+			return "datetime";
 		} else if (columnType.indexOf("year") === 0) {
-			return JSON.stringify("date");
+			return "integer";
 		} else if (columnType.indexOf("time") === 0) {
-			return JSON.stringify("date");
+			return "time";
 		} else if (columnType.indexOf("date") === 0) {
-			return JSON.stringify("date");
+			return "date";
 		} else if (columnType.indexOf("longblob") === 0) {
-			return JSON.stringify("blob");
+			return "blob";
 		} else if (columnType.indexOf("mediumblob") === 0) {
-			return JSON.stringify("blob");
+			return "blob";
 		} else if (columnType.indexOf("smallint") === 0) {
-			return JSON.stringify("blob");
+			return "integer";
 		} else if (columnType.indexOf("blob") === 0) {
-			return JSON.stringify("blob");
+			return "blob";
 		} else if (columnType.indexOf("tinyblob") === 0) {
-			return JSON.stringify("blob");
+			return "blob";
 		} else if (columnType.indexOf("json") === 0) {
-			return JSON.stringify("json");
+			return "json";
 		} else if (columnType.indexOf("longtext") === 0) {
-			return JSON.stringify("text");
+			return "text";
 		} else if (columnType.indexOf("mediumtext") === 0) {
-			return JSON.stringify("text");
+			return "text";
 		} else if (columnType.indexOf("tinytext") === 0) {
-			return JSON.stringify("text");
+			return "text";
 		} else if (columnType.indexOf("varchar") === 0) {
-			return JSON.stringify("string");
+			return "string";
 		} else if (columnType.indexOf("char") === 0) {
-			return JSON.stringify("string");
+			return "string";
 		} else if (columnType.indexOf("tinyint") === 0) {
-			return JSON.stringify("integer");
+			return "integer";
 		}
 	}
 
@@ -151,7 +158,7 @@
 		} else if (columnType.indexOf("year") === 0) {
 			return "Sequelize.DATE" + parseTypeParameters(column);
 		} else if (columnType.indexOf("time") === 0) {
-			return "Sequelize.DATE" + parseTypeParameters(column);
+			return "Sequelize.TIME" + parseTypeParameters(column);
 		} else if (columnType.indexOf("date") === 0) {
 			return "Sequelize.DATE" + parseTypeParameters(column);
 		} else if (columnType.indexOf("longblob") === 0) {
@@ -159,7 +166,7 @@
 		} else if (columnType.indexOf("mediumblob") === 0) {
 			return "Sequelize.BLOB('medium')";
 		} else if (columnType.indexOf("smallint") === 0) {
-			return "Sequelize.BLOB('medium')";
+			return "Sequelize.INTEGER('small')";
 		} else if (columnType.indexOf("blob") === 0) {
 			return "Sequelize.BLOB" + parseTypeParameters(column);
 		} else if (columnType.indexOf("tinyblob") === 0) {
@@ -233,39 +240,82 @@ class <%-Model%>Definition {
 				%>
 			<%-columnName%>: {
 				<%-printPrimaryKey(column)%>
-				type: <%-getSequelizeTypeFrom(column)%>,
-				field: <%-JSON.stringify(columnName)%>,
-				allowNull: <%-column.nullable === "YES" ? "true" : "false" %>,
+				type: <%-column.$type = getSequelizeTypeFrom(column)%>,
+				field: <%-column.$field = JSON.stringify(columnName)%>,
+				allowNull: <%-column.$nullable = column.nullable === "YES" ? "true" : "false" %>,
 				defaultValue: <%
 					if(typeof (column.default) === "number") {
-						%><%-column.default + (column.unsigned ? ".UNISGNED" : "") + (column.zerofill ? ".ZEROFILL" : "")%><%;
-					} else if(column.default === null) {
+						%><%-column.$default = column.default + (column.unsigned ? ".UNSIGNED" : "") + (column.zerofill ? ".ZEROFILL" : "")%><%;
+					} else if(column.default === null || column.default === "null") {
+						column.$default = null;
 						%>null<%;
 					} else {
-						%>Sequelize.literal("<%-column.default%><%
-						if(column.extra && column.extra.indexOf("DEFAULT_GENERATED") === 0) {
-							%><%-column.extra.substr(17)%><%;
-						}
-						%>")<%
+						column.$default = column.default;
+						column.$default += column.extra && column.extra.indexOf("DEFAULT_GENERATED") === 0 ? 
+							column.extra.substr(17) : "";
+						%>Sequelize.literal(<%-JSON.stringify(column.$default)%>)<%
 					}
 				%>,<%
 				if(column.unsigned) {
+					column.$unsigned = true;
 				%>
 				unsigned: true,<%
 				}
+				if(column.maxLength) {
+				%>
+				maxCharacters: <%-column.$maxCharacters = column.maxLength%>,<%
+				}
+				if(column.numericPrecision) {
+				%>
+				maxDigits:  <%-column.$maxDigits = column.numericPrecision%>,<%
+				}
 				if(column.zerofill) {
+					$column.$zerofill = true;
 				%>
 				zerofill: true,<%
 				}%>
 				timestamps: false,
 				underscored: true,
-				__type_code: <%-JSON.stringify(getSequelizeTypeFrom(column))%>,
-				__full_type: <%-JSON.stringify(column.fulltype)%>,
-				__type_label: <%-getSequelizeTypeLabelFrom(column)%>,<%
+				<%
+					const seqType = getSequelizeTypeFrom(column);
+					const seqLabel = getSequelizeTypeLabelFrom(column);
+				%>
+				__type_code: <%-column.$typeCode = JSON.stringify(seqType)%>,
+				__full_type: <%-column.$fullType = JSON.stringify(column.fulltype)%>,
+				__type_label: <%-column.$typeLabel = JSON.stringify(seqLabel)%>,
+				<%
+					if(seqLabel === "enum") { 
+						%>
+				__form_enum_list: <%- parseTypeParameters(column).replace(/^\(/g,"[").replace(/\)$/g, "]") %>,
+					<% }
+				%>
+				<%
 				for(let prop in column) {
 					if(prop.startsWith("__")) {
-				%><%-JSON.stringify(prop)%>: <%-JSON.stringify(column[prop])%>,
-				<%
+						let condition = typeof column[prop] === "object" && column[prop] !== null && typeof column[prop].$type === "string" && column[prop].$type === "es6template";
+						if(condition) {
+							let originalResult = es6Template(column[prop].$value, {
+								label: getSequelizeTypeLabelFrom(column),
+								prop,
+								table,
+								columnName,
+								column,
+								getSequelizeTypeLabelFrom,
+								StringUtils,
+								require: require,
+							});
+							let finalResult = undefined;
+							try {
+								finalResult = JSON.parse(originalResult);
+							} catch(error) {
+								//
+							}
+							column["$" + StringUtils.camelize(prop, false)] = finalResult || originalResult;
+				%><%-JSON.stringify(prop)%>: <%-originalResult%>,
+				<%		} else {
+					column["$" + StringUtils.camelize(prop, false)] = column[prop];
+				%><%-JSON.stringify(prop)%>: column[prop]%>,
+				<%		}
 					}
 				}
 				%>
@@ -281,6 +331,7 @@ class <%-Model%>Definition {
 				columnNames.sort(sortByColumnOrderFactory(tableContent)).forEach(columnName => {
 					const column = tableContent[columnName];
 					if(column.boundConstraints) {
+						column.$formColumnConstraints = column.boundConstraints;
 						column.boundConstraints.forEach(constraint => {
 							const { columnKey, boundConstraint, referencedTable = null, referencedColumn = null } = constraint;
 			%>
@@ -348,6 +399,16 @@ class <%-Model%>Definition {
 
 	static getPublicColumnNames() {
 		return Object.keys(this.getPublicColumns());
+	}
+
+	static getPublicDefinition() {
+		return {
+			table: this.table,
+			name: this.name,
+			columns: this.getPublicColumns(), 
+			innerRelationships: this.innerRelationships,
+			outerRelationships: this.outerRelationships
+		};
 	}
 
 	<%

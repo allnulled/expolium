@@ -1,0 +1,79 @@
+	<!-- Created item modal -->
+	<div class="modal" id="successfullyCreatedItemModal<%-autoId%>" data-rest-create-success>
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+
+	      <!-- Modal Header -->
+	      <div class="modal-header bg-success">
+	        <h4 class="modal-title">Item created</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+
+	      <!-- Modal body -->
+	      <div class="modal-body">
+	        <p>Item was created successfully.</p>
+	        <p>Visit it <span style="color:blue; cursor:pointer" onclick="visitLastCreatedItem(this)">here</span> or open a new tab <span style="color:blue; cursor:pointer" onclick="visitLastCreatedItem(this, true)">here</span>.</p>
+	        <p><button class="btn btn-outline-success" data-toggle="collapse" data-target="#successfullyCreatedItemModalDetails<%-autoId%>" aria-expanded="true">See details</button></p>
+	        <div id="successfullyCreatedItemModalDetails<%-autoId%>" class="collapse">
+		        <pre data-rest-create-success-message style="font-size:10px"></pre>
+		        <pre data-rest-create-success-headers style="font-size:10px"></pre>
+	        </div>
+	      </div>
+
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Thank you</button>
+	      </div>
+
+	    </div>
+	  </div>
+	</div>
+
+	<!-- Created item modal -->
+	<div class="modal" id="erroneouslyCreatedItemModal<%-autoId%>" data-rest-create-error>
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+
+	      <!-- Modal Header -->
+	      <div class="modal-header bg-danger">
+	        <h4 class="modal-title">Item not created</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+
+	      <!-- Modal body -->
+	      <div class="modal-body">
+	        <p>Item could not be created due to the following error:</p>
+	        <p><button class="btn btn-outline-danger" data-toggle="collapse" data-target="#erroneouslyCreatedItemModalDetails<%-autoId%>" aria-expanded="true">See details</button></p>
+	        <div id="erroneouslyCreatedItemModalDetails<%-autoId%>" class="collapse">
+	        	<pre data-rest-create-error-message style="font-size:10px"></pre>
+	        </div>
+	      </div>
+
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Thank you</button>
+	      </div>
+
+	    </div>
+	  </div>
+	</div>
+
+	<script type="text/javascript">
+		const visitLastCreatedItem = (scope, openTab = false) => {
+        	const jThis = jQuery(scope);
+        	const jRestComponent = jThis.closest('[data-rest-component]').length ? jThis.closest('[data-rest-component]') : jQuery('[data-rest-component]').eq(0);
+        	const jSuccess = jThis.closest('.modal-body').find('[data-rest-create-success-message]').eq(0);
+        	const jApiBaseUrl = jRestComponent.find('[data-rest-base-url]');
+        	const apiBaseUrl = jApiBaseUrl.attr('data-rest-base-url');
+        	const jApiModelUrl = jRestComponent.find('[data-rest-model-url]').eq(0);
+        	const apiModelUrl = jApiModelUrl.attr('data-rest-model-url');
+        	const successMsg = jSuccess.text();
+        	const id = JSON.parse(successMsg).data[0].insertId;
+        	const targetUrl = apiBaseUrl + apiModelUrl + '/@/view/' + id;
+        	if(openTab) {
+	        	window.open(targetUrl);
+	        } else {
+	        	window.location.href = targetUrl;
+	        }
+        }
+	</script>

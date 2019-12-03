@@ -1,0 +1,64 @@
+<%
+
+const PageDependencyUtils = require(process.env.PROJECT_ROOT + "/core/helper/PageDependencyUtils.js");
+
+_.output.metadata.tags = Object.assign(_.output.metadata.tags, {
+	ejs: true,
+	bootstrap: true,
+	templateManager: true,
+	jquery: true,
+	jquerySerializeObject: true,
+	jqueryUi: true,
+	jqueryUiTouchPunch: true,
+	restClient: true,
+	axios: true,
+	hammer: true,
+	serializeUrl: true,
+	restForm: true
+});
+
+%>
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+		<meta charset="utf-8">
+		<title>Refresh</title>
+		<%-PageDependencyUtils.getSortedMetadataTags(_.output.metadata.tags)%>
+	</head>
+	<body>
+		<div class="fixed">
+			<div class="centered-table">
+				<div class="centered-cell" style="max-width:260px; top: -20%;margin: 0 auto;">
+					<div>
+						<%- include(process.env.PROJECT_ROOT + "/core/template/auth/parts/logo.ejs") %>
+					</div>
+					<div>
+						<div class="card" style="max-width:250px; margin: 0 auto">
+							<div class="card-header" style="background-color: rgba(0,0,0,.03);">
+								<h4>Refresh</h4>
+							</div>
+							<div class="card-body">
+								<form>
+									<div class="form-group">
+										<div class="w-100 text-center">
+											<button class="btn btn-success">Refresh token</button>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="w-100 text-left">Your token is now:</label>
+										<pre style=" white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;background-color:white;color:black;">gGQNHA4sy94CazvJsnZWlNI82RXvbh6Er7XaD5UfawIkoBaWZkOfVMmP5bSdtN6nvEYBXVeE9bb7OgNd6i1S7HHGPlSupIoGzqEyqeRjvKuK31Y06nDWYYIaHt0jOwYMxTHN42izJk3oYRttk2O7nSLR13YYjMTzDSBuyXH3LaN7LRvmEjsHoPS7yNIw5gPsY3PMSfBa</pre>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<%- include(process.env.PROJECT_ROOT + "/core/template/auth/parts/styles.ejs") %>
+
+	</body>
+</html>

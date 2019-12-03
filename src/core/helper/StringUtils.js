@@ -18,6 +18,7 @@ class StringUtils {
 		let o = "";
 		let capitalizeNext = startCapital;
 		str.split("").forEach(c => {
+
 			if(c === "_") {
 				capitalizeNext = true;
 			} else if(capitalizeNext) {
@@ -26,20 +27,21 @@ class StringUtils {
 			} else {
 				o += c;
 			}
-		})
+		});
 		return o;
 	}
 
 	static camelize(str) {
-		return this.capitalize(str, false);
+		let out = this.capitalize(str, false);
+		out = out.substr(0,1).toLowerCase() + out.substr(1);
+		return out;
 	}
 
 	static humanize(strParam, startCapital = true, allCapitals = false) {
 		let o = "";
 		let str = this.snakize(strParam);
 		let spaceNext = false;
-		str = startCapital ? (str.substr(0,1).toUpperCase() + str.substr(1)) : str;
-		console.log(str);
+		str = str.substr(0,1)[startCapital ? "toUpperCase" : "toLowerCase"]() + str.substr(1);
 		str.split("").forEach(c => {
 			if(c === "_") {
 				spaceNext = true;
@@ -69,7 +71,7 @@ class StringUtils {
 		return out;
 	}
 
-	static stringify(data) {
+	static stringify(data, tab = undefined) {
 		const getCircularReplacer = () => {
 			const seen = new WeakSet();
 			return (key, value) => {
@@ -82,11 +84,19 @@ class StringUtils {
 				return value;
 			};
 		};
-		return JSON.stringify(data, getCircularReplacer());
+		return JSON.stringify(data, getCircularReplacer(), tab);
 	}
 
 	static parseJson(text) {
 		return JSON.parse(text);
+	}
+
+	static generateId(len = 255, pool = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".split("")) {
+		let out = "";
+		while(out.length < len) {
+			out += pool[Math.floor(Math.random()*pool.length)];
+		}
+		return out;
 	}
 
 }

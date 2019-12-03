@@ -12,6 +12,10 @@ const dst = path.resolve(argv.to);
 
 download(src, path.dirname(dst), {filename: path.basename(dst)}).then(i => {
 	console.log("Successfull operation. ", i);
+	if(global.PROJECT) 
+		global.PROJECT.app.closeAll();
 }).catch(error => {
 	console.log("Error: ", error);
+	if(global.PROJECT) 
+		global.PROJECT.app.closeAll();
 });

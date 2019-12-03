@@ -1,0 +1,58 @@
+	<!-- Edited item modal -->
+	<div class="modal" id="erroneouslyEditedItemModal<%-autoId%>" data-rest-edit-error>
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+
+	      <!-- Modal Header -->
+	      <div class="modal-header bg-warning">
+	        <h4 class="modal-title">Item not edited</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+
+	      <!-- Modal body -->
+	      <div class="modal-body">
+	        <p>Item could not be edited due to the following error:</p>
+	        <p><button class="btn btn-outline-warning" data-toggle="collapse" data-target="#erroneouslyEditedItemModalDetails<%-autoId%>" aria-expanded="true">See details</button></p>
+	        <div id="erroneouslyEditedItemModalDetails<%-autoId%>" class="collapse">
+	        	<pre data-rest-edit-error-message style="font-size:10px"></pre>
+	        </div>
+	      </div>
+
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Thank you</button>
+	      </div>
+
+	    </div>
+	  </div>
+	</div>
+
+	<!-- Edited item modal -->
+	<div class="modal" id="erroneouslyEditedItemModal<%-autoId%>" data-rest-edit-success>
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+
+	      <!-- Modal Header -->
+	      <div class="modal-header bg-success text-white">
+	        <h4 class="modal-title">Item edited</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+
+	      <!-- Modal body -->
+	      <div class="modal-body">
+	        <p>Item was edited successfully.</p>
+	        <p><button class="btn btn-outline-success" data-toggle="collapse" data-target="#successfullyDeletedItemModalDetails<%-autoId%>" aria-expanded="true">See details</button></p>
+	        <div id="successfullyDeletedItemModalDetails<%-autoId%>" class="collapse">
+		        <pre data-rest-edit-success-message style="font-size:10px"></pre>
+		        <pre data-rest-edit-success-headers style="font-size:10px"></pre>
+	        </div>
+	      </div>
+
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Thank you</button>
+	      </div>
+
+	    </div>
+	  </div>
+	</div>

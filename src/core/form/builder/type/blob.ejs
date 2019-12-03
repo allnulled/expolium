@@ -1,0 +1,12 @@
+<div class="form-group">
+	<label class="form-label">
+		<i class="fas fa-file-image"></i>
+		<span><%- dataType.label || "Some file:" %></span>
+		<% if(!noDescription) { %>
+			<div class="description"><%- dataType.description %></div>
+		<% } %>
+	</label>
+	<label class="btn btn-sm btn-outline-secondary" style="width:100%">
+		Select file<input type="file" name="<%-dataType.name || "default" %>" hidden>
+	</label>
+</div>

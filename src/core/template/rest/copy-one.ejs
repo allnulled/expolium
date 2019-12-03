@@ -1,0 +1,105 @@
+<%
+
+const formBuilder = new FormBuilder();
+const columns = controller.constructor.model.definition.getPublicColumns();
+const queryStatus = _.storage.queries.viewOneQueryStatus;
+const item = _.storage.queries.viewOneQuery;
+const humanModel = StringUtils.humanize(controller.constructor.model.definition.name);
+const humanModelLower = humanModel.toLowerCase();
+const hasItem = !!_.storage.queries.viewOneQuery.id;
+const id = _.input.__id;
+const actionAbbr = StringUtils.humanize(action).split(" ")[0];
+const autoId = StringUtils.generateId(50);
+
+_.output.metadata.tags = Object.assign(_.output.metadata.tags, {
+	jquerySerializeObject: true,
+	restClient: true,
+	axios: true,
+	rainbowBackground: true
+});
+
+%>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+		<meta charset="utf-8">
+		<title>Copy <%-humanModelLower%> <%=id%></title>
+		<%-PageDependencyUtils.getSortedMetadataTags(_.output.metadata.tags)%>
+		
+	</head>
+	<body>
+		<canvas id="canvas" style="position:fixed;top:0;bottom:0;left:0;right:0;"></canvas>
+		<div data-rest-component data-rest-copy-one-component>
+			<div class="container">
+				<div class="row">
+					<h4 class="col-12">Copy <%-humanModelLower%> <%=id%></h4>
+				</div>
+				<div class="row">
+					<nav class="col-12" aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item btn-sm"><a data-rest-btn-overview href="#">Overview</a></li>
+							<li class="breadcrumb-item btn-sm"><a data-rest-btn-all href="#">All <%-humanModelLower%></a></li>
+							<li class="breadcrumb-item btn-sm active" aria-current="page">Copy <%=humanModelLower%> <%=id%></li>
+						</ol>
+					</nav>
+				</div>
+				<div class="row">
+					<div class="col-12" class="buttons-group">
+						<span class="float-left">
+							<button class="btn btn-sm btn-default" data-rest-btn-all>
+								<i class="fas fa-ellipsis-h"></i>
+							</button>
+							<button class="btn btn-sm btn-default" data-rest-btn-view>
+								<i class="fas fa-eye"></i>
+							</button>
+						</span>
+						<span class="float-right">
+							<% include ./parts/button-create.ejs %>
+						</span>
+					</div>
+				</div>
+		
+		<%
+			if(!hasItem) {
+				%>
+				<div class="row">
+					<div class="alert breadcrumb alert-danger" role="alert">
+						<div class="breadcrumb-item btn-sm alert-danger" style="width:100%">
+							<%-humanModel%> with id <b><%=id%></b> was not found</div>
+						</div>
+					</div>
+				</div>
+				<%
+			} else {
+		%>
+
+				<%- formBuilder.build(SqlItemToFormBuilderAdapter.adapt(item, columns), {}, {
+					"id": "rest-create-unique",
+					"data-rest-model": controller.constructor.model.definition.name,
+					"data-rest-model-url": controller.constructor.path,
+					"data-rest-base-url": controller.restController ? (controller.restController.route.replace(/\/$/g,"") + "/") : "/",
+				}).data %>
+				
+				<div class="row">
+					<div class="col-12" class="buttons-group">
+						<span class="float-right">
+							<% include ./parts/button-create.ejs %>
+						</span>
+					</div>
+				</div>
+
+		<% } %>
+
+
+				
+			</div>
+			<% include ./parts/rest-events.ejs %>
+			<% include ./parts/delete-item-modal.ejs %>
+			<% include ./parts/created-item-modal.ejs %>
+		</div>
+
+		
+
+	</body>
+</html>

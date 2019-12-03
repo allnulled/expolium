@@ -1,4 +1,4 @@
 module.exports = {
 	environment: "development",
-	project: "myproject"
+	project: "project"
 }

@@ -1,0 +1,14 @@
+<div class="form-group">
+	<label class="form-label">
+		<i class="fas fa-quote-right"></i>
+		<span><%- dataType.label || "Some text:" %></span>
+		<% if(!noDescription) { %>
+			<div class="description"><%- dataType.description %></div>
+		<% } %>
+	</label>
+	<input
+		class="form-control form-control-sm"
+		type="text"
+		name="<%-dataType.name%>"
+		value="<%-dataType.value ? dataType.value : ""%>">
+</div>

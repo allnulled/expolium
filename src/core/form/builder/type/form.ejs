@@ -1,0 +1,49 @@
+<%
+
+	_.output.metadata.tags = Object.assign(_.output.metadata.tags, {
+		jquery: true,
+		jquerySerializeObject: true,
+		jqueryUi: true,
+		jqueryUiTouchPunch: true,
+		jqueryUiSortableGeneral: true,
+		popper: true,
+		bootstrap: true,
+		fontawesome: true,
+		moment: true,
+		bootstrapDatetimepicker: true,
+		ejs: true,
+		templateManager: true,
+		bootstrapModal: true,
+		restForm: true,
+		restClient: true,
+		axios: true,
+		serializeUrl: true,
+		stringUtils: true
+	});
+
+%>
+<form data-form-builder-id="<%-settings.id%>" class="row" <%-Object.keys(settings).reduce((out, name) => {
+	out += ` ${name}=${JSON.stringify(settings[name])}`;
+	return out;
+}, "")%>>
+<% dataTypes.forEach(dataType => { %>
+	<div class="form-item<%-noGrid ? '' : ' col-sm-6 col-md-4 col-lg-3'%>">
+		<div class="card" style="width: 100%; height: 100%;">
+	<% 
+	if(dataType.type in formBuilder.types) {
+		const formType = formBuilder.types[dataType.type];
+		const $all = {...allParameters, dataType, formType}
+		$all.$all = $all;
+	%>
+			<div class="card-body">
+				<div class="card-text">
+					<%-include(formType.file, $all)%>
+				</div>
+			</div>
+	<% } else { %>
+			<div>Type "<%-dataType.type%>" not found</div>
+	<% } %>
+		</div>
+	</div>
+<% }); %>
+</form>

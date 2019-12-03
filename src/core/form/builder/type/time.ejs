@@ -1,0 +1,31 @@
+<%
+
+const moment = require("moment");
+const autoId = StringUtils.generateId(50);
+const dateValue = moment(dataType.value, "ddd MMM DD YYYY hh:mm:ss [GMT]ZZ").format("hh:mm:ss");
+
+%>
+<div class="form-group">
+	<label class="form-label">
+		<i class="fas fa-clock"></i>
+		<span><%- dataType.label || "Some text:" %></span>
+		<% if(!noDescription) { %>
+		<div class="description"><%- dataType.description %></div>
+		<% } %>
+	</label>
+	<div class="input-group date" id="datetimepicker<%-autoId%>" data-target-input="nearest" data-tempus data-tempus-format="LT" data-tempus-inline="true">
+        <input 
+	        type="text"
+	        class="form-control form-control-sm"
+	        data-target="#datetimepicker<%-autoId%>"
+	        data-debug="true"
+			name="<%-dataType.name || "default" %>"
+			value="<%-dateValue === "Invalid date" ? "" : dateValue%>" />
+        <div class="input-group-append" data-target="#datetimepicker<%-autoId%>" data-toggle="datetimepicker">
+            <div class="input-group-text">
+            	<i class="fas fa-clock"></i>
+            </div>
+        </div>
+    </div>
+
+</div>

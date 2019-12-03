@@ -1,0 +1,109 @@
+	<!-- Delete item modal -->
+	<div class="modal" id="deleteItemModal<%-autoId%>">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+
+	      <!-- Modal Header -->
+	      <div class="modal-header bg-danger">
+	        <h4 class="modal-title">Delete item</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+
+	      <!-- Modal body -->
+	      <div class="modal-body">
+	        Are you sure you want to delete this item?
+	      </div>
+
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+	        <span onclick="removeCurrentItem(this)"><button type="button" class="btn btn-danger mr-auto" data-dismiss="modal"">Yes, delete this item</button></span>
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+	      </div>
+
+	    </div>
+	  </div>
+	</div>
+
+		<!-- Deleted item modal -->
+	<div class="modal" id="successfullyDeletedItemModal<%-autoId%>" data-rest-delete-success>
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+
+	      <!-- Modal Header -->
+	      <div class="modal-header bg-success">
+	        <h4 class="modal-title">Item deleted</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+
+	      <!-- Modal body -->
+	      <div class="modal-body">
+	        <p>Item was deleted successfully.</p>
+	        <p><button class="btn btn-outline-success" data-toggle="collapse" data-target="#successfullyDeletedItemModalDetails<%-autoId%>" aria-expanded="true">See details</button></p>
+	        <div id="successfullyDeletedItemModalDetails<%-autoId%>" class="collapse">
+		        <pre data-rest-delete-success-message style="font-size:10px"></pre>
+		        <pre data-rest-delete-success-headers style="font-size:10px"></pre>
+	        </div>
+	      </div>
+
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Thank you</button>
+	      </div>
+
+	    </div>
+	  </div>
+	</div>
+
+	<!-- Deleted item modal -->
+	<div class="modal" id="erroneouslyDeletedItemModal<%-autoId%>" data-rest-delete-error>
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+
+	      <!-- Modal Header -->
+	      <div class="modal-header bg-warning">
+	        <h4 class="modal-title">Item not deleted</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+
+	      <!-- Modal body -->
+	      <div class="modal-body">
+	        <p>Item could not be deleted due to the following error:</p>
+	        <p><button class="btn btn-outline-warning" data-toggle="collapse" data-target="#erroneouslyDeletedItemModalDetails<%-autoId%>" aria-expanded="true">See details</button></p>
+	        <div id="erroneouslyDeletedItemModalDetails<%-autoId%>" class="collapse">
+	        	<pre data-rest-delete-error-message style="font-size:10px"></pre>
+	        </div>
+	      </div>
+
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Thank you</button>
+	      </div>
+
+	    </div>
+	  </div>
+	</div>
+
+	<script type="text/javascript">
+		const removeCurrentItem = (scope, openTab = false) => {
+        	const jThis = jQuery(scope);
+        	const jRestComponent = jThis.closest('[data-rest-component]').length ? jThis.closest('[data-rest-component]') : jQuery('[data-rest-component]').eq(0);
+        	const jApiModel = jRestComponent.find('[data-rest-model]').eq(0);
+        	const restModel = jApiModel.attr('data-rest-model');
+			const jSuccessModal = jQuery("#successfullyDeletedItemModal<%-autoId%>").eq(0);
+			const jErrorModal = jQuery("#erroneouslyDeletedItemModal<%-autoId%>").eq(0);
+			const id = window.location.pathname.substr(window.location.pathname.lastIndexOf("/")+1);
+			window.restClient[restModel].delete(id).then((data) => {
+			if(data.data.data[0].affectedRows != 0) {
+				jSuccessModal.find("[data-rest-delete-success-message]").text(JSON.stringify(data.data, null, 2));
+				jSuccessModal.find("[data-rest-delete-success-headers]").text(JSON.stringify(data.headers, null, 2));
+				jSuccessModal.modal({show:true});
+			} else {
+				jErrorModal.find("[data-rest-delete-error-message]").text(JSON.stringify(data.data, null, 2));
+				jErrorModal.modal({show:true});
+			}
+			}).catch(error => {
+				jErrorModal.find("[data-rest-delete-error-message]").text(JSON.stringify(error.response.data, null, 2));
+				jErrorModal.modal({show:true});
+			});
+        }
+	</script>

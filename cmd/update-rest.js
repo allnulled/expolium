@@ -9,8 +9,9 @@ const path = require("path");
 const Timer = require("just-a-timer");
 const prettier = require("prettier");
 const config = require(__dirname + "/../expolium.config.js");
-const DATABASE_CONNECTION_TO_REGENERATE = "db"; // FOR NOW, THE ONLY DATABASE TO BE REGENERATED.
-const OVERRIDE_ALL = false;
+const exportJson = require(__dirname + "/update-rest/export.json");
+const es6Template = require("es6-template-strings");
+const isHardUpdate = false;
 
 class SqlInspector {
 
@@ -21,10 +22,6 @@ class SqlInspector {
 			proseWrap: "never",
 			tabWidth: 4
 		};
-	}
-
-	static getExportJson() {
-		return JSON.parse(fs.readFileSync(__dirname + "/update-rest/export.json").toString());
 	}
 
 	static _flatten(arr) {
@@ -73,17 +70,22 @@ class SqlInspector {
 
 	static __query(sequelize, databaseName) {
 		// @UNCOMMENT to update from database:
-		//return this._query(sequelize, databaseName);
-		return new Promise((resolve, reject) => {
-			resolve(JSON.parse(fs.readFileSync(__dirname + "/update-rest/cached.json").toString()));
-		});
+		if(isHardUpdate) {
+			return this._query(sequelize, databaseName);
+		} else {
+			return new Promise((resolve, reject) => {
+				resolve(JSON.parse(fs.readFileSync(__dirname + "/update-rest/cached.json").toString()));
+			});
+		}
 	}
 
 	static inspect(sequelize, extensionObject = {}, databaseName = false) {
 		return new Promise((resolve, reject) => {
 			this.__query(sequelize, databaseName ? databaseName : sequelize.getDatabaseName()).then(results => {
 				// @UNCOMMENT to cache the results from database:
-				fs.writeFileSync(__dirname + "/update-rest/cached.json", JSON.stringify(results), "utf8");
+				if(isHardUpdate) {
+					fs.writeFileSync(__dirname + "/update-rest/cached.json", JSON.stringify(results), "utf8");
+				}
 				const shaped = this._flatten(results).reduce((o, item) => {
 					const database = item["DATABASE"];
 					const table = item["TABLE"];
@@ -237,8 +239,9 @@ class SqlInspector {
 					Model: this.capitalize(table),
 					model: this.camelize(table),
 					database: database, 
-					databaseConnection: DATABASE_CONNECTION_TO_REGENERATE,
+					databaseConnection: exportJson.databaseConnectionId,
 					databaseContent: databaseContent,
+					require: require,
 					...extra
 				};
 				const baseModelFilepathPart = ejs.render(baseModelPathTemplate, tableVariables);
@@ -250,7 +253,7 @@ class SqlInspector {
 				const baseModelContents = ejs.render(baseModelTemplate, tableVariables);
 				//console.log("Regenerating " + label + " at:\n  - " + baseModelFilepath);
 				fs.outputFileSync(baseModelFilepath, this.beautifyJavascript(baseModelContents), "utf8");
-				if((!fs.existsSync(modelFilepath)) || OVERRIDE_ALL) {
+				if((!fs.existsSync(modelFilepath)) || exportJson.overrideAll) {
 					const modelContents = ejs.render(modelTemplate, tableVariables);
 					//console.log("Generating " + label + " at:\n  - " + modelFilepath);
 					fs.outputFileSync(modelFilepath, this.beautifyJavascript(modelContents), "utf8");
@@ -268,22 +271,27 @@ class SqlInspector {
 		return this.generateFilesPerTable("controller", __dirname + "/update-rest/BaseController.js.ejs", __dirname + "/update-rest/Controller.js.ejs", results, exportJson, project, extra);
 	}
 
+	static generateRestClient(results, exportJson, project, extra) {
+		return this.renderGeneralFile(__dirname + "/update-rest/rest-client.api.js", exportJson.restClient, results, exportJson, project, extra);
+	}
+
 	static renderGeneralFile(fileSrc, fileDst, results, exportJson, project, extra = {}) {
 		const template = fs.readFileSync(fileSrc).toString();
 		Object.keys(results).forEach(database => {
 			const databaseContent = results[database];
 			const templateParameters = {
 				database: database, 
-				databaseConnection: DATABASE_CONNECTION_TO_REGENERATE,
+				databaseConnection: exportJson.databaseConnectionId,
 				databaseContent: databaseContent,
 				results: databaseContent,
 				exportJson: exportJson,
 				project: project,
+				require: require,
 				...extra
 			};
 			const outputPath = path.resolve(project, ejs.render(fileDst, templateParameters));
 			const contents = ejs.render(template, templateParameters);
-			//console.log("Generating:\n  - " + outputPath);
+			console.log("Generating:\n  - " + outputPath);
 			fs.outputFileSync(outputPath, contents, "utf8");
 		});
 	}
@@ -298,40 +306,69 @@ class SqlInspector {
 
 	static generatePostmanCollection(results, exportJson, project, extra) {
 		this.renderGeneralFile(__dirname + "/update-rest/postman-collection.ejs", exportJson.PostmanCollection, results, exportJson, project, extra);
-		JSON.parse(fs.readFileSync(__dirname + "/../doc/project.postman_collection.json").toString());
+		//JSON.parse(fs.readFileSync(path.resolve(exportJson.PostmanCollection)).toString());
+	}
+
+	static generateFormsCollection(results, exportJson, project, extra) {
+		this.renderGeneralFile(__dirname + "/update-rest/forms-collection.ejs", exportJson.FormsCollection, results, exportJson, project, extra);
+		//JSON.parse(fs.readFileSync(path.resolve(exportJson.FormsCollection)).toString());
 	}
 
 	static generateTemplateController(results, exportJson, project, extra) {
 		// const outputPath = path.resolve(project, ejs.render(exportJson.template, {
-		// 	databaseConnection: DATABASE_CONNECTION_TO_REGENERATE,
+		// 	databaseConnection: exportJson.databaseConnectionId,
 		// }));
 		//fs.copyFileSync(__dirname + "/update-rest/template.ejs", outputPath);
 		//fs.copySync(__dirname + "/update-rest/template", outputPath.replace(/\.[^\.]+$/g, ""));
+	}
+
+	static mapFormInjections(results) {
+		Object.keys(results).forEach(database => {
+			Object.keys(results[database]).forEach(table => {
+				Object.keys(results[database][table]).forEach(column => {
+					Object.keys(results[database][table][column]).forEach(field => {
+						// @TODO:
+						return
+							const { $value } = results[database][table][column];
+							results[database][table][column] = es6Template($value, {
+								require,
+								results, 
+								database, 
+								table,
+								column
+							});
+						
+					});
+				});
+			});
+		});
 	}
 
 }
 
 const timer = new Timer();
 
-require(__dirname + "/../src/load.js").then(project => {
+require(__dirname + "/../src/load.js").then(runner => {
 	
-	const extension = JSON.parse(fs.readFileSync(process.env.PROJECT_ROOT + "/" + config.project + "/config/db.extension.json").toString());
+	const extension = JSON.parse(fs.readFileSync(process.env.PROJECT_ROOT + "/core/config/" + exportJson.databaseConnectionId + ".extension.json").toString());
 
-	SqlInspector.inspect(project.app.db.$sequelize, extension).then(results => {
+	SqlInspector.inspect(runner.app[exportJson.databaseConnectionId], extension).then(resultsReceived => {
 		const StringUtils = require(process.env.PROJECT_ROOT + "/core/helper/StringUtils.js");
-		fs.writeFileSync(process.env.PROJECT_ROOT + "/" + config.project + "/config/db.json", JSON.stringify(results, null, 2), "utf8");
-		project.app.db.$sequelize.close();
+		//const results = SqlInspector.mapFormInjections(resultsReceived);
+		const results = resultsReceived;
+		runner.app[exportJson.databaseConnectionId].close();
 		console.log("The successfull operation took: " + (timer.time()/1000) + " milliseconds.");
-		const exportJson = SqlInspector.getExportJson();
-		SqlInspector.generateModels(results, exportJson, process.env.PROJECT_ROOT, project, {StringUtils});
+		SqlInspector.generateModels(results, exportJson, process.env.PROJECT_ROOT, runner, {StringUtils});
+		fs.writeFileSync(process.env.PROJECT_ROOT + "/core/config/" + exportJson.databaseConnectionId + ".json", JSON.stringify(results, null, 2), "utf8");
 		SqlInspector.generateModelsImporter(results, exportJson, process.env.PROJECT_ROOT, {StringUtils});
 		SqlInspector.generatePostmanCollection(results, exportJson, process.env.PROJECT_ROOT, {StringUtils});
+		SqlInspector.generateFormsCollection(results, exportJson, process.env.PROJECT_ROOT, {StringUtils});
 		SqlInspector.generateTemplateController(results, exportJson, process.env.PROJECT_ROOT, {StringUtils});
 		SqlInspector.generateControllers(results, exportJson, process.env.PROJECT_ROOT, {StringUtils});
-		SqlInspector.generateControllersImporter(results, exportJson, process.env.PROJECT_ROOT, {StringUtils});
+		SqlInspector.generateRestClient(results, exportJson, process.env.PROJECT_ROOT, {StringUtils});
 	}).catch(error => {
 		console.log("ERROR", error);
-		project.app[DATABASE_CONNECTION_TO_REGENERATE].$sequelize.close();
+		runner.app[exportJson.databaseConnectionId].close();
 		console.log("The erroneous operation took: " + (timer.time()/1000) + " milliseconds.");
 	});
 });

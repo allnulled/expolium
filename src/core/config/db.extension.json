@@ -1,0 +1,44 @@
+{
+	"*.*.*": {
+		"__form_type": {
+			"$type": "es6template",
+			"$value": "${JSON.stringify(label)}"
+		},
+		"__form_label": {
+			"$type": "es6template",
+			"$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+		},
+		"__form_description": {
+			"$type": "es6template",
+			"$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+		},
+		"__form_table": {
+			"$type": "es6template",
+			"$value": "${JSON.stringify(table)}"
+		},
+		"__form_column": {
+			"$type": "es6template",
+			"$value": "${JSON.stringify(columnName)}"
+		},
+		"__form_max_string": {
+			"$type": "es6template",
+			"$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+		},
+		"__form_max_number": {
+			"$type": "es6template",
+			"$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+		},
+		"__form_required": {
+			"$type": "es6template",
+			"$value": "${!column.nullable}"
+		},
+		"__form_unsigned": {
+			"$type": "es6template",
+			"$value": "${!!column.unsigned}"
+		},
+		"__form_default_value": {
+			"$type": "es6template",
+			"$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+		}
+	}
+}

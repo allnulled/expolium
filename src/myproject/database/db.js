@@ -1,1 +1,0 @@
-module.exports = DatabaseManager.createFromEnvPrefix("DB_");

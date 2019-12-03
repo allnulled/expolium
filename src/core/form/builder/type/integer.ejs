@@ -1,0 +1,14 @@
+<div class="form-group">
+	<label class="form-label">
+		<i class="fas fa-square-root-alt"></i>
+		<span><%- dataType.label || "Some number:" %></span>
+		<% if(!noDescription) { %>
+			<div class="description"><%- dataType.description %></div>
+		<% } %>
+	</label>
+	<input
+		class="form-control form-control-sm"
+		type="number"
+		name="<%-dataType.name || "default" %>"
+		value="<%-dataType.value%>">
+</div>

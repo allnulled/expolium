@@ -1,0 +1,5056 @@
+{
+  "bM90APIyMv": {
+    "community": {
+      "id": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "boundConstraints": [
+          {
+            "columnKey": "PRI",
+            "boundConstraint": "PRIMARY"
+          }
+        ],
+        "isPrimaryKey": true,
+        "unsigned": 1,
+        "extra": "auto_increment",
+        "order": 1,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0,
+        "$type": "Sequelize.INTEGER(10)",
+        "$field": "\"id\"",
+        "$nullable": "false",
+        "$default": null,
+        "$unsigned": true,
+        "$maxDigits": 10,
+        "$typeCode": "\"Sequelize.INTEGER(10)\"",
+        "$fullType": "\"int(10) unsigned\"",
+        "$typeLabel": "\"integer\"",
+        "$formType": "integer",
+        "$formLabel": "Id",
+        "$formDescription": "Unit of \"integer\" describing the \"id\" field of an instance of \"community\".",
+        "$formTable": "community",
+        "$formColumn": "id",
+        "$formMaxString": "null",
+        "$formMaxNumber": 10,
+        "$formRequired": "false",
+        "$formUnsigned": true,
+        "$formDefaultValue": "null",
+        "$formColumnConstraints": [
+          {
+            "columnKey": "PRI",
+            "boundConstraint": "PRIMARY"
+          }
+        ]
+      },
+      "name": {
+        "type": "varchar",
+        "fulltype": "varchar(50)",
+        "nullable": "NO",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "boundConstraints": [
+          {
+            "columnKey": "UNI",
+            "boundConstraint": "UNIQUE_name"
+          }
+        ],
+        "hasUniqueRule": true,
+        "unsigned": 0,
+        "extra": "",
+        "order": 2,
+        "charset": "utf8mb4",
+        "collation": "utf8mb4_unicode_ci",
+        "maxLength": 50,
+        "maxBytes": 200,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.STRING(50)",
+        "$field": "\"name\"",
+        "$nullable": "false",
+        "$default": null,
+        "$maxCharacters": 50,
+        "$typeCode": "\"Sequelize.STRING(50)\"",
+        "$fullType": "\"varchar(50)\"",
+        "$typeLabel": "\"string\"",
+        "$formType": "string",
+        "$formLabel": "Name",
+        "$formDescription": "Unit of \"string\" describing the \"name\" field of an instance of \"community\".",
+        "$formTable": "community",
+        "$formColumn": "name",
+        "$formMaxString": 50,
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null",
+        "$formColumnConstraints": [
+          {
+            "columnKey": "UNI",
+            "boundConstraint": "UNIQUE_name"
+          }
+        ]
+      },
+      "created_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED",
+        "order": 3,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.DATE",
+        "$field": "\"created_at\"",
+        "$nullable": "false",
+        "$default": "CURRENT_TIMESTAMP",
+        "$typeCode": "\"Sequelize.DATE\"",
+        "$fullType": "\"timestamp\"",
+        "$typeLabel": "\"datetime\"",
+        "$formType": "datetime",
+        "$formLabel": "Created at",
+        "$formDescription": "Unit of \"datetime\" describing the \"created at\" field of an instance of \"community\".",
+        "$formTable": "community",
+        "$formColumn": "created_at",
+        "$formMaxString": "null",
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "updated_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
+        "order": 4,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.DATE",
+        "$field": "\"updated_at\"",
+        "$nullable": "false",
+        "$default": "CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
+        "$typeCode": "\"Sequelize.DATE\"",
+        "$fullType": "\"timestamp\"",
+        "$typeLabel": "\"datetime\"",
+        "$formType": "datetime",
+        "$formLabel": "Updated at",
+        "$formDescription": "Unit of \"datetime\" describing the \"updated at\" field of an instance of \"community\".",
+        "$formTable": "community",
+        "$formColumn": "updated_at",
+        "$formMaxString": "null",
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      }
+    },
+    "ejemplos": {
+      "id": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "boundConstraints": [
+          {
+            "columnKey": "PRI",
+            "boundConstraint": "PRIMARY"
+          }
+        ],
+        "isPrimaryKey": true,
+        "unsigned": 1,
+        "extra": "auto_increment",
+        "order": 1,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0,
+        "$type": "Sequelize.INTEGER(10)",
+        "$field": "\"id\"",
+        "$nullable": "false",
+        "$default": null,
+        "$unsigned": true,
+        "$maxDigits": 10,
+        "$typeCode": "\"Sequelize.INTEGER(10)\"",
+        "$fullType": "\"int(10) unsigned\"",
+        "$typeLabel": "\"integer\"",
+        "$formType": "integer",
+        "$formLabel": "Id",
+        "$formDescription": "Unit of \"integer\" describing the \"id\" field of an instance of \"ejemplos\".",
+        "$formTable": "ejemplos",
+        "$formColumn": "id",
+        "$formMaxString": "null",
+        "$formMaxNumber": 10,
+        "$formRequired": "false",
+        "$formUnsigned": true,
+        "$formDefaultValue": "null",
+        "$formColumnConstraints": [
+          {
+            "columnKey": "PRI",
+            "boundConstraint": "PRIMARY"
+          }
+        ]
+      },
+      "col1": {
+        "type": "tinyint",
+        "fulltype": "tinyint(4)",
+        "nullable": "YES",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 2,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 3,
+        "numericScale": 0,
+        "$type": "Sequelize.INTEGER(4)",
+        "$field": "\"col1\"",
+        "$nullable": "true",
+        "$default": null,
+        "$maxDigits": 3,
+        "$typeCode": "\"Sequelize.INTEGER(4)\"",
+        "$fullType": "\"tinyint(4)\"",
+        "$typeLabel": "\"integer\"",
+        "$formType": "integer",
+        "$formLabel": "Col1",
+        "$formDescription": "Unit of \"integer\" describing the \"col1\" field of an instance of \"ejemplos\".",
+        "$formTable": "ejemplos",
+        "$formColumn": "col1",
+        "$formMaxString": "null",
+        "$formMaxNumber": 3,
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "col2": {
+        "type": "smallint",
+        "fulltype": "smallint(6)",
+        "nullable": "YES",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 3,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 5,
+        "numericScale": 0,
+        "$type": "Sequelize.INTEGER('small')",
+        "$field": "\"col2\"",
+        "$nullable": "true",
+        "$default": null,
+        "$maxDigits": 5,
+        "$typeCode": "\"Sequelize.INTEGER('small')\"",
+        "$fullType": "\"smallint(6)\"",
+        "$typeLabel": "\"integer\"",
+        "$formType": "integer",
+        "$formLabel": "Col2",
+        "$formDescription": "Unit of \"integer\" describing the \"col2\" field of an instance of \"ejemplos\".",
+        "$formTable": "ejemplos",
+        "$formColumn": "col2",
+        "$formMaxString": "null",
+        "$formMaxNumber": 5,
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "col3": {
+        "type": "mediumint",
+        "fulltype": "mediumint(9)",
+        "nullable": "YES",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 4,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 7,
+        "numericScale": 0,
+        "$type": "Sequelize.BIGINT(9)",
+        "$field": "\"col3\"",
+        "$nullable": "true",
+        "$default": null,
+        "$maxDigits": 7,
+        "$typeCode": "\"Sequelize.BIGINT(9)\"",
+        "$fullType": "\"mediumint(9)\"",
+        "$typeLabel": "\"bigint\"",
+        "$formType": "bigint",
+        "$formLabel": "Col3",
+        "$formDescription": "Unit of \"bigint\" describing the \"col3\" field of an instance of \"ejemplos\".",
+        "$formTable": "ejemplos",
+        "$formColumn": "col3",
+        "$formMaxString": "null",
+        "$formMaxNumber": 7,
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "col4": {
+        "type": "int",
+        "fulltype": "int(11)",
+        "nullable": "YES",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 5,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0,
+        "$type": "Sequelize.INTEGER(11)",
+        "$field": "\"col4\"",
+        "$nullable": "true",
+        "$default": null,
+        "$maxDigits": 10,
+        "$typeCode": "\"Sequelize.INTEGER(11)\"",
+        "$fullType": "\"int(11)\"",
+        "$typeLabel": "\"integer\"",
+        "$formType": "integer",
+        "$formLabel": "Col4",
+        "$formDescription": "Unit of \"integer\" describing the \"col4\" field of an instance of \"ejemplos\".",
+        "$formTable": "ejemplos",
+        "$formColumn": "col4",
+        "$formMaxString": "null",
+        "$formMaxNumber": 10,
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "col5": {
+        "type": "bigint",
+        "fulltype": "bigint(20)",
+        "nullable": "YES",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 6,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 19,
+        "numericScale": 0,
+        "$type": "Sequelize.BIGINT(20)",
+        "$field": "\"col5\"",
+        "$nullable": "true",
+        "$default": null,
+        "$maxDigits": 19,
+        "$typeCode": "\"Sequelize.BIGINT(20)\"",
+        "$fullType": "\"bigint(20)\"",
+        "$typeLabel": "\"bigint\"",
+        "$formType": "bigint",
+        "$formLabel": "Col5",
+        "$formDescription": "Unit of \"bigint\" describing the \"col5\" field of an instance of \"ejemplos\".",
+        "$formTable": "ejemplos",
+        "$formColumn": "col5",
+        "$formMaxString": "null",
+        "$formMaxNumber": 19,
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "col6": {
+        "type": "bit",
+        "fulltype": "bit(1)",
+        "nullable": "YES",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 7,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 1,
+        "numericScale": null,
+        "$type": "Sequelize.BOOLEAN(1)",
+        "$field": "\"col6\"",
+        "$nullable": "true",
+        "$default": null,
+        "$maxDigits": 1,
+        "$typeCode": "\"Sequelize.BOOLEAN(1)\"",
+        "$fullType": "\"bit(1)\"",
+        "$typeLabel": "\"boolean\"",
+        "$formType": "boolean",
+        "$formLabel": "Col6",
+        "$formDescription": "Unit of \"boolean\" describing the \"col6\" field of an instance of \"ejemplos\".",
+        "$formTable": "ejemplos",
+        "$formColumn": "col6",
+        "$formMaxString": "null",
+        "$formMaxNumber": 1,
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "col7": {
+        "type": "float",
+        "fulltype": "float",
+        "nullable": "YES",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 8,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 12,
+        "numericScale": null,
+        "$type": "Sequelize.FLOAT",
+        "$field": "\"col7\"",
+        "$nullable": "true",
+        "$default": null,
+        "$maxDigits": 12,
+        "$typeCode": "\"Sequelize.FLOAT\"",
+        "$fullType": "\"float\"",
+        "$typeLabel": "\"float\"",
+        "$formType": "float",
+        "$formLabel": "Col7",
+        "$formDescription": "Unit of \"float\" describing the \"col7\" field of an instance of \"ejemplos\".",
+        "$formTable": "ejemplos",
+        "$formColumn": "col7",
+        "$formMaxString": "null",
+        "$formMaxNumber": 12,
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "col8": {
+        "type": "double",
+        "fulltype": "double",
+        "nullable": "YES",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 9,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 22,
+        "numericScale": null,
+        "$type": "Sequelize.DOUBLE",
+        "$field": "\"col8\"",
+        "$nullable": "true",
+        "$default": null,
+        "$maxDigits": 22,
+        "$typeCode": "\"Sequelize.DOUBLE\"",
+        "$fullType": "\"double\"",
+        "$typeLabel": "\"double\"",
+        "$formType": "double",
+        "$formLabel": "Col8",
+        "$formDescription": "Unit of \"double\" describing the \"col8\" field of an instance of \"ejemplos\".",
+        "$formTable": "ejemplos",
+        "$formColumn": "col8",
+        "$formMaxString": "null",
+        "$formMaxNumber": 22,
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "col9": {
+        "type": "decimal",
+        "fulltype": "decimal(10,0)",
+        "nullable": "YES",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 10,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0,
+        "$type": "Sequelize.DECIMAL(10,0)",
+        "$field": "\"col9\"",
+        "$nullable": "true",
+        "$default": null,
+        "$maxDigits": 10,
+        "$typeCode": "\"Sequelize.DECIMAL(10,0)\"",
+        "$fullType": "\"decimal(10,0)\"",
+        "$typeLabel": "\"decimal\"",
+        "$formType": "decimal",
+        "$formLabel": "Col9",
+        "$formDescription": "Unit of \"decimal\" describing the \"col9\" field of an instance of \"ejemplos\".",
+        "$formTable": "ejemplos",
+        "$formColumn": "col9",
+        "$formMaxString": "null",
+        "$formMaxNumber": 10,
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "col10": {
+        "type": "char",
+        "fulltype": "char(1)",
+        "nullable": "YES",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 11,
+        "charset": "utf8",
+        "collation": "utf8_unicode_ci",
+        "maxLength": 1,
+        "maxBytes": 3,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.STRING(1)",
+        "$field": "\"col10\"",
+        "$nullable": "true",
+        "$default": null,
+        "$maxCharacters": 1,
+        "$typeCode": "\"Sequelize.STRING(1)\"",
+        "$fullType": "\"char(1)\"",
+        "$typeLabel": "\"string\"",
+        "$formType": "string",
+        "$formLabel": "Col10",
+        "$formDescription": "Unit of \"string\" describing the \"col10\" field of an instance of \"ejemplos\".",
+        "$formTable": "ejemplos",
+        "$formColumn": "col10",
+        "$formMaxString": 1,
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "col11": {
+        "type": "varchar",
+        "fulltype": "varchar(255)",
+        "nullable": "YES",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 12,
+        "charset": "utf8",
+        "collation": "utf8_unicode_ci",
+        "maxLength": 255,
+        "maxBytes": 765,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.STRING(255)",
+        "$field": "\"col11\"",
+        "$nullable": "true",
+        "$default": null,
+        "$maxCharacters": 255,
+        "$typeCode": "\"Sequelize.STRING(255)\"",
+        "$fullType": "\"varchar(255)\"",
+        "$typeLabel": "\"string\"",
+        "$formType": "string",
+        "$formLabel": "Col11",
+        "$formDescription": "Unit of \"string\" describing the \"col11\" field of an instance of \"ejemplos\".",
+        "$formTable": "ejemplos",
+        "$formColumn": "col11",
+        "$formMaxString": 255,
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "col12": {
+        "type": "tinytext",
+        "fulltype": "tinytext",
+        "nullable": "YES",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 13,
+        "charset": "utf8",
+        "collation": "utf8_unicode_ci",
+        "maxLength": 255,
+        "maxBytes": 255,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.TEXT('tiny')",
+        "$field": "\"col12\"",
+        "$nullable": "true",
+        "$default": null,
+        "$maxCharacters": 255,
+        "$typeCode": "\"Sequelize.TEXT('tiny')\"",
+        "$fullType": "\"tinytext\"",
+        "$typeLabel": "\"text\"",
+        "$formType": "text",
+        "$formLabel": "Col12",
+        "$formDescription": "Unit of \"text\" describing the \"col12\" field of an instance of \"ejemplos\".",
+        "$formTable": "ejemplos",
+        "$formColumn": "col12",
+        "$formMaxString": 255,
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "col13": {
+        "type": "mediumtext",
+        "fulltype": "mediumtext",
+        "nullable": "YES",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 14,
+        "charset": "utf8",
+        "collation": "utf8_unicode_ci",
+        "maxLength": 16777215,
+        "maxBytes": 16777215,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.TEXT('medium')",
+        "$field": "\"col13\"",
+        "$nullable": "true",
+        "$default": null,
+        "$maxCharacters": 16777215,
+        "$typeCode": "\"Sequelize.TEXT('medium')\"",
+        "$fullType": "\"mediumtext\"",
+        "$typeLabel": "\"text\"",
+        "$formType": "text",
+        "$formLabel": "Col13",
+        "$formDescription": "Unit of \"text\" describing the \"col13\" field of an instance of \"ejemplos\".",
+        "$formTable": "ejemplos",
+        "$formColumn": "col13",
+        "$formMaxString": 16777215,
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "col14": {
+        "type": "longtext",
+        "fulltype": "longtext",
+        "nullable": "YES",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 15,
+        "charset": "utf8",
+        "collation": "utf8_unicode_ci",
+        "maxLength": 4294967295,
+        "maxBytes": 4294967295,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.TEXT('long')",
+        "$field": "\"col14\"",
+        "$nullable": "true",
+        "$default": null,
+        "$maxCharacters": 4294967295,
+        "$typeCode": "\"Sequelize.TEXT('long')\"",
+        "$fullType": "\"longtext\"",
+        "$typeLabel": "\"text\"",
+        "$formType": "text",
+        "$formLabel": "Col14",
+        "$formDescription": "Unit of \"text\" describing the \"col14\" field of an instance of \"ejemplos\".",
+        "$formTable": "ejemplos",
+        "$formColumn": "col14",
+        "$formMaxString": 4294967295,
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "col15": {
+        "type": "json",
+        "fulltype": "json",
+        "nullable": "YES",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 16,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.JSON",
+        "$field": "\"col15\"",
+        "$nullable": "true",
+        "$default": null,
+        "$typeCode": "\"Sequelize.JSON\"",
+        "$fullType": "\"json\"",
+        "$typeLabel": "\"json\"",
+        "$formType": "json",
+        "$formLabel": "Col15",
+        "$formDescription": "Unit of \"json\" describing the \"col15\" field of an instance of \"ejemplos\".",
+        "$formTable": "ejemplos",
+        "$formColumn": "col15",
+        "$formMaxString": "null",
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "col18": {
+        "type": "tinyblob",
+        "fulltype": "tinyblob",
+        "nullable": "YES",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 17,
+        "charset": null,
+        "collation": null,
+        "maxLength": 255,
+        "maxBytes": 255,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.BLOB('tiny')",
+        "$field": "\"col18\"",
+        "$nullable": "true",
+        "$default": null,
+        "$maxCharacters": 255,
+        "$typeCode": "\"Sequelize.BLOB('tiny')\"",
+        "$fullType": "\"tinyblob\"",
+        "$typeLabel": "\"blob\"",
+        "$formType": "blob",
+        "$formLabel": "Col18",
+        "$formDescription": "Unit of \"blob\" describing the \"col18\" field of an instance of \"ejemplos\".",
+        "$formTable": "ejemplos",
+        "$formColumn": "col18",
+        "$formMaxString": 255,
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "col19": {
+        "type": "blob",
+        "fulltype": "blob",
+        "nullable": "YES",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 18,
+        "charset": null,
+        "collation": null,
+        "maxLength": 65535,
+        "maxBytes": 65535,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.BLOB",
+        "$field": "\"col19\"",
+        "$nullable": "true",
+        "$default": null,
+        "$maxCharacters": 65535,
+        "$typeCode": "\"Sequelize.BLOB\"",
+        "$fullType": "\"blob\"",
+        "$typeLabel": "\"blob\"",
+        "$formType": "blob",
+        "$formLabel": "Col19",
+        "$formDescription": "Unit of \"blob\" describing the \"col19\" field of an instance of \"ejemplos\".",
+        "$formTable": "ejemplos",
+        "$formColumn": "col19",
+        "$formMaxString": 65535,
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "col20": {
+        "type": "mediumblob",
+        "fulltype": "mediumblob",
+        "nullable": "YES",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 19,
+        "charset": null,
+        "collation": null,
+        "maxLength": 16777215,
+        "maxBytes": 16777215,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.BLOB('medium')",
+        "$field": "\"col20\"",
+        "$nullable": "true",
+        "$default": null,
+        "$maxCharacters": 16777215,
+        "$typeCode": "\"Sequelize.BLOB('medium')\"",
+        "$fullType": "\"mediumblob\"",
+        "$typeLabel": "\"blob\"",
+        "$formType": "blob",
+        "$formLabel": "Col20",
+        "$formDescription": "Unit of \"blob\" describing the \"col20\" field of an instance of \"ejemplos\".",
+        "$formTable": "ejemplos",
+        "$formColumn": "col20",
+        "$formMaxString": 16777215,
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "col21": {
+        "type": "longblob",
+        "fulltype": "longblob",
+        "nullable": "YES",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 20,
+        "charset": null,
+        "collation": null,
+        "maxLength": 4294967295,
+        "maxBytes": 4294967295,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.BLOB('long')",
+        "$field": "\"col21\"",
+        "$nullable": "true",
+        "$default": null,
+        "$maxCharacters": 4294967295,
+        "$typeCode": "\"Sequelize.BLOB('long')\"",
+        "$fullType": "\"longblob\"",
+        "$typeLabel": "\"blob\"",
+        "$formType": "blob",
+        "$formLabel": "Col21",
+        "$formDescription": "Unit of \"blob\" describing the \"col21\" field of an instance of \"ejemplos\".",
+        "$formTable": "ejemplos",
+        "$formColumn": "col21",
+        "$formMaxString": 4294967295,
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "col22": {
+        "type": "date",
+        "fulltype": "date",
+        "nullable": "YES",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 21,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.DATE",
+        "$field": "\"col22\"",
+        "$nullable": "true",
+        "$default": null,
+        "$typeCode": "\"Sequelize.DATE\"",
+        "$fullType": "\"date\"",
+        "$typeLabel": "\"date\"",
+        "$formType": "date",
+        "$formLabel": "Col22",
+        "$formDescription": "Unit of \"date\" describing the \"col22\" field of an instance of \"ejemplos\".",
+        "$formTable": "ejemplos",
+        "$formColumn": "col22",
+        "$formMaxString": "null",
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "col23": {
+        "type": "time",
+        "fulltype": "time",
+        "nullable": "YES",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 22,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.TIME",
+        "$field": "\"col23\"",
+        "$nullable": "true",
+        "$default": null,
+        "$typeCode": "\"Sequelize.TIME\"",
+        "$fullType": "\"time\"",
+        "$typeLabel": "\"time\"",
+        "$formType": "time",
+        "$formLabel": "Col23",
+        "$formDescription": "Unit of \"time\" describing the \"col23\" field of an instance of \"ejemplos\".",
+        "$formTable": "ejemplos",
+        "$formColumn": "col23",
+        "$formMaxString": "null",
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "col24": {
+        "type": "year",
+        "fulltype": "year(4)",
+        "nullable": "YES",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 23,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.DATE(4)",
+        "$field": "\"col24\"",
+        "$nullable": "true",
+        "$default": null,
+        "$typeCode": "\"Sequelize.DATE(4)\"",
+        "$fullType": "\"year(4)\"",
+        "$typeLabel": "\"integer\"",
+        "$formType": "integer",
+        "$formLabel": "Col24",
+        "$formDescription": "Unit of \"integer\" describing the \"col24\" field of an instance of \"ejemplos\".",
+        "$formTable": "ejemplos",
+        "$formColumn": "col24",
+        "$formMaxString": "null",
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "col25": {
+        "type": "datetime",
+        "fulltype": "datetime",
+        "nullable": "YES",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 24,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.DATE",
+        "$field": "\"col25\"",
+        "$nullable": "true",
+        "$default": null,
+        "$typeCode": "\"Sequelize.DATE\"",
+        "$fullType": "\"datetime\"",
+        "$typeLabel": "\"datetime\"",
+        "$formType": "datetime",
+        "$formLabel": "Col25",
+        "$formDescription": "Unit of \"datetime\" describing the \"col25\" field of an instance of \"ejemplos\".",
+        "$formTable": "ejemplos",
+        "$formColumn": "col25",
+        "$formMaxString": "null",
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "col26": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "YES",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 25,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.DATE",
+        "$field": "\"col26\"",
+        "$nullable": "true",
+        "$default": null,
+        "$typeCode": "\"Sequelize.DATE\"",
+        "$fullType": "\"timestamp\"",
+        "$typeLabel": "\"datetime\"",
+        "$formType": "datetime",
+        "$formLabel": "Col26",
+        "$formDescription": "Unit of \"datetime\" describing the \"col26\" field of an instance of \"ejemplos\".",
+        "$formTable": "ejemplos",
+        "$formColumn": "col26",
+        "$formMaxString": "null",
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "col36": {
+        "type": "enum",
+        "fulltype": "enum('a','b','c')",
+        "nullable": "YES",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 26,
+        "charset": "utf8",
+        "collation": "utf8_unicode_ci",
+        "maxLength": 1,
+        "maxBytes": 3,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.ENUM('a','b','c')",
+        "$field": "\"col36\"",
+        "$nullable": "true",
+        "$default": null,
+        "$maxCharacters": 1,
+        "$typeCode": "\"Sequelize.ENUM('a','b','c')\"",
+        "$fullType": "\"enum('a','b','c')\"",
+        "$typeLabel": "\"enum\"",
+        "$formType": "enum",
+        "$formLabel": "Col36",
+        "$formDescription": "Unit of \"enum\" describing the \"col36\" field of an instance of \"ejemplos\".",
+        "$formTable": "ejemplos",
+        "$formColumn": "col36",
+        "$formMaxString": 1,
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "col38": {
+        "type": "set",
+        "fulltype": "set('a','b','c')",
+        "nullable": "YES",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 27,
+        "charset": "utf8",
+        "collation": "utf8_unicode_ci",
+        "maxLength": 5,
+        "maxBytes": 15,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.ENUM('a','b','c')",
+        "$field": "\"col38\"",
+        "$nullable": "true",
+        "$default": null,
+        "$maxCharacters": 5,
+        "$typeCode": "\"Sequelize.ENUM('a','b','c')\"",
+        "$fullType": "\"set('a','b','c')\"",
+        "$typeLabel": "\"enum\"",
+        "$formType": "enum",
+        "$formLabel": "Col38",
+        "$formDescription": "Unit of \"enum\" describing the \"col38\" field of an instance of \"ejemplos\".",
+        "$formTable": "ejemplos",
+        "$formColumn": "col38",
+        "$formMaxString": 5,
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      }
+    },
+    "membership": {
+      "id": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "boundConstraints": [
+          {
+            "columnKey": "PRI",
+            "boundConstraint": "PRIMARY"
+          }
+        ],
+        "isPrimaryKey": true,
+        "unsigned": 1,
+        "extra": "auto_increment",
+        "order": 1,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0,
+        "$type": "Sequelize.INTEGER(10)",
+        "$field": "\"id\"",
+        "$nullable": "false",
+        "$default": null,
+        "$unsigned": true,
+        "$maxDigits": 10,
+        "$typeCode": "\"Sequelize.INTEGER(10)\"",
+        "$fullType": "\"int(10) unsigned\"",
+        "$typeLabel": "\"integer\"",
+        "$formType": "integer",
+        "$formLabel": "Id",
+        "$formDescription": "Unit of \"integer\" describing the \"id\" field of an instance of \"membership\".",
+        "$formTable": "membership",
+        "$formColumn": "id",
+        "$formMaxString": "null",
+        "$formMaxNumber": 10,
+        "$formRequired": "false",
+        "$formUnsigned": true,
+        "$formDefaultValue": "null",
+        "$formColumnConstraints": [
+          {
+            "columnKey": "PRI",
+            "boundConstraint": "PRIMARY"
+          }
+        ]
+      },
+      "id_user": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "boundConstraints": [
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "FK_membership_user",
+            "referencedTable": "user",
+            "referencedColumn": "id"
+          },
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "UNIQUE_user_per_community"
+          }
+        ],
+        "isForeignKey": true,
+        "unsigned": 1,
+        "extra": "",
+        "order": 2,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0,
+        "hasUniqueRule": true,
+        "$type": "Sequelize.INTEGER(10)",
+        "$field": "\"id_user\"",
+        "$nullable": "false",
+        "$default": null,
+        "$unsigned": true,
+        "$maxDigits": 10,
+        "$typeCode": "\"Sequelize.INTEGER(10)\"",
+        "$fullType": "\"int(10) unsigned\"",
+        "$typeLabel": "\"referenced-table\"",
+        "$formType": "referenced-table",
+        "$formLabel": "Id user",
+        "$formDescription": "Unit of \"referenced-table\" describing the \"id user\" field of an instance of \"membership\".",
+        "$formTable": "membership",
+        "$formColumn": "id_user",
+        "$formMaxString": "null",
+        "$formMaxNumber": 10,
+        "$formRequired": "false",
+        "$formUnsigned": true,
+        "$formDefaultValue": "null",
+        "$formColumnConstraints": [
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "FK_membership_user",
+            "referencedTable": "user",
+            "referencedColumn": "id"
+          },
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "UNIQUE_user_per_community"
+          }
+        ]
+      },
+      "id_community": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "boundConstraints": [
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "UNIQUE_user_per_community"
+          },
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "FK_membership_community",
+            "referencedTable": "community",
+            "referencedColumn": "id"
+          }
+        ],
+        "hasUniqueRule": true,
+        "unsigned": 1,
+        "extra": "",
+        "order": 3,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0,
+        "isForeignKey": true,
+        "$type": "Sequelize.INTEGER(10)",
+        "$field": "\"id_community\"",
+        "$nullable": "false",
+        "$default": null,
+        "$unsigned": true,
+        "$maxDigits": 10,
+        "$typeCode": "\"Sequelize.INTEGER(10)\"",
+        "$fullType": "\"int(10) unsigned\"",
+        "$typeLabel": "\"referenced-table\"",
+        "$formType": "referenced-table",
+        "$formLabel": "Id community",
+        "$formDescription": "Unit of \"referenced-table\" describing the \"id community\" field of an instance of \"membership\".",
+        "$formTable": "membership",
+        "$formColumn": "id_community",
+        "$formMaxString": "null",
+        "$formMaxNumber": 10,
+        "$formRequired": "false",
+        "$formUnsigned": true,
+        "$formDefaultValue": "null",
+        "$formColumnConstraints": [
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "UNIQUE_user_per_community"
+          },
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "FK_membership_community",
+            "referencedTable": "community",
+            "referencedColumn": "id"
+          }
+        ]
+      },
+      "id_role": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "boundConstraints": [
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "FK_membership_role",
+            "referencedTable": "role",
+            "referencedColumn": "id"
+          }
+        ],
+        "isForeignKey": true,
+        "unsigned": 1,
+        "extra": "",
+        "order": 4,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0,
+        "$type": "Sequelize.INTEGER(10)",
+        "$field": "\"id_role\"",
+        "$nullable": "false",
+        "$default": null,
+        "$unsigned": true,
+        "$maxDigits": 10,
+        "$typeCode": "\"Sequelize.INTEGER(10)\"",
+        "$fullType": "\"int(10) unsigned\"",
+        "$typeLabel": "\"referenced-table\"",
+        "$formType": "referenced-table",
+        "$formLabel": "Id role",
+        "$formDescription": "Unit of \"referenced-table\" describing the \"id role\" field of an instance of \"membership\".",
+        "$formTable": "membership",
+        "$formColumn": "id_role",
+        "$formMaxString": "null",
+        "$formMaxNumber": 10,
+        "$formRequired": "false",
+        "$formUnsigned": true,
+        "$formDefaultValue": "null",
+        "$formColumnConstraints": [
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "FK_membership_role",
+            "referencedTable": "role",
+            "referencedColumn": "id"
+          }
+        ]
+      },
+      "created_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED",
+        "order": 5,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.DATE",
+        "$field": "\"created_at\"",
+        "$nullable": "false",
+        "$default": "CURRENT_TIMESTAMP",
+        "$typeCode": "\"Sequelize.DATE\"",
+        "$fullType": "\"timestamp\"",
+        "$typeLabel": "\"datetime\"",
+        "$formType": "datetime",
+        "$formLabel": "Created at",
+        "$formDescription": "Unit of \"datetime\" describing the \"created at\" field of an instance of \"membership\".",
+        "$formTable": "membership",
+        "$formColumn": "created_at",
+        "$formMaxString": "null",
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "updated_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
+        "order": 6,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.DATE",
+        "$field": "\"updated_at\"",
+        "$nullable": "false",
+        "$default": "CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
+        "$typeCode": "\"Sequelize.DATE\"",
+        "$fullType": "\"timestamp\"",
+        "$typeLabel": "\"datetime\"",
+        "$formType": "datetime",
+        "$formLabel": "Updated at",
+        "$formDescription": "Unit of \"datetime\" describing the \"updated at\" field of an instance of \"membership\".",
+        "$formTable": "membership",
+        "$formColumn": "updated_at",
+        "$formMaxString": "null",
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      }
+    },
+    "permission": {
+      "id": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "boundConstraints": [
+          {
+            "columnKey": "PRI",
+            "boundConstraint": "PRIMARY"
+          }
+        ],
+        "isPrimaryKey": true,
+        "unsigned": 1,
+        "extra": "auto_increment",
+        "order": 1,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0,
+        "$type": "Sequelize.INTEGER(10)",
+        "$field": "\"id\"",
+        "$nullable": "false",
+        "$default": null,
+        "$unsigned": true,
+        "$maxDigits": 10,
+        "$typeCode": "\"Sequelize.INTEGER(10)\"",
+        "$fullType": "\"int(10) unsigned\"",
+        "$typeLabel": "\"integer\"",
+        "$formType": "integer",
+        "$formLabel": "Id",
+        "$formDescription": "Unit of \"integer\" describing the \"id\" field of an instance of \"permission\".",
+        "$formTable": "permission",
+        "$formColumn": "id",
+        "$formMaxString": "null",
+        "$formMaxNumber": 10,
+        "$formRequired": "false",
+        "$formUnsigned": true,
+        "$formDefaultValue": "null",
+        "$formColumnConstraints": [
+          {
+            "columnKey": "PRI",
+            "boundConstraint": "PRIMARY"
+          }
+        ]
+      },
+      "id_community": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "boundConstraints": [
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "UNIQUE_permission_name_community"
+          },
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "FK_permission_community",
+            "referencedTable": "community",
+            "referencedColumn": "id"
+          }
+        ],
+        "hasUniqueRule": true,
+        "unsigned": 1,
+        "extra": "",
+        "order": 2,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0,
+        "isForeignKey": true,
+        "$type": "Sequelize.INTEGER(10)",
+        "$field": "\"id_community\"",
+        "$nullable": "false",
+        "$default": null,
+        "$unsigned": true,
+        "$maxDigits": 10,
+        "$typeCode": "\"Sequelize.INTEGER(10)\"",
+        "$fullType": "\"int(10) unsigned\"",
+        "$typeLabel": "\"referenced-table\"",
+        "$formType": "referenced-table",
+        "$formLabel": "Id community",
+        "$formDescription": "Unit of \"referenced-table\" describing the \"id community\" field of an instance of \"permission\".",
+        "$formTable": "permission",
+        "$formColumn": "id_community",
+        "$formMaxString": "null",
+        "$formMaxNumber": 10,
+        "$formRequired": "false",
+        "$formUnsigned": true,
+        "$formDefaultValue": "null",
+        "$formColumnConstraints": [
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "UNIQUE_permission_name_community"
+          },
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "FK_permission_community",
+            "referencedTable": "community",
+            "referencedColumn": "id"
+          }
+        ]
+      },
+      "name": {
+        "type": "varchar",
+        "fulltype": "varchar(50)",
+        "nullable": "NO",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "boundConstraints": [
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "UNIQUE_permission_name_community"
+          }
+        ],
+        "hasUniqueRule": true,
+        "unsigned": 0,
+        "extra": "",
+        "order": 3,
+        "charset": "utf8mb4",
+        "collation": "utf8mb4_unicode_ci",
+        "maxLength": 50,
+        "maxBytes": 200,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.STRING(50)",
+        "$field": "\"name\"",
+        "$nullable": "false",
+        "$default": null,
+        "$maxCharacters": 50,
+        "$typeCode": "\"Sequelize.STRING(50)\"",
+        "$fullType": "\"varchar(50)\"",
+        "$typeLabel": "\"string\"",
+        "$formType": "string",
+        "$formLabel": "Name",
+        "$formDescription": "Unit of \"string\" describing the \"name\" field of an instance of \"permission\".",
+        "$formTable": "permission",
+        "$formColumn": "name",
+        "$formMaxString": 50,
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null",
+        "$formColumnConstraints": [
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "UNIQUE_permission_name_community"
+          }
+        ]
+      },
+      "created_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED",
+        "order": 4,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.DATE",
+        "$field": "\"created_at\"",
+        "$nullable": "false",
+        "$default": "CURRENT_TIMESTAMP",
+        "$typeCode": "\"Sequelize.DATE\"",
+        "$fullType": "\"timestamp\"",
+        "$typeLabel": "\"datetime\"",
+        "$formType": "datetime",
+        "$formLabel": "Created at",
+        "$formDescription": "Unit of \"datetime\" describing the \"created at\" field of an instance of \"permission\".",
+        "$formTable": "permission",
+        "$formColumn": "created_at",
+        "$formMaxString": "null",
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "updated_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
+        "order": 5,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.DATE",
+        "$field": "\"updated_at\"",
+        "$nullable": "false",
+        "$default": "CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
+        "$typeCode": "\"Sequelize.DATE\"",
+        "$fullType": "\"timestamp\"",
+        "$typeLabel": "\"datetime\"",
+        "$formType": "datetime",
+        "$formLabel": "Updated at",
+        "$formDescription": "Unit of \"datetime\" describing the \"updated at\" field of an instance of \"permission\".",
+        "$formTable": "permission",
+        "$formColumn": "updated_at",
+        "$formMaxString": "null",
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      }
+    },
+    "permission_per_role": {
+      "id": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "boundConstraints": [
+          {
+            "columnKey": "PRI",
+            "boundConstraint": "PRIMARY"
+          }
+        ],
+        "isPrimaryKey": true,
+        "unsigned": 1,
+        "extra": "auto_increment",
+        "order": 1,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0,
+        "$type": "Sequelize.INTEGER(10)",
+        "$field": "\"id\"",
+        "$nullable": "false",
+        "$default": null,
+        "$unsigned": true,
+        "$maxDigits": 10,
+        "$typeCode": "\"Sequelize.INTEGER(10)\"",
+        "$fullType": "\"int(10) unsigned\"",
+        "$typeLabel": "\"integer\"",
+        "$formType": "integer",
+        "$formLabel": "Id",
+        "$formDescription": "Unit of \"integer\" describing the \"id\" field of an instance of \"permission_per_role\".",
+        "$formTable": "permission_per_role",
+        "$formColumn": "id",
+        "$formMaxString": "null",
+        "$formMaxNumber": 10,
+        "$formRequired": "false",
+        "$formUnsigned": true,
+        "$formDefaultValue": "null",
+        "$formColumnConstraints": [
+          {
+            "columnKey": "PRI",
+            "boundConstraint": "PRIMARY"
+          }
+        ]
+      },
+      "id_permission": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "boundConstraints": [
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "UNIQUE_permission_per_role"
+          },
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "FK_permission_per_role_permission",
+            "referencedTable": "permission",
+            "referencedColumn": "id"
+          }
+        ],
+        "hasUniqueRule": true,
+        "unsigned": 1,
+        "extra": "",
+        "order": 2,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0,
+        "isForeignKey": true,
+        "$type": "Sequelize.INTEGER(10)",
+        "$field": "\"id_permission\"",
+        "$nullable": "false",
+        "$default": null,
+        "$unsigned": true,
+        "$maxDigits": 10,
+        "$typeCode": "\"Sequelize.INTEGER(10)\"",
+        "$fullType": "\"int(10) unsigned\"",
+        "$typeLabel": "\"referenced-table\"",
+        "$formType": "referenced-table",
+        "$formLabel": "Id permission",
+        "$formDescription": "Unit of \"referenced-table\" describing the \"id permission\" field of an instance of \"permission_per_role\".",
+        "$formTable": "permission_per_role",
+        "$formColumn": "id_permission",
+        "$formMaxString": "null",
+        "$formMaxNumber": 10,
+        "$formRequired": "false",
+        "$formUnsigned": true,
+        "$formDefaultValue": "null",
+        "$formColumnConstraints": [
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "UNIQUE_permission_per_role"
+          },
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "FK_permission_per_role_permission",
+            "referencedTable": "permission",
+            "referencedColumn": "id"
+          }
+        ]
+      },
+      "id_role": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "boundConstraints": [
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "UNIQUE_permission_per_role"
+          },
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "FK_permission_per_role_role",
+            "referencedTable": "role",
+            "referencedColumn": "id"
+          }
+        ],
+        "hasUniqueRule": true,
+        "unsigned": 1,
+        "extra": "",
+        "order": 3,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0,
+        "isForeignKey": true,
+        "$type": "Sequelize.INTEGER(10)",
+        "$field": "\"id_role\"",
+        "$nullable": "false",
+        "$default": null,
+        "$unsigned": true,
+        "$maxDigits": 10,
+        "$typeCode": "\"Sequelize.INTEGER(10)\"",
+        "$fullType": "\"int(10) unsigned\"",
+        "$typeLabel": "\"referenced-table\"",
+        "$formType": "referenced-table",
+        "$formLabel": "Id role",
+        "$formDescription": "Unit of \"referenced-table\" describing the \"id role\" field of an instance of \"permission_per_role\".",
+        "$formTable": "permission_per_role",
+        "$formColumn": "id_role",
+        "$formMaxString": "null",
+        "$formMaxNumber": 10,
+        "$formRequired": "false",
+        "$formUnsigned": true,
+        "$formDefaultValue": "null",
+        "$formColumnConstraints": [
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "UNIQUE_permission_per_role"
+          },
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "FK_permission_per_role_role",
+            "referencedTable": "role",
+            "referencedColumn": "id"
+          }
+        ]
+      },
+      "created_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED",
+        "order": 4,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.DATE",
+        "$field": "\"created_at\"",
+        "$nullable": "false",
+        "$default": "CURRENT_TIMESTAMP",
+        "$typeCode": "\"Sequelize.DATE\"",
+        "$fullType": "\"timestamp\"",
+        "$typeLabel": "\"datetime\"",
+        "$formType": "datetime",
+        "$formLabel": "Created at",
+        "$formDescription": "Unit of \"datetime\" describing the \"created at\" field of an instance of \"permission_per_role\".",
+        "$formTable": "permission_per_role",
+        "$formColumn": "created_at",
+        "$formMaxString": "null",
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "updated_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
+        "order": 5,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.DATE",
+        "$field": "\"updated_at\"",
+        "$nullable": "false",
+        "$default": "CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
+        "$typeCode": "\"Sequelize.DATE\"",
+        "$fullType": "\"timestamp\"",
+        "$typeLabel": "\"datetime\"",
+        "$formType": "datetime",
+        "$formLabel": "Updated at",
+        "$formDescription": "Unit of \"datetime\" describing the \"updated at\" field of an instance of \"permission_per_role\".",
+        "$formTable": "permission_per_role",
+        "$formColumn": "updated_at",
+        "$formMaxString": "null",
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      }
+    },
+    "role": {
+      "id": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "boundConstraints": [
+          {
+            "columnKey": "PRI",
+            "boundConstraint": "PRIMARY"
+          }
+        ],
+        "isPrimaryKey": true,
+        "unsigned": 1,
+        "extra": "auto_increment",
+        "order": 1,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0,
+        "$type": "Sequelize.INTEGER(10)",
+        "$field": "\"id\"",
+        "$nullable": "false",
+        "$default": null,
+        "$unsigned": true,
+        "$maxDigits": 10,
+        "$typeCode": "\"Sequelize.INTEGER(10)\"",
+        "$fullType": "\"int(10) unsigned\"",
+        "$typeLabel": "\"integer\"",
+        "$formType": "integer",
+        "$formLabel": "Id",
+        "$formDescription": "Unit of \"integer\" describing the \"id\" field of an instance of \"role\".",
+        "$formTable": "role",
+        "$formColumn": "id",
+        "$formMaxString": "null",
+        "$formMaxNumber": 10,
+        "$formRequired": "false",
+        "$formUnsigned": true,
+        "$formDefaultValue": "null",
+        "$formColumnConstraints": [
+          {
+            "columnKey": "PRI",
+            "boundConstraint": "PRIMARY"
+          }
+        ]
+      },
+      "id_community": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "boundConstraints": [
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "UNIQUE_role_name_community"
+          },
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "FK_role_community",
+            "referencedTable": "community",
+            "referencedColumn": "id"
+          }
+        ],
+        "hasUniqueRule": true,
+        "unsigned": 1,
+        "extra": "",
+        "order": 2,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0,
+        "isForeignKey": true,
+        "$type": "Sequelize.INTEGER(10)",
+        "$field": "\"id_community\"",
+        "$nullable": "false",
+        "$default": null,
+        "$unsigned": true,
+        "$maxDigits": 10,
+        "$typeCode": "\"Sequelize.INTEGER(10)\"",
+        "$fullType": "\"int(10) unsigned\"",
+        "$typeLabel": "\"referenced-table\"",
+        "$formType": "referenced-table",
+        "$formLabel": "Id community",
+        "$formDescription": "Unit of \"referenced-table\" describing the \"id community\" field of an instance of \"role\".",
+        "$formTable": "role",
+        "$formColumn": "id_community",
+        "$formMaxString": "null",
+        "$formMaxNumber": 10,
+        "$formRequired": "false",
+        "$formUnsigned": true,
+        "$formDefaultValue": "null",
+        "$formColumnConstraints": [
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "UNIQUE_role_name_community"
+          },
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "FK_role_community",
+            "referencedTable": "community",
+            "referencedColumn": "id"
+          }
+        ]
+      },
+      "name": {
+        "type": "varchar",
+        "fulltype": "varchar(50)",
+        "nullable": "NO",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "boundConstraints": [
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "UNIQUE_role_name_community"
+          }
+        ],
+        "hasUniqueRule": true,
+        "unsigned": 0,
+        "extra": "",
+        "order": 3,
+        "charset": "utf8mb4",
+        "collation": "utf8mb4_unicode_ci",
+        "maxLength": 50,
+        "maxBytes": 200,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.STRING(50)",
+        "$field": "\"name\"",
+        "$nullable": "false",
+        "$default": null,
+        "$maxCharacters": 50,
+        "$typeCode": "\"Sequelize.STRING(50)\"",
+        "$fullType": "\"varchar(50)\"",
+        "$typeLabel": "\"string\"",
+        "$formType": "string",
+        "$formLabel": "Name",
+        "$formDescription": "Unit of \"string\" describing the \"name\" field of an instance of \"role\".",
+        "$formTable": "role",
+        "$formColumn": "name",
+        "$formMaxString": 50,
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null",
+        "$formColumnConstraints": [
+          {
+            "columnKey": "MUL",
+            "boundConstraint": "UNIQUE_role_name_community"
+          }
+        ]
+      },
+      "created_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED",
+        "order": 4,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.DATE",
+        "$field": "\"created_at\"",
+        "$nullable": "false",
+        "$default": "CURRENT_TIMESTAMP",
+        "$typeCode": "\"Sequelize.DATE\"",
+        "$fullType": "\"timestamp\"",
+        "$typeLabel": "\"datetime\"",
+        "$formType": "datetime",
+        "$formLabel": "Created at",
+        "$formDescription": "Unit of \"datetime\" describing the \"created at\" field of an instance of \"role\".",
+        "$formTable": "role",
+        "$formColumn": "created_at",
+        "$formMaxString": "null",
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "updated_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
+        "order": 5,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.DATE",
+        "$field": "\"updated_at\"",
+        "$nullable": "false",
+        "$default": "CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
+        "$typeCode": "\"Sequelize.DATE\"",
+        "$fullType": "\"timestamp\"",
+        "$typeLabel": "\"datetime\"",
+        "$formType": "datetime",
+        "$formLabel": "Updated at",
+        "$formDescription": "Unit of \"datetime\" describing the \"updated at\" field of an instance of \"role\".",
+        "$formTable": "role",
+        "$formColumn": "updated_at",
+        "$formMaxString": "null",
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      }
+    },
+    "session": {
+      "id": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "boundConstraints": [
+          {
+            "columnKey": "PRI",
+            "boundConstraint": "PRIMARY"
+          }
+        ],
+        "isPrimaryKey": true,
+        "unsigned": 1,
+        "extra": "auto_increment",
+        "order": 1,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0,
+        "$type": "Sequelize.INTEGER(10)",
+        "$field": "\"id\"",
+        "$nullable": "false",
+        "$default": null,
+        "$unsigned": true,
+        "$maxDigits": 10,
+        "$typeCode": "\"Sequelize.INTEGER(10)\"",
+        "$fullType": "\"int(10) unsigned\"",
+        "$typeLabel": "\"integer\"",
+        "$formType": "integer",
+        "$formLabel": "Id",
+        "$formDescription": "Unit of \"integer\" describing the \"id\" field of an instance of \"session\".",
+        "$formTable": "session",
+        "$formColumn": "id",
+        "$formMaxString": "null",
+        "$formMaxNumber": 10,
+        "$formRequired": "false",
+        "$formUnsigned": true,
+        "$formDefaultValue": "null",
+        "$formColumnConstraints": [
+          {
+            "columnKey": "PRI",
+            "boundConstraint": "PRIMARY"
+          }
+        ]
+      },
+      "id_user": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "boundConstraints": [
+          {
+            "columnKey": "UNI",
+            "boundConstraint": "FK__user",
+            "referencedTable": "user",
+            "referencedColumn": "id"
+          },
+          {
+            "columnKey": "UNI",
+            "boundConstraint": "UNIQUE_user_per_session"
+          }
+        ],
+        "isForeignKey": true,
+        "unsigned": 1,
+        "extra": "",
+        "order": 2,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0,
+        "hasUniqueRule": true,
+        "$type": "Sequelize.INTEGER(10)",
+        "$field": "\"id_user\"",
+        "$nullable": "false",
+        "$default": null,
+        "$unsigned": true,
+        "$maxDigits": 10,
+        "$typeCode": "\"Sequelize.INTEGER(10)\"",
+        "$fullType": "\"int(10) unsigned\"",
+        "$typeLabel": "\"referenced-table\"",
+        "$formType": "referenced-table",
+        "$formLabel": "Id user",
+        "$formDescription": "Unit of \"referenced-table\" describing the \"id user\" field of an instance of \"session\".",
+        "$formTable": "session",
+        "$formColumn": "id_user",
+        "$formMaxString": "null",
+        "$formMaxNumber": 10,
+        "$formRequired": "false",
+        "$formUnsigned": true,
+        "$formDefaultValue": "null",
+        "$formColumnConstraints": [
+          {
+            "columnKey": "UNI",
+            "boundConstraint": "FK__user",
+            "referencedTable": "user",
+            "referencedColumn": "id"
+          },
+          {
+            "columnKey": "UNI",
+            "boundConstraint": "UNIQUE_user_per_session"
+          }
+        ]
+      },
+      "secret_token": {
+        "type": "varchar",
+        "fulltype": "varchar(255)",
+        "nullable": "NO",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 3,
+        "charset": "utf8",
+        "collation": "utf8_unicode_ci",
+        "maxLength": 255,
+        "maxBytes": 765,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.STRING(255)",
+        "$field": "\"secret_token\"",
+        "$nullable": "false",
+        "$default": null,
+        "$maxCharacters": 255,
+        "$typeCode": "\"Sequelize.STRING(255)\"",
+        "$fullType": "\"varchar(255)\"",
+        "$typeLabel": "\"string\"",
+        "$formType": "string",
+        "$formLabel": "Secret token",
+        "$formDescription": "Unit of \"string\" describing the \"secret token\" field of an instance of \"session\".",
+        "$formTable": "session",
+        "$formColumn": "secret_token",
+        "$formMaxString": 255,
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "recovery_token": {
+        "type": "varchar",
+        "fulltype": "varchar(255)",
+        "nullable": "NO",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 4,
+        "charset": "utf8",
+        "collation": "utf8_unicode_ci",
+        "maxLength": 255,
+        "maxBytes": 765,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.STRING(255)",
+        "$field": "\"recovery_token\"",
+        "$nullable": "false",
+        "$default": null,
+        "$maxCharacters": 255,
+        "$typeCode": "\"Sequelize.STRING(255)\"",
+        "$fullType": "\"varchar(255)\"",
+        "$typeLabel": "\"string\"",
+        "$formType": "string",
+        "$formLabel": "Recovery token",
+        "$formDescription": "Unit of \"string\" describing the \"recovery token\" field of an instance of \"session\".",
+        "$formTable": "session",
+        "$formColumn": "recovery_token",
+        "$formMaxString": 255,
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "created_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED",
+        "order": 5,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.DATE",
+        "$field": "\"created_at\"",
+        "$nullable": "false",
+        "$default": "CURRENT_TIMESTAMP",
+        "$typeCode": "\"Sequelize.DATE\"",
+        "$fullType": "\"timestamp\"",
+        "$typeLabel": "\"datetime\"",
+        "$formType": "datetime",
+        "$formLabel": "Created at",
+        "$formDescription": "Unit of \"datetime\" describing the \"created at\" field of an instance of \"session\".",
+        "$formTable": "session",
+        "$formColumn": "created_at",
+        "$formMaxString": "null",
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "updated_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
+        "order": 6,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.DATE",
+        "$field": "\"updated_at\"",
+        "$nullable": "false",
+        "$default": "CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
+        "$typeCode": "\"Sequelize.DATE\"",
+        "$fullType": "\"timestamp\"",
+        "$typeLabel": "\"datetime\"",
+        "$formType": "datetime",
+        "$formLabel": "Updated at",
+        "$formDescription": "Unit of \"datetime\" describing the \"updated at\" field of an instance of \"session\".",
+        "$formTable": "session",
+        "$formColumn": "updated_at",
+        "$formMaxString": "null",
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      }
+    },
+    "user": {
+      "id": {
+        "type": "int",
+        "fulltype": "int(10) unsigned",
+        "nullable": "NO",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "boundConstraints": [
+          {
+            "columnKey": "PRI",
+            "boundConstraint": "PRIMARY"
+          }
+        ],
+        "isPrimaryKey": true,
+        "unsigned": 1,
+        "extra": "auto_increment",
+        "order": 1,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": 10,
+        "numericScale": 0,
+        "$type": "Sequelize.INTEGER(10)",
+        "$field": "\"id\"",
+        "$nullable": "false",
+        "$default": null,
+        "$unsigned": true,
+        "$maxDigits": 10,
+        "$typeCode": "\"Sequelize.INTEGER(10)\"",
+        "$fullType": "\"int(10) unsigned\"",
+        "$typeLabel": "\"integer\"",
+        "$formType": "integer",
+        "$formLabel": "Id",
+        "$formDescription": "Unit of \"integer\" describing the \"id\" field of an instance of \"user\".",
+        "$formTable": "user",
+        "$formColumn": "id",
+        "$formMaxString": "null",
+        "$formMaxNumber": 10,
+        "$formRequired": "false",
+        "$formUnsigned": true,
+        "$formDefaultValue": "null",
+        "$formColumnConstraints": [
+          {
+            "columnKey": "PRI",
+            "boundConstraint": "PRIMARY"
+          }
+        ]
+      },
+      "name": {
+        "type": "varchar",
+        "fulltype": "varchar(50)",
+        "nullable": "NO",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "boundConstraints": [
+          {
+            "columnKey": "UNI",
+            "boundConstraint": "UNIQUE_user_name"
+          }
+        ],
+        "hasUniqueRule": true,
+        "unsigned": 0,
+        "extra": "",
+        "order": 2,
+        "charset": "utf8mb4",
+        "collation": "utf8mb4_unicode_ci",
+        "maxLength": 50,
+        "maxBytes": 200,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.STRING(50)",
+        "$field": "\"name\"",
+        "$nullable": "false",
+        "$default": null,
+        "$maxCharacters": 50,
+        "$typeCode": "\"Sequelize.STRING(50)\"",
+        "$fullType": "\"varchar(50)\"",
+        "$typeLabel": "\"string\"",
+        "$formType": "string",
+        "$formLabel": "Name",
+        "$formDescription": "Unit of \"string\" describing the \"name\" field of an instance of \"user\".",
+        "$formTable": "user",
+        "$formColumn": "name",
+        "$formMaxString": 50,
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null",
+        "$formColumnConstraints": [
+          {
+            "columnKey": "UNI",
+            "boundConstraint": "UNIQUE_user_name"
+          }
+        ]
+      },
+      "password": {
+        "type": "varchar",
+        "fulltype": "varchar(255)",
+        "nullable": "NO",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "",
+        "order": 3,
+        "charset": "utf8mb4",
+        "collation": "utf8mb4_unicode_ci",
+        "maxLength": 255,
+        "maxBytes": 1020,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.STRING(255)",
+        "$field": "\"password\"",
+        "$nullable": "false",
+        "$default": null,
+        "$maxCharacters": 255,
+        "$typeCode": "\"Sequelize.STRING(255)\"",
+        "$fullType": "\"varchar(255)\"",
+        "$typeLabel": "\"string\"",
+        "$formType": "string",
+        "$formLabel": "Password",
+        "$formDescription": "Unit of \"string\" describing the \"password\" field of an instance of \"user\".",
+        "$formTable": "user",
+        "$formColumn": "password",
+        "$formMaxString": 255,
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "email": {
+        "type": "varchar",
+        "fulltype": "varchar(100)",
+        "nullable": "NO",
+        "default": null,
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "boundConstraints": [
+          {
+            "columnKey": "UNI",
+            "boundConstraint": "UNIQUE_user_mail"
+          }
+        ],
+        "hasUniqueRule": true,
+        "unsigned": 0,
+        "extra": "",
+        "order": 4,
+        "charset": "utf8mb4",
+        "collation": "utf8mb4_unicode_ci",
+        "maxLength": 100,
+        "maxBytes": 400,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.STRING(100)",
+        "$field": "\"email\"",
+        "$nullable": "false",
+        "$default": null,
+        "$maxCharacters": 100,
+        "$typeCode": "\"Sequelize.STRING(100)\"",
+        "$fullType": "\"varchar(100)\"",
+        "$typeLabel": "\"string\"",
+        "$formType": "string",
+        "$formLabel": "Email",
+        "$formDescription": "Unit of \"string\" describing the \"email\" field of an instance of \"user\".",
+        "$formTable": "user",
+        "$formColumn": "email",
+        "$formMaxString": 100,
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null",
+        "$formColumnConstraints": [
+          {
+            "columnKey": "UNI",
+            "boundConstraint": "UNIQUE_user_mail"
+          }
+        ]
+      },
+      "created_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED",
+        "order": 5,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.DATE",
+        "$field": "\"created_at\"",
+        "$nullable": "false",
+        "$default": "CURRENT_TIMESTAMP",
+        "$typeCode": "\"Sequelize.DATE\"",
+        "$fullType": "\"timestamp\"",
+        "$typeLabel": "\"datetime\"",
+        "$formType": "datetime",
+        "$formLabel": "Created at",
+        "$formDescription": "Unit of \"datetime\" describing the \"created at\" field of an instance of \"user\".",
+        "$formTable": "user",
+        "$formColumn": "created_at",
+        "$formMaxString": "null",
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      },
+      "updated_at": {
+        "type": "timestamp",
+        "fulltype": "timestamp",
+        "nullable": "NO",
+        "default": "CURRENT_TIMESTAMP",
+        "__form_type": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(label)}"
+        },
+        "__form_label": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(StringUtils.humanize(columnName))}"
+        },
+        "__form_description": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify('Unit of \"' + label + '\" describing the \"' + StringUtils.humanize(columnName).toLowerCase() + '\" field of an instance of \"' + table + '\".')}"
+        },
+        "__form_table": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(table)}"
+        },
+        "__form_column": {
+          "$type": "es6template",
+          "$value": "${JSON.stringify(columnName)}"
+        },
+        "__form_max_string": {
+          "$type": "es6template",
+          "$value": "${column.maxLength ? JSON.stringify(column.maxLength) : 'null'}"
+        },
+        "__form_max_number": {
+          "$type": "es6template",
+          "$value": "${column.numericPrecision ? JSON.stringify(column.numericPrecision) : 'null'}"
+        },
+        "__form_required": {
+          "$type": "es6template",
+          "$value": "${!column.nullable}"
+        },
+        "__form_unsigned": {
+          "$type": "es6template",
+          "$value": "${!!column.unsigned}"
+        },
+        "__form_default_value": {
+          "$type": "es6template",
+          "$value": "${(!column.$default) || column.$default.toLowerCase() === 'null'? column.$default : 'null'}"
+        },
+        "unsigned": 0,
+        "extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
+        "order": 6,
+        "charset": null,
+        "collation": null,
+        "maxLength": null,
+        "maxBytes": null,
+        "numericPrecision": null,
+        "numericScale": null,
+        "$type": "Sequelize.DATE",
+        "$field": "\"updated_at\"",
+        "$nullable": "false",
+        "$default": "CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
+        "$typeCode": "\"Sequelize.DATE\"",
+        "$fullType": "\"timestamp\"",
+        "$typeLabel": "\"datetime\"",
+        "$formType": "datetime",
+        "$formLabel": "Updated at",
+        "$formDescription": "Unit of \"datetime\" describing the \"updated at\" field of an instance of \"user\".",
+        "$formTable": "user",
+        "$formColumn": "updated_at",
+        "$formMaxString": "null",
+        "$formMaxNumber": "null",
+        "$formRequired": "false",
+        "$formUnsigned": "false",
+        "$formDefaultValue": "null"
+      }
+    }
+  }
+}

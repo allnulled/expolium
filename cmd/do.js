@@ -1,20 +1,26 @@
+const path = require("path");
+const fs = require("fs");
+const argv = require("yargs").argv;
+const inquirer = require("inquirer");
+const config = require(__dirname + "/do/config.json");
+
+if (config.directCommands.indexOf(argv._[0]) !== -1) {
+	return require(path.resolve(__dirname, argv._[0].replace(/[ \:]/g, "-").replace(/\.js$/g, " ") + ".js"));
+}
+
 require(__dirname + "/../src/load.js").then(project => {
 
 	global.PROJECT = project;
-
-	const fs = require("fs");
-	const path = require("path");
-	const argv = require("yargs").argv;
-	const inquirer = require("inquirer");
-	const files = fs.readdirSync(__dirname);
-	let memo = {
-		action: undefined
-	};
 
 	if (argv._[0]) {
 		return require(path.resolve(__dirname, argv._[0].replace(/[ \:]/g, "-").replace(/\.js$/g, " ") + ".js"));
 	}
 
+	let memo = {
+		action: undefined
+	};
+
+	const files = fs.readdirSync(__dirname);
 	const execution = async () => {
 		try {
 			const result = await inquirer.prompt({

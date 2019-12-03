@@ -1,0 +1,16 @@
+<script type="text/javascript">
+	///////////////////////////////////////////////////////
+	// ID:1. Events to view all and overview
+	///////////////////////////////////////////////////////
+	(function(currentScript) {
+		const me = jQuery(document.currentScript);
+		window.addEventListener("load", () => {
+			const jComponent = me.closest("[data-rest-component]");
+			jComponent.on("click", "[data-rest-endpoint]", function() {
+				window.location.href = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/g, "").replace(/\/[^\/]*$/g, "") + jQuery(this).attr("data-rest-endpoint") + "/@/view";
+			});
+		});
+	})(document.currentScript);
+	///////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////
+</script>

@@ -1,10 +1,11 @@
-require(__dirname + "/env.js");
-const path = require("path");
+const env = require(__dirname + "/env.js");
+const Runner = require(__dirname + "/" + process.env.PROJECT_NAME + "/runner/Runner.js");
+const runner = new Runner();
 
-const Project = require(path.resolve(process.env.PROJECT_ROOT, process.env.PROJECT_PATH));
-const project = new Project();
-
-module.exports = project.start().then(p => {
-	console.log("(*) Project started successfully!");
-	return p;
+module.exports = runner.start().then(() => {
+	console.log("Project <" + process.env.PROJECT_NAME + "> was started.");
+	return runner;
+}).catch(error => {
+	console.log("Error starting project:", error);
+	throw error;
 });

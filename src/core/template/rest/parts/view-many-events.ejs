@@ -1,0 +1,123 @@
+			
+			<script type="text/javascript">
+				const tag = document.currentScript;
+				window.addEventListener("load", () => {
+					//////////////////////////////////////////////////////////////
+					const jComponent = jQuery(tag.parentElement);
+					jComponent.on("click", ".clickable-body > .clickable-row", function() {
+						const itemId = jQuery(this).attr("data-row-id");
+						const { origin, pathname, search, hash } = window.location;
+						const destiny = origin + pathname + "/" + itemId;
+						window.location.href = destiny;
+					});
+					//////////////////////////////////////////////////////////////
+					const urlParams = new URLSearchParams(window.location.search);
+					const search = urlParams.get("search") || "";
+					const jSearchInput = jComponent.find("[data-rest-search-input]");
+					if(search) {
+						jSearchInput.val(search);
+					}
+					let page = urlParams.get("page") || "1";
+					let pageInt;
+					try {
+						pageInt = parseInt(page);
+					} catch(error) {
+						pageInt = 1;
+						page = "1";
+					}
+					jComponent.find("[data-rest-form] [name=page]").val(page);
+					const jNavPagination = jComponent.find("[data-rest-pagination]");
+					const jPagination = jNavPagination.find(".pagination");
+					jPagination.html("");
+					const items = [{
+						text: page,
+						number: parseInt(page)
+					}];
+					if(pageInt > "1") {
+						const r = pageInt - 1;
+						items.unshift({text: r, number: r});
+					}
+					const r2 = pageInt + 1;
+					items.push({text: r2, number: r2});
+					if(items[0].number !== 1) {
+						items.unshift({text: "1...", number: 1});
+					}
+					items.forEach(item => {
+						const jItem = jQuery(`<li class="page-item"><a class="page-link" data-rest-pagination-link="${item.number}">${item.text}</a></li>`);
+						if(page === item.text) {
+							jItem.addClass("active");
+						}
+						jPagination.append(jItem);
+					});
+					jComponent.on("click", "[data-rest-pagination-link]", function() {
+						const jPaginationButton = jQuery(this);
+						const page = jPaginationButton.attr("data-rest-pagination-link");
+						const urlParams = new URLSearchParams(window.location.search);
+						urlParams.set("page", page);
+						const { origin, pathname, search, hash } = window.location;
+						window.location = origin + pathname + "?" + urlParams.toString() + hash;
+					});
+					//////////////////////////////////////////////////////////////
+					const jSearchForm = jComponent.find("[data-rest-form]");
+					const onSubmitForm = function(event) {
+						const serializeUrl = window.serializeUrl;
+						console.log("Form submit!");
+						event.preventDefault();
+						const jFormSearchParams = jComponent.find("[data-rest-search-form],[data-rest-search-parameters-form]");
+						const parameters = jFormSearchParams.find(":input").serializeObject();
+						Object.keys(parameters).forEach(p => {
+							if(typeof parameters[p] === "undefined") {
+								delete parameters[p];
+							}
+						});
+						if(parameters.where) {
+							parameters.where = JSON.stringify(parameters.where);
+						} else delete parameters.where;
+						if(parameters.sort) {
+							parameters.sort = JSON.stringify(parameters.sort);
+						} else delete parameters.sort
+						if(parameters.group) {
+							parameters.group = JSON.stringify(parameters.group);
+						} else delete parameters.group
+						const serializedUrl = serializeUrl(parameters);
+						console.log(parameters, serializeUrl(parameters));
+						const newpath = window.location.origin + window.location.pathname + "?" + serializeUrl(parameters);
+						console.log(newpath);
+						window.location.href = newpath;
+						return false;
+					};
+					jComponent.on("click", "[data-rest-search-btn]", onSubmitForm);
+					jSearchForm.on("submit", onSubmitForm);
+					
+				})
+				///////////////////////////////////////////////////////
+				// ID:1. Events to view all and overview
+				///////////////////////////////////////////////////////
+				window.addEventListener("load", () => {
+					const jComponent = jQuery(tag.parentElement);
+					jComponent.on("click", "[data-rest-btn-overview]", () => {
+						window.location.href = window.location.origin + (window.location.pathname
+							.replace(/\/[^\/]*$/g, "")
+							.replace(/\/[^\/]*$/g, "")
+							.replace(/\/[^\/]*$/g, "") + "/@/view")
+					});
+					jComponent.on("click", "[data-rest-btn-all]", () => {
+						window.location.href = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/g, "");
+					});
+					jQuery("ul.sortable-list").sortable({
+						handle: ".sortable-handler",
+					});
+					/*
+					jQuery("ul.sortable-list").each(function() {
+						new Sortable(this, {
+							animation: 150,  // ms, animation speed moving items when sorting, `0` — without animation
+							easing: "cubic-bezier(1, 0, 0, 1)", // Easing for animation. Defaults to null. See https://easings.net/ for examples.
+							handle: ".sortable-handler",
+							invertSwap: true
+						});
+					});
+					//*/
+				});
+				///////////////////////////////////////////////////////
+				///////////////////////////////////////////////////////
+			</script>

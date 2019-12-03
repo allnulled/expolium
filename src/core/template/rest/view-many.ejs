@@ -1,0 +1,131 @@
+<%
+
+const dd = (msg) => {
+	return JSON.stringify(JSON.parse(StringUtils.stringify(msg)), null, 2);
+}
+const modelName = controller.constructor.model.definition.table.toLowerCase();
+const cols = controller.constructor.model.definition.getPublicColumns();
+const humanModel = StringUtils.humanize(modelName);
+const humanModelLower = humanModel.toLowerCase();
+
+_.output.metadata.tags = Object.assign(_.output.metadata.tags, {
+	ejs: true,
+	templateManager: true,
+	jquerySerializeObject: true,
+	jqueryUi: true,
+	jqueryUiTouchPunch: true,
+	restClient: true,
+	axios: true,
+	hammer: true,
+	serializeUrl: true,
+	rainbowBackground: true
+});
+const isViewMany = true;
+
+%>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+		<meta charset="utf-8">
+		<title>All <%-humanModelLower%></title>
+		<%-PageDependencyUtils.getSortedMetadataTags(_.output.metadata.tags)%>
+	</head>
+	<body>
+		<canvas id="canvas" style="position:fixed;top:0;bottom:0;left:0;right:0;"></canvas>
+		<div data-rest-component data-rest-view-many-component>
+			<div class="container">
+				<div class="row">
+				<!--<pre style="background: black;color:#F00;padding:5px;"><%-dd(_.storage)%></pre>-->
+					<h4 class="col-12">All <%-humanModelLower%></h4>
+				</div>
+				<div class="row">
+					<nav class="col-12" aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item btn-sm"><a data-rest-btn-overview href="#">Overview</a></li>
+							<li class="breadcrumb-item btn-sm active" aria-current="page">All <%-humanModelLower%></li>
+						</ol>
+					</nav>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<nav aria-label="..." class="nav-left" data-rest-pagination>
+							<ul class="pagination pagination-sm" style="margin-bottom: 0rem">
+								<li class="page-item disabled">
+									<a class="page-link" href="#" tabindex="-1">Previous</a>
+								</li>
+								<li class="page-item active"><a class="page-link" href="#">1 <span class="sr-only">(current)</span></a></li>
+								<li class="page-item">
+									<a class="page-link" href="#">2</a>
+								</li>
+								<li class="page-item"><a class="page-link" href="#">3</a></li>
+								<li class="page-item">
+									<a class="page-link" href="#">Next</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<%- include( "parts/rest-search.ejs", {isViewMany, cols, selectorTargetSettings: "#search-settings-view" }) %>
+					</div>
+				</div>
+				<div class="row collapse" id="search-settings-view">
+					<div class="col-12">
+						<div class="card simple">
+							<%- include( "parts/rest-search-parameters.ejs", {isViewMany, cols}) %>
+						</div>
+					</div>
+				</div>
+						
+				<div class="row">
+					<div class="col-12">
+						<div class="table-responsive">
+							<table class="table table-striped table-sm" style="width:100%">
+								<thead>
+									<tr>
+										<%
+											Object.keys(cols).forEach(col => {
+										%>
+										<th style="white-space:nowrap;word-break:keep-all" ><%-StringUtils.humanize(col)%></th>
+										<%
+											});
+										%>
+									</tr>
+								</thead>
+								<tbody class="clickable-body">
+									<%
+										_.storage.queries.viewManyQuery.forEach(row => {
+											%>
+										<tr class="clickable-row" data-row-id="<%-row.id%>">
+											<%
+												Object.keys(row).forEach(column => {
+													%>
+											<td  style="white-space:nowrap;word-break:keep-all" class=""><%-row[column]%></td>
+													<%
+												});
+											%>
+										</tr>
+											<%
+										});
+									%>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
+				<div>
+					<button class="nav-right btn btn-success btn-sm" onclick="window.location.href = window.location.origin + window.location.pathname.replace(/\/view$/g,'/add')">
+						<i class="fas fa-plus"></i>
+					</button>
+				</div>
+
+			</div>
+
+			<% include ./parts/view-many-events.ejs %>
+
+		</div>
+	</body>
+</html>

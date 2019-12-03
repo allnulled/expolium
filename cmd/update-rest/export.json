@@ -1,10 +1,15 @@
 {
-	"BaseController": "core.rest/<%=databaseConnection%>/controller/base/Base<%=Model%>Controller.js",
-	"Controller": "core.rest/<%=databaseConnection%>/controller/<%=Model%>Controller.js",
-	"BaseModel": "core.rest/<%=databaseConnection%>/model/base/Base<%=Model%>.js",
-	"Model": "core.rest/<%=databaseConnection%>/model/<%=Model%>.js",
-	"controllers": "core.rest/<%=databaseConnection%>/controllers.js",
-	"models": "core.rest/<%=databaseConnection%>/models.js",
-	"PostmanCollection": "../doc/project.postman_collection.json",
-	"PostmanCollectionName": "My Custom REST API"
+	"BaseController": "core/controller/rest/<%=databaseConnection%>/base/Base<%=Model%>Controller.js",
+	"Controller": "core/controller/rest/<%=databaseConnection%>/<%=Model%>Controller.js",
+	"BaseModel": "core/model/rest/<%=databaseConnection%>/base/Base<%=Model%>.js",
+	"Model": "core/model/rest/<%=databaseConnection%>/<%=Model%>.js",
+	"controllers": "core/controller/rest/<%=databaseConnection%>/controllers.js",
+	"models": "core/model/rest/<%=databaseConnection%>/models.js",
+	"PostmanCollection": "core/config/rest.<%=databaseConnection%>.postman_collection.json",
+	"PostmanCollectionName": "My Custom REST API",
+	"FormsCollection": "core/config/rest.<%=databaseConnection%>.forms_collection.json",
+	"overrideAll": false,
+	"databaseConnectionId": "db",
+	"restClient": "core/public/static/lib/rest-client.api.js",
+	"RestClientTargetURL": "http://127.0.0.1:8089"
 }

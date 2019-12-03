@@ -1,0 +1,11 @@
+<div class="form-group">
+	<label class="form-label">
+		<i class="far fa-check-square"></i>
+		<span><%- dataType.label || "Some boolean:" %></span>
+		<% if(!noDescription) { %>
+			<div class="description"><%- dataType.description %></div>
+		<% } %>
+	</label>
+	<input type="checkbox" class="form-control-input" id="defaultChecked2" checked>
+	<label class="form-label" for="defaultChecked2"><%- dataType.label || "Some boolean" %> (boolean)</label>
+</div>

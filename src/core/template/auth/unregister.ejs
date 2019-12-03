@@ -1,0 +1,60 @@
+<%
+
+const PageDependencyUtils = require(process.env.PROJECT_ROOT + "/core/helper/PageDependencyUtils.js");
+
+_.output.metadata.tags = Object.assign(_.output.metadata.tags, {
+	ejs: true,
+	bootstrap: true,
+	templateManager: true,
+	jquery: true,
+	jquerySerializeObject: true,
+	jqueryUi: true,
+	jqueryUiTouchPunch: true,
+	restClient: true,
+	axios: true,
+	hammer: true,
+	serializeUrl: true,
+	//spaceBackground: true,
+	restForm: true
+});
+
+%>
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+		<meta charset="utf-8">
+		<title>Unregister</title>
+		<%-PageDependencyUtils.getSortedMetadataTags(_.output.metadata.tags)%>
+	</head>
+	<body>
+		
+		<!-- Space background -->
+		<canvas id="canvas"></canvas>
+
+		<div class="fixed">
+			<div class="centered-table">
+				<div class="centered-cell" style="max-width:260px; top: -20%;margin: 0 auto;">
+					<div>
+						<%- include(process.env.PROJECT_ROOT + "/core/template/auth/parts/logo.ejs") %>
+					</div>
+					<div>
+						<div class="card" style="max-width:250px; margin: 0 auto">
+							<div class="card-body" style="background-color: rgba(0,0,0,.03);">
+								<h4 style="margin:0;padding:0">Unregister</h4>
+							</div>
+							<div class="card-body">
+								<form>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<%- include(process.env.PROJECT_ROOT + "/core/template/auth/parts/styles.ejs") %>
+		
+	</body>
+</html>

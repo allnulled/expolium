@@ -1,13 +1,11 @@
 const express = require("express");
-const path = require("path");
-const BasicController = require(__dirname + "/BasicController.js");
+const BaseController = require(__dirname + "/BaseController.js");
+const ErrorManager = require(process.env.PROJECT_ROOT + "/core/helper/ErrorManager.js");
 
-class StaticController extends BasicController {
+class StaticController extends BaseController {
 
-	mountOnRouter(router) {
-		const slug = path.posix.join(this.path.replace(/\*$/g, ""), "");
-		console.log("Log slug:", slug, this.directory);
-		router.$router.use(slug, express.static(path.resolve(this.directory)));
+	beMountedOnRouter(router) {
+		router.$router.use(this.route, this.middleware || [], express.static(this.file));
 	}
 
 }

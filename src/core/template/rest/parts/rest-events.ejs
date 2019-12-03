@@ -1,0 +1,158 @@
+<script type="text/javascript">
+	///////////////////////////////////////////////////////
+	// ID:1. Events to view all and overview
+	///////////////////////////////////////////////////////
+	(function(currentScript) {
+		const me = jQuery(document.currentScript);
+		window.addEventListener("load", () => {
+			const jComponent = me.closest("[data-rest-component]");
+			const isAddOne = window.location.pathname.endsWith("/add");
+			jComponent.on("click", "[data-rest-btn-overview]", () => {
+				window.location.href = window.location.origin + window.location.pathname
+					.replace(/\/[^\/]*$/g, "")
+					.replace(/\/[^\/]*$/g, "")
+					.replace(/\/[^\/]*$/g, "")
+					.replace(/\/[^\/]*$/g, "") + "/@/view"
+			});
+			jComponent.on("click", "[data-rest-btn-overview]", function() {
+				let result = undefined;
+				if(isAddOne) {
+					result = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/g, "").replace(/\/[^\/]*$/g, "").replace(/\/[^\/]*$/g, "") + "/@/view";
+				} else {
+					result = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/g, "").replace(/\/[^\/]*$/g, "").replace(/\/[^\/]*$/g, "").replace(/\/[^\/]*$/g, "") + "/@/view";
+				}
+				window.location.href = result;
+			});
+			jComponent.on("click", "[data-rest-btn-all]", function() {
+				let result = undefined;
+				if(isAddOne) {
+					result = window.location.href = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/g, "") + "/view";
+				} else {
+					result = window.location.href = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/g, "").replace(/\/[^\/]*$/g, "") + "/view";
+				}
+				window.location.href = result;
+			});
+			jComponent.on("click", "[data-rest-btn-edit]", function() {
+				let result = undefined;
+				if(isAddOne) {
+					result = window.location.href = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/g, "") + "/edit/<%=id%>";
+				} else {
+					result = window.location.href = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/g, "").replace(/\/[^\/]*$/g, "") + "/edit/<%=id%>";
+				}
+				window.location.href = result;
+			});
+			jComponent.on("click", "[data-rest-btn-copy]", function() {
+				let result = undefined;
+				if(isAddOne) {
+					result = window.location.href = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/g, "") + "/add/<%=id%>";
+				} else {
+					result = window.location.href = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/g, "").replace(/\/[^\/]*$/g, "") + "/add/<%=id%>";
+				}
+				window.location.href = result;
+			});
+			jComponent.on("click", "[data-rest-btn-new]", function() {
+				let result = undefined;
+				if(isAddOne) {
+					result = window.location.href = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/g, "") + "/add";
+				} else {
+					result = window.location.href = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/g, "").replace(/\/[^\/]*$/g, "") + "/add";
+				}
+				window.location.href = result;
+			});
+			jComponent.on("click", "[data-rest-btn-view]", function() {
+				let result = undefined;
+				if(isAddOne) {
+					result = window.location.href = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/g, "") + "/view/<%=id%>";
+				} else {
+					result = window.location.href = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/g, "").replace(/\/[^\/]*$/g, "") + "/view/<%=id%>";
+				}
+				window.location.href = result;
+			});
+			jComponent.on("click", "[data-rest-btn-create]", function() {
+				const selector = jQuery(this).attr("data-rest-btn-create");
+				const jForm = jQuery(selector);
+				const restModel = jForm.attr("data-rest-model");
+				const formDataSerialized = jForm.serializeObject();
+				delete formDataSerialized.id;
+				window.restClient[restModel].post(formDataSerialized).then((data) => {
+					const jSuccessModal = jComponent.find("[data-rest-create-success]");
+					jSuccessModal.find("[data-rest-create-success-message]").text(JSON.stringify(data.data, null, 2));
+					jSuccessModal.find("[data-rest-create-success-headers]").text(JSON.stringify(data.headers, null, 2));
+					jSuccessModal.modal({show:true});
+				}).catch(error => {
+					const jErrorModal = jComponent.find("[data-rest-create-error]");
+					const jErrorModalMessage = jErrorModal.find("[data-rest-create-error-message]");
+					try {
+						jErrorModalMessage.text(JSON.stringify(error.response.data, null, 2));
+					} catch(error) {
+						jErrorModalMessage.text(JSON.stringify(error, null, 2));
+					}
+					jErrorModal.modal({show:true});
+				})
+			});
+			jComponent.on("click", "[data-rest-btn-delete]", function() {
+				/*
+				const selector = jQuery(this).attr("data-rest-btn-delete");
+				const jForm = jQuery(selector);
+				const restModel = jForm.attr("data-rest-model");
+				const formDataSerialized = jForm.serializeObject();
+				delete formDataSerialized.id;
+				window.restClient[restModel].post(formDataSerialized).then((data) => {
+					const jSuccessModal = jComponent.find("[data-rest-create-success]");
+					jSuccessModal.find("[data-rest-create-success-message]").text(JSON.stringify(data.data, null, 2));
+					jSuccessModal.find("[data-rest-create-success-headers]").text(JSON.stringify(data.headers, null, 2));
+					jSuccessModal.modal({show:true});
+				}).catch(error => {
+					const jErrorModal = jComponent.find("[data-rest-create-error]");
+					jErrorModal.find("[data-rest-create-error-message]").text(JSON.stringify(error.response.data, null, 2));
+					jErrorModal.modal({show:true});
+				});
+				//*/
+			});
+			jComponent.on("click", "[data-rest-btn-save]", function() {
+				const selector = jQuery(this).attr("data-rest-btn-save");
+				const jForm = jQuery(selector);
+				const restModel = jForm.attr("data-rest-model");
+				const id = window.location.pathname.substr(window.location.pathname.lastIndexOf("/")+1);
+				// @TODO: Remove blob types if empty also
+				const jInputs = jForm.find(":input");
+				const formData = new FormData();
+				jInputs.each((index, htmlInput) => {
+					if(htmlInput.type === "file") {
+						if(htmlInput.files.length) {
+							formData.append(htmlInput.name, htmlInput.files[0]);
+						}
+					} else {
+						if(htmlInput.value) {
+							formData.set(htmlInput.name, htmlInput.value);
+						}
+					}
+				});
+				formData.set("_method", "PUT");
+				window.restClient[restModel].put(id, formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then((data) => {
+					if(data.data.data[0].affectedRows != 1) {
+						jErrorModal.find("[data-rest-edit-error-message]").text(JSON.stringify(data.data, null, 2));
+						jErrorModal.modal({show:true});
+					} else {
+						const jSuccessModal = jComponent.find("[data-rest-edit-success]");
+						jSuccessModal.find("[data-rest-edit-success-message]").text(JSON.stringify(data.data, null, 2));
+						jSuccessModal.find("[data-rest-edit-success-headers]").text(JSON.stringify(data.headers, null, 2));
+						jSuccessModal.modal({show:true});
+					}
+				}).catch(error => {
+					const jErrorModal = jComponent.find("[data-rest-edit-error]");
+					const jErrorModalMessage = jErrorModal.find("[data-rest-edit-error-message]");
+					try {
+						jErrorModalMessage.text(JSON.stringify(error.response.data, null, 2));
+					} catch(error) {
+						jErrorModalMessage.text(JSON.stringify(error, null, 2));
+					}
+					jErrorModal.modal({show:true});
+				})
+			});
+
+		});
+	})(document.currentScript);
+	///////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////
+</script>

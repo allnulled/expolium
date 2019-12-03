@@ -1,71 +1,160 @@
 <%
 
-_.output.metadata.tags = Object.assign({}, _.output.metadata.tags, {
+const PageDependencyUtils = require(process.env.PROJECT_ROOT + "/core/helper/PageDependencyUtils.js");
+
+_.output.metadata.tags = Object.assign(_.output.metadata.tags, {
+	axios: true,
 	bootstrap: true,
-	popper: true,
+	bootstrapDatetimepicker: true,
+	bootstrapModal: true,
+	ejs: true,
+	errorReducer: true,
 	jquery: true,
-	"custom.rest": true,
-	"login.title": true,
+	jquerySerializeObject: true,
+	jqueryUi: true,
+	jqueryUiTouchPunch: true,
+	fontawesome: true,
+	moment: true,
+	restForm: true,
+	restClient: true,
+	templateManager: true,
 });
 
-const AuthenticationManager = require(process.env.PROJECT_ROOT + "/core.auth/helper/AuthenticationManager.js");
-const bearerToken = AuthenticationManager.getBearerToken(_);
+// @TOFIX: ahora se está pillando la "SESIÓN" de la cookie. MAL. El middleware pilla el estado y lo inyecta en la request.
+// @TOFIX: por tanto, aquí se consulta la inyección del middleware, no la cookie.
 
 %>
-<div class="container x-login-form">
-	<div class="card x-card x-login-card">
-		<% if(!bearerToken) { %>
-			<div class="card-header">
-				<h3 style="text-align:center; text-transform: uppercase; margin: 4px;">Login</h3>
-			</div>
-			<div class="card-body">
-				<form method="<%-_.controller.settings && _.controller.settings.formMethod ? _.controller.settings.formMethod : "POST"%>"
-					action=<%-JSON.stringify(_.controller.settings && _.controller.settings.formAction ? _.controller.settings.formAction : "#")%>>
-					<input type="hidden" name="__redirect_success" value="/home" />
-					<input type="hidden" name="__redirect_error" value="/login" />
-					<div class="form-group x-form-group">
-						<label class="x-form-label">User or email:</label>
-						<input class="form-control form-control-sm x-form-control" type="text" name="name" value="defaultuser" />
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+		<meta charset="utf-8">
+		<title>Login</title>
+		<%-PageDependencyUtils.getSortedMetadataTags(_.output.metadata.tags)%>
+	</head>
+	<body>
+		<div class="fixed">
+			<div class="centered-table">
+				<div class="centered-cell" style="max-width:260px; top: -20%;margin: 0 auto;">
+					<div>
+						<%- include(process.env.PROJECT_ROOT + "/core/template/auth/parts/logo.ejs") %>
 					</div>
-					<div class="form-group x-form-group">
-						<label class="x-form-label">Password:</label>
-						<input class="form-control form-control-sm x-form-control" type="password" name="password" value="defaultpassword" />
+					<div>
+						<div class="card" style="max-width:250px; margin: 0 auto">
+							<div class="card-body" style="background-color: rgba(0,0,0,.03);">
+								<h4 style="margin:0;padding:0;text-transform:uppercase">Welcome</h4>
+							</div>
+							<div class="card-body">
+								<% if(_.response.cookie("EXPOLIUM_SESSION_TOKEN")) { %>
+									<div class="card simple bg-success text-white" style="margin-top:4px;" data-login-error-box>
+										<div class="card-body">
+											<span>You are already loggen in.</span>
+											<span><a href="/" class="text-white">Back home</a></span>
+										</div>
+									</div>
+								<% } else { %>
+									<form id="login-form">
+										<div class="form-group">
+											<label class="w-100 text-left">User or email:</label>
+											<input autofocus class="form-control form-control-sm" type="text" name="name" />
+										</div>
+										<div class="form-group">
+											<label class="w-100 text-left">Password:</label>
+											<input class="form-control form-control-sm" type="password" name="password" />
+										</div>
+										<div class="form-group">
+											<label class="w-100 text-right">
+												<input type="checkbox" name="remember_me" value="true" style="vertical-align: middle;" onchange="storeCredentialsInDevice(this)">
+												<span style="vertical-align: middle;">Remember me</span>
+											</label>
+										</div>
+										<div class="form-group" style="margin-bottom: 0">
+											<button class="btn btn-dark">Login</button>
+										</div>
+										<div class="login-messages">
+											<div class="card simple bg-danger text-warning d-none" style="margin-top:4px;" data-login-error-box>
+												<div class="card-body">
+													<span class="d-inline-block w-auto float-left" data-login-error-message></span>
+													<span class="d-inline-block w-auto float-right" onclick="removeLoginMessageError(this)">
+														<i class="fas fa-times"></i>
+													</span>
+												</div>
+											</div>
+										</div>
+										<script type="text/javascript">
+											const me1 = document.currentScript;
+											const removeLoginMessageError = function(element) {
+												jQuery(element)
+													.closest('[data-login-error-box]')
+													.addClass('d-none')
+													.find('[data-login-error-message]')
+													.text('');
+											}
+										</script>
+										<script type="text/javascript">
+											const me2 = document.currentScript;
+											const storeCredentialsInDevice = function(element) {
+												const jMe = jQuery(me2);
+												const jLoginForm = jMe.closest("#login-form");
+												const name = jLoginForm.find("input[name='name']").val();
+												const value = jLoginForm.find("input[name='password']").val();
+												localStorage.__LOGIN__ = JSON.stringify({ name, value });
+											}
+										</script>
+										<script type="text/javascript">
+											const me3 = document.currentScript;
+											window.addEventListener("load", function() {
+												const jMe = jQuery(me3);
+												const jLoginForm = jMe.closest("#login-form");
+												const loginDataJson = localStorage.__LOGIN__;
+												if(loginDataJson) {
+													try {
+														const { name, value } = JSON.parse(loginDataJson);
+														jLoginForm.find("input[name='name']").val(name);
+														jLoginForm.find("input[name='password']").val(value);
+													} catch(error) {
+														console.log(error);
+													}
+												}
+												jLoginForm.on("submit", function(event) {
+													event.preventDefault();
+													const loginFormData = jLoginForm.serializeObject();
+													jQuery.ajax({
+														url: window.location.href,
+														method: "POST",
+														type: "json",
+														data: loginFormData,
+														success: (data) => {
+															console.log("Status:", data)
+															// @TODO:
+															// go to previously request url (by GET parameters):
+															// or go home:
+															window.location.href = "/";
+														},
+														error: (error) => {
+															const errorReduction = window.errorReducer.reduce(error.responseJSON.data);
+															jLoginForm.find("[data-login-error-message]").text(errorReduction);
+															jLoginForm.find("[data-login-error-box]").removeClass("d-none");
+														}
+													});
+													return false;
+												});
+											});
+										</script>
+									</form>
+								<% } %>
+							</div>
+							<div class="card-body bg-white">
+								<% if(_.response.cookie("EXPOLIUM_SESSION_TOKEN")) { %>
+									<p class="d-block text-right">Go to the <a href="/auth/overview">AUTH API overview</a>.</p>
+								<% } %>
+							</div>
+						</div>
 					</div>
-					<div class="form-group" style="text-align: center;">
-						<button class="btn btn-sm btn-info">Log in</button>
-						<span style="min-width:20px;"></span>
-						<button class="btn btn-sm btn-success">Register</button>
-					</div>
-					<div class="form-group x-form-group" style="text-align:center; margin-bottom: 0;">
-						<a class="x-form-label" href="#">Remind me, please</a>
-					</div>
-				</form>
+				</div>
 			</div>
-		<% } else { %>
-			<div class="card-header">
-				<h3 style="text-align:center; text-transform: uppercase; margin: 4px;">You are already logged in!</h3>
-			</div>
-			<div class="card-body">
-				<div class="x-form-label">This is your token in case you missed it:</div>
-				<pre><%=bearerToken%></pre>
-				<a href="/">Return to home.</a>
-			</div>
-		<% } %>
-	</div>
-	<script type="text/javascript">
-		const me = jQuery(document.currentScript);
-		const form = me.parent();
-		const formDataReceived = <%-JSON.stringify({
-			controllerUrl: _.request.url,
-		}, null, 4);%>;
-		const events = {
-			// 
-		};
-		Object.keys(events).forEach(eventSelector => {
-			const separatorPosition = eventSelector.indexOf(":");
-			const event = eventSelector.substr(0, separatorPosition);
-			const selector = eventSelector.substr(separatorPosition+1);
-			form.on(event, selector, events[eventSelector]);
-		});
-	</script>
-</div>
+		</div>
+		<%- include(process.env.PROJECT_ROOT + "/core/template/auth/parts/styles.ejs") %>
+	</body>
+</html>

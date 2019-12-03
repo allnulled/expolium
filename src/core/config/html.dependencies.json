@@ -1,0 +1,72 @@
+{
+
+	"jquery": {
+		"contents": "<script src='/static/lib/jquery.js'></script>"
+	},
+	"errorReducer": {
+		"contents": "<script src='/static/lib/error-reducer.js'></script>"
+	},
+	"jqueryUi": {
+		"contents": "<script src='/static/lib/jquery-ui/jquery-ui.js'></script>\n<link rel='stylesheet' type='text/css' href='/static/lib/jquery-ui/jquery-ui.css' />\n<link rel='stylesheet' type='text/css' href='/static/lib/jquery-ui/jquery-ui.structure.css' />\n<link rel='stylesheet' type='text/css' href='/static/lib/jquery-ui/jquery-ui.theme.css' />"
+	},
+	"jqueryUiTouchPunch": {
+		"contents": "<script src='/static/lib/jquery-ui-touch-punch.js'></script>"
+	},
+	"jquerySerializeObject": {
+		"contents": "<script src='/static/lib/jquery.serialize-object.js'></script>"
+	},
+	"sortable": {
+		"contents": "<script src='/static/lib/sortable.js'></script>"
+	},
+	"jqueryUiSortableGeneral": {
+		"contents": "<script src='/static/lib/jquery-ui-sortable.general.js'></script>\n"
+	},
+	"serializeUrl": {
+		"contents": "<script src='/static/lib/serialize-url.js'></script>"
+	},
+	"hammer": {
+		"contents": "<script src='/static/lib/hammer.js'></script>"
+	},
+	"ejs": {
+		"contents": "<script src='/static/lib/ejs.js'></script>"
+	},
+	"templateManager": {
+		"contents": "<script src='/static/lib/template-manager.js'></script>"
+	},
+	"popper": {
+		"contents": "<script src='/static/lib/popper.js'></script>"
+	},
+	"bootstrap": {
+		"contents": "<script src='/static/lib/bootstrap.js'></script>\n<link rel='stylesheet' type='text/css' href='/static/lib/bootstrap.css' />\n"
+	},
+	"fontawesome": {
+		"contents": "<script src='/static/lib/fontawesome/js/all.js'></script>\n<link rel='stylesheet' type='text/css' href='/static/lib/fontawesome/css/all.css' />\n"
+	},
+	"moment": {
+		"contents": "<script src='/static/lib/moment.js'></script>\n"
+	},
+	"bootstrapDatetimepicker": {
+		"contents": "<script src='/static/lib/bootstrap-datetimepicker.js'></script>\n<link rel='stylesheet' type='text/css' href='/static/lib/bootstrap-datetimepicker.css' />\n"
+	},
+	"bootstrapModal": {
+		"contents": "<script src='/static/lib/bootstrap-modal-manager.js'></script>\n<script src='/static/lib/bootstrap-modal.js'></script>\n<link rel='stylesheet' type='text/css' href='/static/lib/bootstrap-modal.css' />\n"
+	},
+	"axios": {
+		"contents": "<script src='/static/lib/axios.js'></script>\n"
+	},
+	"restClient": {
+		"contents": "<script src='/static/lib/rest-client.api.js'></script>\n<script src='/static/lib/rest-client.js'></script>\n"
+	},
+	"restForm": {
+		"contents": "<script src='/static/lib/rest-form.js'></script>\n<link rel='stylesheet' type='text/css' href='/static/lib/rest-form.css' />\n"
+	},
+	"stringUtils": {
+		"contents": "<script src='/static/lib/string-utils.js'></script>\n"
+	},
+	"rainbowBackground": {
+		"contents": "<script src='/static/lib/rainbow-background.js'></script>\n<link rel='stylesheet' type='text/css' href='/static/lib/rainbow-background.css' />\n"
+	},
+	"spaceBackground": {
+		"contents": "<script src='/static/lib/space-background.js'></script>\n<link rel='stylesheet' type='text/css' href='/static/lib/space-background.css' />\n"
+	}
+}

@@ -1,61 +1,112 @@
 <%
-	
-_.output.metadata.tags = Object.assign({}, _.output.metadata.tags, {
-	bootstrap: true,
-	popper: true,
-	jquery: true,
-	"custom.rest": true,
-	"logout.title": true,
-});
 
-const AuthenticationManager = require(process.env.PROJECT_ROOT + "/core.auth/helper/AuthenticationManager.js");
-const bearerToken = AuthenticationManager.getBearerToken(_);
+const PageDependencyUtils = require(process.env.PROJECT_ROOT + "/core/helper/PageDependencyUtils.js");
+
+_.output.metadata.tags = Object.assign(_.output.metadata.tags, {
+	axios: true,
+	bootstrap: true,
+	bootstrapDatetimepicker: true,
+	bootstrapModal: true,
+	ejs: true,
+	errorReducer: true,
+	jquery: true,
+	jquerySerializeObject: true,
+	jqueryUi: true,
+	jqueryUiTouchPunch: true,
+	fontawesome: true,
+	moment: true,
+	restForm: true,
+	restClient: true,
+	templateManager: true,
+});
 
 %>
 
-<div class="container x-login-form">
-	<div class="card x-card x-login-card">
-		<div class="card-header">
-			<h3 style="text-align:center; text-transform: uppercase; margin: 4px;">Logout</h3>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+		<meta charset="utf-8">
+		<title>Logout</title>
+		<%-PageDependencyUtils.getSortedMetadataTags(_.output.metadata.tags)%>
+	</head>
+	<body>
+		<div class="fixed">
+			<div class="centered-table">
+				<div class="centered-cell" style="max-width:260px; top: -20%;margin: 0 auto;">
+					<div>
+						<%- include(process.env.PROJECT_ROOT + "/core/template/auth/parts/logo.ejs") %>
+					</div>
+					<div>
+						<div class="card" style="max-width:250px; margin: 0 auto">
+							<div class="card-body" style="background-color: rgba(0,0,0,.03);">
+								<h4 style="margin:0;padding:0">Logout</h4>
+							</div>
+							<div class="card-body">
+								<form id="logout-form">
+									<p>You are into log out of the application.</p>
+									<p>Are you sure?</p>
+									<div class="form-group" style="margin-bottom: 0">
+										<button class="btn btn-sm btn-default" type="button" onclick="window.history.back()">Bring me back</button>
+										<button class="btn btn-sm btn-danger">Yes, log me out</button>
+									</div>
+									<div class="logout-messages">
+										<div class="card simple bg-danger text-warning d-none" style="margin-top:4px;" data-logout-error-box>
+											<div class="card-body">
+												<span class="d-inline-block w-auto float-left" data-logout-error-message></span>
+												<span class="d-inline-block w-auto float-right" onclick="removeLoginMessageError(this)">
+													<i class="fas fa-times"></i>
+												</span>
+												<script type="text/javascript">
+													const me1 = document.currentScript;
+													const removeLoginMessageError = function(element) {
+														jQuery(element)
+															.closest('[data-logout-error-box]')
+															.addClass('d-none')
+															.find('[data-logout-error-message]')
+															.text('');
+													}
+												</script>
+											</div>
+										</div>
+									</div>
+									<script type="text/javascript">
+										const me2 = document.currentScript;
+										window.addEventListener("load", function() {
+											const jMe = jQuery(me2);
+											const jLoginForm = jMe.closest("#logout-form");
+											jLoginForm.on("submit", function(event) {
+												event.preventDefault();
+												jQuery.ajax({
+													url: window.location.href,
+													method: "POST",
+													type: "json",
+													data: {},
+													success: (data) => {
+														window.location.href = "/auth/logout";
+													},
+													error: (error) => {
+														const errorReduction = window.errorReducer.reduce(error.responseJSON.data);
+														jLoginForm.find("[data-logout-error-message]").text(errorReduction);
+														jLoginForm.find("[data-logout-error-box]").removeClass("d-none");
+													}
+												});
+												return false;
+											});
+										});
+									</script>
+								</form>
+							</div>
+							<div class="card-body bg-white">
+								<% if(_.response.cookie("EXPOLIUM_SESSION_TOKEN")) { %>
+									<p class="d-block text-right">Go to the <a href="/auth/overview">AUTH API overview</a>.</p>
+								<% } %>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class="card-body">
-		<% if(bearerToken) { %>
-			<form method="<%-_.controller.settings && _.controller.settings.formMethod ? _.controller.settings.formMethod : "POST"%>"
-				action=<%-JSON.stringify(_.controller.settings && _.controller.settings.formAction ? _.controller.settings.formAction : "#")%>>
-				<div class="form-group x-form-group" style="text-align: center;">
-					<label class="x-form-label">Secret token:</label>
-					<div><%=bearerToken%></div>
-				</div>
-				<div class="form-group x-form-group" style="text-align: center;">
-					<label class="x-form-label">Are you sure you want to leave us?</label>
-				</div>
-				<div class="form-group" style="text-align: center; margin-bottom: 0;">
-					<button class="btn btn-sm btn-danger" data-logout-btn>Yes, I want to leave</button>
-					<span style="min-width:20px;"></span>
-					<button class="btn btn-sm btn-default" onclick="window.history.back()">Cancel</button>
-				</div>
-			</form>
-		<% } else { %>
-			<span style="text-align: center;">You need to be <a href="/login">logged in</a> to logout.</span>
-		<% } %>
-		</div>
-	</div>
-	<script type="text/javascript">
-		const me = jQuery(document.currentScript);
-		const form = me.parent();
-		const formDataReceived = <%-JSON.stringify({
-			controllerUrl: _.request.url,
-		}, null, 4);%>;
-		const events = {
-			["click:[data-cancel-btn]"]: (e) => {
-
-			}
-		};
-		Object.keys(events).forEach(eventSelector => {
-			const separatorPosition = eventSelector.indexOf(":");
-			const event = eventSelector.substr(0, separatorPosition);
-			const selector = eventSelector.substr(separatorPosition+1);
-			form.on(event, selector, events[eventSelector]);
-		});
-	</script>
-</div>
+		<%- include(process.env.PROJECT_ROOT + "/core/template/auth/parts/styles.ejs") %>
+	</body>
+</html>

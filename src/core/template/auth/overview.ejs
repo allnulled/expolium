@@ -1,0 +1,111 @@
+<%
+const StringUtils = require(process.env.PROJECT_ROOT + "/core/helper/StringUtils.js");
+const PageDependencyUtils = require(process.env.PROJECT_ROOT + "/core/helper/PageDependencyUtils.js");
+const baseAuth = "/auth";
+
+_.output.metadata.tags = Object.assign({}, _.output.metadata.tags, {
+	jquery: true,
+	jquerySerializeObject: true,
+	popper: true,
+	bootstrap: true,
+	fontawesome: true,
+	moment: true,
+	bootstrapDatetimepicker: true,
+	bootstrapModal: true,
+	restForm: true,
+	restClient: true,
+	axios: true,
+	templateManager: true,
+});
+
+%>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+		<meta charset="utf-8">
+		<title>Overview of the UI AUTH API</title>
+		<%-PageDependencyUtils.getSortedMetadataTags(_.output.metadata.tags)%>
+	</head>
+	<body>
+		<div data-rest-component data-rest-overview-component>
+			<div class="container">
+				<div class="row">
+					<h4 class="col-12">Overview of the UI AUTH API</h4>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<div class="table-responsive">
+							<table class="table table-striped table-sm">
+								<thead>
+									<tr>
+										<th>Pages:</th>
+									</tr>
+								</thead>
+								<tbody class="clickable-body">
+									<tr class="clickable-row" data-href="<%=baseAuth%>/login">
+										<td style="white-space:nowrap;word-break:keep-all">
+											<span>Login</span>
+										</td>
+									</tr>
+									<tr class="clickable-row" data-href="<%=baseAuth%>/logout">
+										<td style="white-space:nowrap;word-break:keep-all">
+											<span>Logout</span>
+										</td>
+									</tr>
+									<tr class="clickable-row" data-href="<%=baseAuth%>/refresh">
+										<td style="white-space:nowrap;word-break:keep-all">
+											<span>Refresh</span>
+										</td>
+									</tr>
+									<tr class="clickable-row" data-href="<%=baseAuth%>/register">
+										<td style="white-space:nowrap;word-break:keep-all">
+											<span>Register</span>
+										</td>
+									</tr>
+									<tr class="clickable-row" data-href="<%=baseAuth%>/unregister">
+										<td style="white-space:nowrap;word-break:keep-all">
+											<span>Unregister</span>
+										</td>
+									</tr>
+									<tr class="clickable-row" data-href="<%=baseAuth%>/status">
+										<td style="white-space:nowrap;word-break:keep-all">
+											<span>Status</span>
+										</td>
+									</tr>
+									<tr class="clickable-row" data-href="<%=baseAuth%>/change-credentials">
+										<td style="white-space:nowrap;word-break:keep-all">
+											<span>Change credentials</span>
+										</td>
+									</tr>
+									<tr class="clickable-row" data-href="<%=baseAuth%>/confirm-registration">
+										<td style="white-space:nowrap;word-break:keep-all">
+											<span>Confirm registration</span>
+										</td>
+									</tr>
+									<tr class="clickable-row" data-href="<%=baseAuth%>/forgot-password">
+										<td style="white-space:nowrap;word-break:keep-all">
+											<span>Forgot password</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div>
+							<p class="d-block text-right">Go to the <a href="/api/v1/@/view">REST API</a>.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<%- include(process.env.PROJECT_ROOT + "/core/template/auth/parts/styles.ejs") %>
+			<script type="text/javascript">
+				jQuery(function() {
+					jQuery(document.body).on("click", ".clickable-row", function() {
+						const href = jQuery(this).data("href");
+						window.location.href = href;
+					});
+				})
+			</script>
+		</div>
+	</body>
+</html>
